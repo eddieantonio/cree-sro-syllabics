@@ -16,14 +16,23 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import gzip
+
 # GLOBAL: sigma: (num, symbol) pairs.
 sigma = []
 states = []
 last_state_no = None
 
 
+Epsilon = type('Epsilon', Symbol.__mro__, {})()
+Unknown = type('Unknown', Symbol.__mro__, {})()
+Identity = type('Identity', Symbol.__mro__, {})()
+
+
 class InvalidState(ValueError):
-    ...
+    """
+    Raised when parsing got in an invalid state.
+    """
 
 
 def read_header(line):
@@ -44,12 +53,10 @@ def read_props(line):
         _arity, _arc_count, _state_count, _line_count, _final_count,
         _path_count, is_deterministic, _is_pruned, _is_minimized,
         is_epsilon_free,
-        is_loop_free, extras,
-        *name
+        _is_loop_free, _extras, *_name
     ) = line.split()
     assert is_deterministic == '1', 'network must be deterministic'
     assert is_epsilon_free == '1', 'network must not have epsilon transitions'
-    assert is_loop_free in '01'
     return read_sigma_start
 
 
@@ -128,11 +135,6 @@ class Symbol:
         return type(self).__name__
 
 
-Epsilon = type('Epsilon', Symbol.__mro__, {})()
-Unknown = type('Unknown', Symbol.__mro__, {})()
-Identity = type('Identity', Symbol.__mro__, {})()
-
-
 def to_symbol(text):
     if text == '@_EPSILON_SYMBOL_@':
         return Epsilon
@@ -145,10 +147,18 @@ def to_symbol(text):
         return text
 
 
-with open('Cans-to-Latn.txt') as fsm_file:
-    next_state = read_header
-    for line in fsm_file:
-        next_state = next_state(line.rstrip())
+if __name__ == '__main__':
+    import sys
+    from pprint import pprint
 
-from pprint import pprint
-pprint(states)
+    _, filename = sys.argv
+
+    with gzip.open(filename, 'rt', encoding='UTF-8') as fsm_file:
+        next_state = read_header
+        for line in fsm_file:
+            next_state = next_state(line.rstrip())
+
+    print('SIGMA = ', end='')
+    pprint(sigma)
+    print('STATES = ', end='')
+    pprint(states)

@@ -1,6 +1,12 @@
-all: Cans-to-Latn.txt
+all: Cans-to-Latn.py
 
-%.txt: %.fsm
-	<$< gunzip >$@
+
+%.py: %.fsm
+	python3 parse_foma.py $< > $@
+
 %.fsm: %.xfscript
 	printf "source $<\nsave stack $@\n" | foma
+
+
+.PHONY: all
+.DELETE_ON_ERROR:
