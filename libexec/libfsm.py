@@ -67,6 +67,5 @@ class Transition(namedtuple('_Transition', 'upper lower target')):
     """
     def __str__(self):
         return '<{}:{} (-> {})>'.format(
-                to_sigma[self.upper],
-                to_sigma[self.lower],
-                self.target)
+            self.upper, self.lower, self.target
+        )
