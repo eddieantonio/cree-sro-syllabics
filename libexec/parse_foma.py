@@ -17,8 +17,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import gzip
-from collections import namedtuple
 from functools import partial
+
+from libfsm import Epsilon, Unknown, Identity, State
 
 
 # GLOBAL: sigma: (num, symbol) pairs.
@@ -26,50 +27,10 @@ sigma = []
 states = []
 
 
-class Symbol:
-    def __repr__(self) -> str:
-        return type(self).__name__
-
-
-Epsilon = type('Epsilon', Symbol.__mro__, {})()
-Unknown = type('Unknown', Symbol.__mro__, {})()
-Identity = type('Identity', Symbol.__mro__, {})()
-
-
 class InvalidState(ValueError):
     """
     Raised when parsing got in an invalid state.
     """
-
-
-class State:
-    def __init__(self, state_no, is_final_state, transitions=None):
-        self.state_no = state_no
-        self.is_final_state = is_final_state
-        self.transitions = [] if transitions is None else transitions
-
-    def append_transition(self, in_, out, target):
-        self.transitions.append(
-            Transition(upper=in_, lower=out, target=target)
-        )
-
-    def __repr__(self):
-        return '{}(state_no={}, is_final_state={}, transitions={})'.format(
-            type(self).__name__,
-            self.state_no, self.is_final_state,
-            self.transitions
-        )
-
-
-class Transition(namedtuple('_Transition', 'upper lower target')):
-    """
-    Signifies a transition from one state to another.
-    """
-    def __str__(self):
-        return '<{}:{} (-> {})>'.format(
-                to_sigma[self.upper],
-                to_sigma[self.lower],
-                self.target)
 
 
 def read_header(line):
@@ -117,6 +78,7 @@ def is_sentinel_state(nums):
 
 
 def read_state_array(nums):
+    global states
     nums = [int(c) for c in line.split()]
     if is_sentinel_state(nums):
         return read_end
