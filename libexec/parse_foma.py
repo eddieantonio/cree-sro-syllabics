@@ -16,6 +16,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Convert a FOMA finite-state transducer into a Python file.
+
+Usage:
+    ./parse_foma.py -o output.py input.fsm
+
+
+This parses the FOMA binary formatted, saved as follows,
+
+    foma[1]: save stack <NAME>.fsm
+"""
+
 import gzip
 from functools import partial
 
@@ -176,4 +188,4 @@ if __name__ == '__main__':
         # Finally, include the parts that make up the FSM.
         output('TO_SIGMA =', pformat(to_sigma, compact=True))
         output('FROM_SIGMA =', pformat(from_sigma, compact=True))
-        output('STATES = ', pformat(states))
+        output('STATES =', pformat(states))
