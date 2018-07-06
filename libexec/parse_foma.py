@@ -40,7 +40,16 @@ def read_props(line):
     """
     Read the properties, that I'm just going to completely ignore for now.
     """
-    # TODO: ...
+    (
+        _arity, _arc_count, _state_count, _line_count, _final_count,
+        _path_count, is_deterministic, _is_pruned, _is_minimized,
+        is_epsilon_free,
+        is_loop_free, extras,
+        *name
+    ) = line.split()
+    assert is_deterministic == '1', 'network must be deterministic'
+    assert is_epsilon_free == '1', 'network must not have epsilon transitions'
+    assert is_loop_free in '01'
     return read_sigma_start
 
 
