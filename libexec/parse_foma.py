@@ -17,11 +17,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import gzip
+from collections import namedtuple
 
 # GLOBAL: sigma: (num, symbol) pairs.
 sigma = []
 states = []
-last_state_no = None
+
+
+class Symbol:
+    def __repr__(self) -> str:
+        return type(self).__name__
 
 
 Epsilon = type('Epsilon', Symbol.__mro__, {})()
@@ -32,6 +37,31 @@ Identity = type('Identity', Symbol.__mro__, {})()
 class InvalidState(ValueError):
     """
     Raised when parsing got in an invalid state.
+    """
+
+
+class State:
+    def __init__(self, state_no, is_final_state, transitions=None):
+        self.state_no = state_no
+        self.is_final_state = is_final_state
+        self.transitions = [] if transitions is None else transitions
+
+    def append_transition(self, in_, out, target):
+        self.transitions.append(
+            Transition(in_, out, target)
+        )
+
+    def __repr__(self):
+        return '{}(state_no={}, is_final_state={}, transitions={})'.format(
+            type(self).__name__,
+            self.state_no, self.is_final_state,
+            self.transitions
+        )
+
+
+class Transition(namedtuple('_Transition', 'in_ out target')):
+    """
+    Signifies a transition from one state to another.
     """
 
 
@@ -79,42 +109,30 @@ def is_sentinel_state(nums):
     return all(n == -1 for n in nums)
 
 
-def numberify_line(state):
-    def wrapper(line):
-        nums = [int(c) for c in line.split()]
-        return state(nums)
-    return wrapper
-
-
-@numberify_line
 def read_state_array(nums):
-    global last_state_no
-
+    nums = [int(c) for c in line.split()]
     if is_sentinel_state(nums):
         return read_end
     elif len(nums) == 5:
+        # New state
         state_no, in_, out, target, final_state = nums
+        states.append(State(state_no, bool(final_state)))
     elif len(nums) == 4:
+        # New state
         state_no, in_, target, final_state = nums
         out = in_
+        states.append(State(state_no, bool(final_state)))
     elif len(nums) == 3:
-        assert last_state_no is not None
+        # Old state
         in_, out, target = nums
-        state_no = last_state_no
-        final_state = None
     elif len(nums) == 2:
-        assert last_state_no is not None
+        # Old state
         in_, target = nums
-        state_no = last_state_no
         out = in_
-        final_state = None
     else:
         raise InvalidState
 
-    states.append(
-            (state_no, in_, in_, target, final_state)
-    )
-    last_state_no = state_no
+    states[-1].append_transition(in_, out, target)
     return read_state_array
 
 
@@ -128,11 +146,6 @@ def invalid_state(line):
     Should never reach this state.
     """
     raise ValueError(line)
-
-
-class Symbol:
-    def __repr__(self) -> str:
-        return type(self).__name__
 
 
 def to_symbol(text):

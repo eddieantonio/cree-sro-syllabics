@@ -1,7 +1,7 @@
 all: Cans-to-Latn.py
 
 
-%.py: %.fsm
+%.py: %.fsm parse_foma.py
 	python3 parse_foma.py $< > $@
 
 %.fsm: %.xfscript
