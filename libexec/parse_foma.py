@@ -18,6 +18,8 @@
 
 import gzip
 from collections import namedtuple
+from functools import partial
+
 
 # GLOBAL: sigma: (num, symbol) pairs.
 sigma = []
@@ -48,7 +50,7 @@ class State:
 
     def append_transition(self, in_, out, target):
         self.transitions.append(
-            Transition(in_, out, target)
+            Transition(upper=in_, lower=out, target=target)
         )
 
     def __repr__(self):
@@ -59,10 +61,15 @@ class State:
         )
 
 
-class Transition(namedtuple('_Transition', 'in_ out target')):
+class Transition(namedtuple('_Transition', 'upper lower target')):
     """
     Signifies a transition from one state to another.
     """
+    def __str__(self):
+        return '<{}:{} (-> {})>'.format(
+                to_sigma[self.upper],
+                to_sigma[self.lower],
+                self.target)
 
 
 def read_header(line):
@@ -161,17 +168,25 @@ def to_symbol(text):
 
 
 if __name__ == '__main__':
-    import sys
-    from pprint import pprint
+    import argparse
+    from pprint import pformat
 
-    _, filename = sys.argv
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-o', '--output', default='/dev/stdout')
+    parser.add_argument('filename')
+    args = parser.parse_args()
 
-    with gzip.open(filename, 'rt', encoding='UTF-8') as fsm_file:
+    with gzip.open(args.filename, 'rt', encoding='UTF-8') as fsm_file:
         next_state = read_header
         for line in fsm_file:
             next_state = next_state(line.rstrip())
 
-    print('SIGMA = ', end='')
-    pprint(sigma)
-    print('STATES = ', end='')
-    pprint(states)
+    assert all(i == num for i, (num, _symbol) in enumerate(sigma))
+    to_sigma = [symbol for _num, symbol in sigma]
+    from_sigma = {symbol: num for num, symbol in sigma}
+
+    with open(args.output, 'wt', encoding='UTF-8') as output_file:
+        output = partial(print, file=output_file)
+        output('TO_SIGMA =', pformat(to_sigma, compact=True))
+        output('FROM_SIGMA =', pformat(from_sigma, compact=True))
+        output('STATES = ', pformat(states))
