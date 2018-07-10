@@ -20,6 +20,8 @@ import pytest
 
 from crk_orthography import sro2syllabics
 
+COMBINING_CIRCUMFLEX = '\u0302'
+
 
 @pytest.mark.parametrize("sro,syllabics", [
     ('acimosis', 'ᐊᒋᒧᓯᐢ'),
@@ -45,6 +47,18 @@ def test_normalize_single_words(sro, syllabics):
     Test single word inputs with non-standard orthography.
     """
     assert sro2syllabics(sro) == syllabics
+
+
+def test_unicode_normalization():
+    """
+    Test when the input string is not in NFC-normalized.
+    """
+    water = 'nipiy'
+    leaf = 'ni' + COMBINING_CIRCUMFLEX + 'piy'
+    assert water != leaf
+    assert sro2syllabics(water) != sro2syllabics(leaf)
+    assert sro2syllabics(water) == 'ᓂᐱᕀ'
+    assert sro2syllabics(leaf) == 'ᓃᐱᕀ'
 
 
 # ...(sandhi)...
