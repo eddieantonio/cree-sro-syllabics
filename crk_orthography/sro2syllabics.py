@@ -181,7 +181,11 @@ def sro2syllabics(sro_text) -> str:
     """
     # TODO: partition words at punctuation to handle sentences and paragraphs.
 
-    to_transcribe = sro_text
+    to_transcribe = sro_text.\
+        lower().\
+        replace('e', 'ê').\
+        replace("'", 'i')
+
     parts = []
 
     match = sro_pattern.match(to_transcribe)
