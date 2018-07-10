@@ -26,12 +26,26 @@ from crk_orthography import sro2syllabics
     ('atahk', 'ᐊᑕᕽ'),
     ('mêriy', 'ᒣᕒᐃᕀ'),
     ('wîstihkêw', 'ᐑᐢᑎᐦᑫᐤ'),
+    ('nêhiyawêwin', 'ᓀᐦᐃᔭᐍᐏᐣ'),
+    ('tirêyl', 'ᑎᕒᐁᕀᓬ'),
 ])
 def test_single_words(sro, syllabics):
+    """
+    Test single words with perfect SRO orthography.
+    """
     assert sro2syllabics(sro) == syllabics
 
 
-# blah blah trail (road to enoch cree nation)
-# ...(hk-medial)...
+@pytest.mark.parametrize("sro,syllabics", [
+    ("Tân'si", 'ᑖᓂᓯ'),
+    ('Maskekosihk', 'ᒪᐢᑫᑯᓯᕽ'),
+])
+def test_normalize_single_words(sro, syllabics):
+    """
+    Test single word inputs with non-standard orthography.
+    """
+    assert sro2syllabics(sro) == syllabics
+
+
 # ...(sandhi)...
 # test NFD accents
