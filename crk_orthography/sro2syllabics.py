@@ -177,7 +177,7 @@ sro2syllabics_lookup = {
 
 def sro2syllabics(sro_text) -> str:
     """
-    Handles one word at a time.
+    Transcribes one word at a time.
     """
     # TODO: partition words at punctuation to handle sentences and paragraphs.
 
@@ -193,10 +193,13 @@ def sro2syllabics(sro_text) -> str:
         to_transcribe = to_transcribe[match.end():]
         match = sro_pattern.match(to_transcribe)
 
-    # If the last syllabics are h, k, replace with hk.
+    # Special-case word-final 'hk': we did not convert it in the above loop,
+    # because it can only happen at the end of words, and if we did convert it
+    # in the prior loop, it would convert '-ihkwê-' -> 'ᐃᕽᐍ' instead of 'ᐃᐦᑵ'
+    # as intended. We know the end of the word is 'hk' because it got
+    # converted to «ᐦ» followed by «ᐠ».
     if parts[-2:] == ['ᐦ', 'ᐠ']:
-        parts[-2:] = ['ᕽ']
-    if to_transcribe == 'hk':
-        parts.append('ᕽ')
+        parts[-2:] = [sro2syllabics_lookup['hk']]
 
+    assert to_transcribe == '', 'could not transcribe %r' % (to_transcribe)
     return ''.join(parts)
