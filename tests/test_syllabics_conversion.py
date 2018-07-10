@@ -16,16 +16,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import pytest
 
 from crk_orthography import sro2syllabics
 
 
-def test_simple():
-    assert sro2syllabics('acimosis') == 'ᐊᒋᒧᓯᐢ'
-    assert sro2syllabics('atahk') == 'ᐊᑕᕽ'
+@pytest.mark.parametrize("sro,syllabics", [
+    ('acimosis', 'ᐊᒋᒧᓯᐢ'),
+    ('atahk', 'ᐊᑕᕽ'),
+    ('mêriy', 'ᒣᕒᐃᕀ'),
+    ('wîstihkêw', 'ᐑᐢᑎᐦᑫᐤ'),
+])
+def test_single_words(sro, syllabics):
+    assert sro2syllabics(sro) == syllabics
 
 
-# meriy
 # blah blah trail (road to enoch cree nation)
 # ...(hk-medial)...
 # ...(sandhi)...
