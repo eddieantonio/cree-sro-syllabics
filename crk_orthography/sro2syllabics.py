@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from unicodedata import normalize
 
 
 # Match an SRO syllable.
@@ -181,7 +182,7 @@ def sro2syllabics(sro_text) -> str:
     """
     # TODO: partition words at punctuation to handle sentences and paragraphs.
 
-    to_transcribe = sro_text.\
+    to_transcribe = nfc(sro_text).\
         lower().\
         replace('e', 'ê').\
         replace("'", 'i')
@@ -207,3 +208,10 @@ def sro2syllabics(sro_text) -> str:
 
     assert to_transcribe == '', 'could not transcribe %r' % (to_transcribe)
     return ''.join(parts)
+
+
+def nfc(text):
+    """
+    Return NFC-normalized text.
+    """
+    return normalize('NFC', text)
