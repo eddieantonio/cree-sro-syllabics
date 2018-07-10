@@ -178,6 +178,10 @@ def sro2syllabics(sro_text) -> str:
         to_transcribe = to_transcribe[match.end():]
         match = sro_pattern.match(to_transcribe)
 
-    # TODO: Handle 'hk'
+    # If the last syllabics are h, k, replace with hk.
+    if parts[-2:] == ['ᐦ', 'ᐠ']:
+        parts[-2:] = ['ᕽ']
+    if to_transcribe == 'hk':
+        parts.append('ᕽ')
 
     return ''.join(parts)

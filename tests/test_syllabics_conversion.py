@@ -6,9 +6,9 @@ from crk_orthography import sro2syllabics
 
 def test_simple():
     assert sro2syllabics('acimosis') == 'ᐊᒋᒧᓯᐢ'
+    assert sro2syllabics('atahk') == 'ᐊᑕᕽ'
 
 
-# atahk
 # meriy
 # blah blah trail (road to enoch cree nation)
 # ...(hk-medial)...
