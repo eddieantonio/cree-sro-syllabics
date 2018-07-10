@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 import re
 
 
@@ -31,7 +30,7 @@ sro_pattern = re.compile(r'''
     nê|ni|nî|no|nô|na|nâ|nwê|nwa|nwâ|n|
     sê|si|sî|so|sô|sa|sâ|swê|swi|swî|swo|swô|swa|swâ|s|
     yê|yi|yî|yo|yô|ya|yâ|ywê|ywi|ywî|ywo|ywô|ywa|ywâ|y|
-    l|r|
+    h|l|r|
     ê|i|î|o|ô|a|â
 ''', re.VERBOSE)
 
