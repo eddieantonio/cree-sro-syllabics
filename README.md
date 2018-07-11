@@ -6,10 +6,20 @@ Plains Cree Orthography
 Usage
 -----
 
+Convert Standard Roman Orthography (SRO) to syllabics:
+
 ```python
 >>> from crk_orthography import sro2syllabics
 >>> sro2syllabics('nêhiyawêwin')
 'ᓀᐦᔭᐍᐏᐣ'
+```
+
+Convert syllabics to SRO:
+
+```
+>>> from crk_orthography import syllabics2sro
+>>> syllabics2sro('ᐊᒋᒧᓯᐢ')
+'acimosis'
 ```
 
 
