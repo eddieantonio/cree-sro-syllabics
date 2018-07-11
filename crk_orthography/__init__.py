@@ -15,4 +15,4 @@
 
 
 from .__version__ import __version__
-from .sro2syllabics import sro2syllabics
+from .sro2syllabics import sro2syllabics, syllabics2sro

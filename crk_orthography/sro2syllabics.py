@@ -175,8 +175,11 @@ sro2syllabics_lookup = {
     "hk": "ᕽ",
 }
 
+syllabics2sro_lookup = {syl: sro for sro, syl in sro2syllabics_lookup.items()}
+assert len(syllabics2sro_lookup) == len(sro2syllabics_lookup)
 
-def sro2syllabics(sro_text) -> str:
+
+def sro2syllabics(sro_text: str) -> str:
     """
     Transcribes one word at a time.
     """
@@ -208,6 +211,13 @@ def sro2syllabics(sro_text) -> str:
 
     assert to_transcribe == '', 'could not transcribe %r' % (to_transcribe)
     return ''.join(parts)
+
+
+def syllabics2sro(syllabics: str) -> str:
+    """
+    Transcribes one word of syllabics into SRO.
+    """
+    return ''.join(syllabics2sro_lookup[syllabic] for syllabic in syllabics)
 
 
 def nfc(text):
