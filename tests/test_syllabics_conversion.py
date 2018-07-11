@@ -18,7 +18,7 @@
 
 import pytest
 
-from crk_orthography import sro2syllabics
+from crk_orthography import sro2syllabics, syllabics2sro
 
 COMBINING_CIRCUMFLEX = '\u0302'
 
@@ -35,7 +35,14 @@ def test_single_words(sro, syllabics):
     """
     Test single words with perfect SRO orthography.
     """
+    # Converting SRO to syllabics should work.
     assert sro2syllabics(sro) == syllabics
+    # Converting syllabics to SRO should work.
+    assert syllabics2sro(syllabics) == sro
+    # With "perfect" orthography, each roundtrip should leave the input
+    # unchanged.
+    assert sro2syllabics(syllabics2sro(syllabics)) == syllabics
+    assert syllabics2sro(sro2syllabics(sro)) == sro
 
 
 @pytest.mark.parametrize("sro,syllabics", [
