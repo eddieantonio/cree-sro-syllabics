@@ -3,10 +3,13 @@ Plains Cree Orthography
 
 [![](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
 
+Convert between nêhiyawêwin/ᓀᐦᐃᔭᐍᐏᐣ (Plains Cree Y-dialect) Standard
+Roman Orthography (SRO) and Canadian Aboriginal syllabics.
+
 Usage
 -----
 
-Convert Standard Roman Orthography (SRO) to syllabics:
+Convert SRO to syllabics:
 
 ```python
 >>> from crk_orthography import sro2syllabics
@@ -16,11 +19,17 @@ Convert Standard Roman Orthography (SRO) to syllabics:
 
 Convert syllabics to SRO:
 
-```
+```python
 >>> from crk_orthography import syllabics2sro
 >>> syllabics2sro('ᐊᒋᒧᓯᐢ')
 'acimosis'
 ```
+
+
+See also
+--------
+
+[nêhiyawêwin syllabics](https://github.com/UAlbertaALTLab/nehiyawewin-syllabics)
 
 
 License
