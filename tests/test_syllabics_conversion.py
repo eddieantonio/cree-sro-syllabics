@@ -68,5 +68,13 @@ def test_unicode_normalization():
     assert sro2syllabics(leaf) == 'ᓃᐱᕀ'
 
 
-# ...(sandhi)...
-# test NFD accents
+def test_multiple_words():
+    """
+    Test transcoding multiple words.
+    """
+
+    assert sro2syllabics('\t namoya  tataspeyihtam. ') == '\t ᓇᒧᔭ  ᑕᑕᐢᐯᔨᐦᑕᒼ. '
+
+
+# TODO: test replace - with soft hyphen
+# TODO: ...(sandhi)...
