@@ -66,7 +66,7 @@ ONSET = '[ptkcshmny]w?|w'
 VOWEL = "[aâi'îoôêe]"
 CODA = '[hs]?[ptkcmn]|h|s|y|w'
 SYLLABLE = '(?:{ONSET})?{VOWEL}(?:{CODA})?|r|l'.format(**globals())
-WORD = '(?:{SYLLABLE})+'.format(**globals())
+WORD = r'\b(?:{SYLLABLE})+\b'.format(**globals())
 word_pattern = re.compile(WORD, re.IGNORECASE)
 
 
