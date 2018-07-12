@@ -68,12 +68,15 @@ def test_unicode_normalization():
     assert sro2syllabics(leaf) == 'ᓃᐱᕀ'
 
 
-def test_multiple_words():
+@pytest.mark.parametrize("input_text,expected", [
+    ('\t namoya  tataspeyihtam. ', '\t ᓇᒧᔭ  ᑕᑕᐢᐯᔨᐦᑕᒼ. '),
+    ('obviously english text', 'obviously english text'),
+])
+def test_multiple_words(input_text, expected):
     """
     Test transcoding multiple words.
     """
-
-    assert sro2syllabics('\t namoya  tataspeyihtam. ') == '\t ᓇᒧᔭ  ᑕᑕᐢᐯᔨᐦᑕᒼ. '
+    assert sro2syllabics(input_text) == expected
 
 
 # TODO: test replace - with soft hyphen
