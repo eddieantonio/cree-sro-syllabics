@@ -62,17 +62,30 @@ sro2syllabics_lookup = {
 syllabics2sro_lookup = {syl: sro for sro, syl in sro2syllabics_lookup.items()}
 assert len(syllabics2sro_lookup) == len(sro2syllabics_lookup)
 
+ONSET = '[ptkcshmny]w?|w'
+VOWEL = "[aâi'îoôêe]"
+CODA = '[hs]?[ptkcmn]|h|s|y|w'
+SYLLABLE = '(?:{ONSET})?{VOWEL}(?:{CODA})?|r|l'.format(**globals())
+WORD = '(?:{SYLLABLE})+'.format(**globals())
+word_pattern = re.compile(WORD, re.IGNORECASE)
+
 
 def sro2syllabics(sro_text: str) -> str:
     """
+    Converts SRO text to syllabics.
+    """
+    def transcode_match(match) -> str:
+        return transcode_sro_word_to_syllabics(match.group(0))
+    return word_pattern.sub(transcode_match, nfc(sro_text))
+
+
+def transcode_sro_word_to_syllabics(sro_word) -> str:
+    """
     Transcribes one word at a time.
     """
-    # TODO: partition words at punctuation to handle sentences and paragraphs.
 
-    to_transcribe = nfc(sro_text).\
-        lower().\
-        replace('e', 'ê').\
-        replace("'", 'i')
+    to_transcribe = sro_word.lower().\
+        replace('e', 'ê').replace("'", 'i')
 
     parts = []
 
@@ -109,3 +122,15 @@ def nfc(text):
     Return NFC-normalized text.
     """
     return normalize('NFC', text)
+
+
+def test_word_pattern():
+    """
+    Test that the WORD regex can match entire nêhiyawêwin words and loanwords,
+    NFC-normalized.
+    """
+    entire_word = re.compile('^' + WORD + '$')
+    assert entire_word.match("n'")
+    assert entire_word.match('amisk')
+    assert entire_word.match('meriy')
+    assert entire_word.match('waskahikanahk')
