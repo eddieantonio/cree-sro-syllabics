@@ -59,8 +59,6 @@ sro2syllabics_lookup = {
     "l": "ᓬ", "r": "ᕒ", "h": "ᐦ", "hk": "ᕽ",
 }
 
-syllabics2sro_lookup = {syl: sro for sro, syl in sro2syllabics_lookup.items()}
-assert len(syllabics2sro_lookup) == len(sro2syllabics_lookup)
 
 ONSET = '[ptkcshmny]w?|w'
 VOWEL = "[aâi'îoôêe]"
@@ -68,9 +66,6 @@ CODA = '[hs]?[ptkcmn]|h|s|y|w'
 SYLLABLE = '(?:{ONSET})?{VOWEL}(?:{CODA})?|r|l'.format(**globals())
 WORD = r'\b(?:{SYLLABLE})+\b'.format(**globals())
 word_pattern = re.compile(WORD, re.IGNORECASE)
-
-# Match a stetch of characters entirely within the CANADIAN SYLLABICS block.
-syllabics_pattern = re.compile(r'[\u1400-\u167f]+')
 
 
 def sro2syllabics(sro_text: str) -> str:
@@ -111,19 +106,6 @@ def transcode_sro_word_to_syllabics(sro_word) -> str:
 
     assert to_transcribe == '', 'could not transcribe %r' % (to_transcribe)
     return ''.join(parts)
-
-
-def syllabics2sro(syllabics: str) -> str:
-    """
-    Transcribes one word of syllabics into SRO.
-    """
-    def replace_syllabics(match):
-        return transcribe_syllabics_word_to_sro(match.group(0))
-    return syllabics_pattern.sub(replace_syllabics, syllabics)
-
-
-def transcribe_syllabics_word_to_sro(syllabics):
-    return ''.join(syllabics2sro_lookup[syllabic] for syllabic in syllabics)
 
 
 def nfc(text):
