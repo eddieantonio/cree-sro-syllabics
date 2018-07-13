@@ -69,6 +69,9 @@ SYLLABLE = '(?:{ONSET})?{VOWEL}(?:{CODA})?|r|l'.format(**globals())
 WORD = r'\b(?:{SYLLABLE})+\b'.format(**globals())
 word_pattern = re.compile(WORD, re.IGNORECASE)
 
+# Match a stetch of characters entirely within the CANADIAN SYLLABICS block.
+syllabics_pattern = re.compile(r'[\u1400-\u167f]+')
+
 
 def sro2syllabics(sro_text: str) -> str:
     """
@@ -114,6 +117,12 @@ def syllabics2sro(syllabics: str) -> str:
     """
     Transcribes one word of syllabics into SRO.
     """
+    def replace_syllabics(match):
+        return transcribe_syllabics_word_to_sro(match.group(0))
+    return syllabics_pattern.sub(replace_syllabics, syllabics)
+
+
+def transcribe_syllabics_word_to_sro(syllabics):
     return ''.join(syllabics2sro_lookup[syllabic] for syllabic in syllabics)
 
 
