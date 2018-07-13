@@ -2,8 +2,8 @@ Plains Cree Orthography
 =======================
 
 [![Build Status](https://travis-ci.org/eddieantonio/crk_orthography.svg?branch=master)](https://travis-ci.org/eddieantonio/crk_orthography)
-[![Calver MAJOR.YYYY0M0D.PATCH](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
 [![PyPI package](https://img.shields.io/pypi/v/crk_orthography.svg)](https://pypi.org/project/crk_orthography/)
+[![Calver MAJOR.YYYY0M0D.PATCH](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
 
 Convert between nêhiyawêwin/ᓀᐦᐃᔭᐍᐏᐣ (Plains Cree Y-dialect) Standard
 Roman Orthography (SRO) and Canadian Aboriginal syllabics!
@@ -16,17 +16,33 @@ Install
 Usage
 -----
 
+### As a Python module
+
 Convert SRO to syllabics:
 
     >>> from crk_orthography import sro2syllabics
     >>> sro2syllabics('nêhiyawêwin')
     'ᓀᐦᔭᐍᐏᐣ'
+    >>> sro2syllabics('write nêhiyawêwin')
+    'write ᓀᐦᐃᔭᐍᐏᐣ'
 
 Convert syllabics to SRO:
 
     >>> from crk_orthography import syllabics2sro
     >>> syllabics2sro('ᐊᒋᒧᓯᐢ')
     'acimosis'
+    >>> syllabics2sro(' → ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᕀᓬ ')
+    ' → maskêkosihk  tireyl '
+
+
+### On the command line
+
+Once installed as a Python module, you can invoke its command line mode
+by writing `python3 -m crk_orthography`. When invoked this way, it
+converts each line of input from SRO to syllabics.
+
+    $ echo "minôs" | python3 -m crk_orthography
+    ᒥᓅᐢ
 
 
 See also
