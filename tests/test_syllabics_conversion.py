@@ -106,6 +106,7 @@ def test_macrons(sro, syllabics):
     Test that macrons can be converted
     """
     assert sro2syllabics(sro) == syllabics
+    assert syllabics2sro(syllabics, produce_macrons=True) == sro
 
 
 # TODO: test replace - with soft hyphen
