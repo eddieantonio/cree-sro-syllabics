@@ -60,12 +60,17 @@ sro2syllabics_lookup = {
 }
 
 
+# TODO: Document these regular expressions:
 ONSET = '[ptkcshmny]w?|w'
-VOWEL = "[aâi'îoôêe]"
+VOWEL = "[aâāi'îīoôōeêē]"
 CODA = '[hs]?[ptkcmn]|h|s|y|w'
 SYLLABLE = '(?:{ONSET})?{VOWEL}(?:{CODA})?|r|l'.format(**globals())
 WORD = r'\b(?:{SYLLABLE})+\b'.format(**globals())
 word_pattern = re.compile(WORD, re.IGNORECASE)
+
+# Converts macron and alternate forms of vowels into "canonical" forms.
+TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
+                                    'âiîôêê')
 
 
 def sro2syllabics(sro_text: str) -> str:
@@ -83,7 +88,7 @@ def transcode_sro_word_to_syllabics(sro_word) -> str:
     """
 
     to_transcribe = sro_word.lower().\
-        replace('e', 'ê').replace("'", 'i')
+        translate(TRANSLATE_ALT_FORMS)
 
     parts = []
 
