@@ -36,6 +36,9 @@ syllabics2sro_lookup.update({
     '\N{CANADIAN SYLLABICS Y-CREE W}': 'y'
 })
 
+# Translation table to convert syllabics to SRO.
+SYLLABICS_TO_SRO = str.maketrans(syllabics2sro_lookup)
+
 # Match a stretch of characters entirely within the CANADIAN SYLLABICS block.
 syllabics_pattern = re.compile(r'[\u1400-\u167f]+')
 
@@ -65,4 +68,4 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
 
 
 def transcribe_syllabics_word_to_sro(word):
-    return ''.join(syllabics2sro_lookup[syllabic] for syllabic in word)
+    return word.translate(SYLLABICS_TO_SRO)
