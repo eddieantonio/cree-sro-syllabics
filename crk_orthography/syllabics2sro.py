@@ -26,6 +26,13 @@ syllabics2sro_lookup = {syl: sro for sro, syl in sro2syllabics_lookup.items()}
 # Initially, no syllabics should map to an SRO string more than once
 # (hence, the two tables should have an equal amount of entries).
 assert len(syllabics2sro_lookup) == len(sro2syllabics_lookup)
+# Add alterinate and "look-alike" forms:
+syllabics2sro_lookup.update({
+    # TODO: add wolvengrey citation and page number.
+    # See: https://en.wikipedia.org/w/index.php?title=Plains_Cree&oldid=848160114#Canadian_aboriginal_syllabics
+    # for an explanation of this special y-final.
+    '\N{CANADIAN SYLLABICS Y-CREE W}': 'y'
+})
 
 # Match a stetch of characters entirely within the CANADIAN SYLLABICS block.
 syllabics_pattern = re.compile(r'[\u1400-\u167f]+')
