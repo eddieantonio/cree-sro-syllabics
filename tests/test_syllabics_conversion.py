@@ -82,6 +82,20 @@ def test_multiple_words(sro, syllabics):
     assert syllabics2sro(syllabics) == sro
 
 
+def test_alternate_y_final():
+    """
+    From Wikipedia:
+
+    Some Plains Cree communities use a final for y which is different from the
+    usual western final. This is a superposed dot ᐝ, instead of the usual ᐩ,
+    as in ᓰᐱᐩ (ᓰᐱᐝ) sīpiy “river". When the dot y-final is placed after a
+    syllabic which has a w-dot, the two dots combine to form a colon-like
+    symbol, as in ᓅᐦᑖᐏᐩ (ᓅᐦᑖᐃ᛬) nōhtāwiy “my father".
+    """
+    syllabics = 'ᓰᐱᐝ'
+    sro = 'sîpiy'
+    assert syllabics2sro(syllabics) == sro
+
 # TODO: test replace - with soft hyphen
 # TODO: ...(sandhi)...
 # TODO: test alternate w
