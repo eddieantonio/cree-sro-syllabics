@@ -96,7 +96,18 @@ def test_alternate_y_final():
     sro = 'sîpiy'
     assert syllabics2sro(syllabics) == sro
 
+
+@pytest.mark.parametrize("sro,syllabics", [
+    ('yōtinipēstāw', 'ᔫᑎᓂᐯᐢᑖᐤ'),
+    ('īkatē', 'ᐄᑲᑌ'),
+])
+def test_macrons(sro, syllabics):
+    """
+    Test that macrons can be converted
+    """
+    assert sro2syllabics(sro) == syllabics
+
+
 # TODO: test replace - with soft hyphen
 # TODO: ...(sandhi)...
-# TODO: test alternate w
 # TODO: test look-alikes.
