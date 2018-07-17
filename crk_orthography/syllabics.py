@@ -18,7 +18,7 @@
 
 import re
 
-from .sro2syllabics import sro2syllabics_lookup
+from .sro import sro2syllabics_lookup
 
 
 # Derive the Syllabics -> SRO lookup table from the SRO -> Syllabics table.
