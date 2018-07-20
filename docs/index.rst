@@ -10,6 +10,8 @@ Welcome to Plains Cree Orthography's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. autofunction:: crk_orthography.sro2syllabics
+.. autofunction:: crk_orthography.syllabics2sro
 
 
 Indices and tables
