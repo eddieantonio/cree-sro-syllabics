@@ -8,3 +8,6 @@ pytest = "*"
 
 [dev-packages]
 twine = "*"
+recommonmark = "*"
+sphinx = "*"
+sphinx-autobuild = "*"
