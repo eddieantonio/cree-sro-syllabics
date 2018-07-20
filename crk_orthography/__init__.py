@@ -17,3 +17,5 @@
 from .__version__ import __version__
 from .sro import sro2syllabics
 from .syllabics import syllabics2sro
+
+__all__ = ['sro2syllabics', 'syllabics2sro']
