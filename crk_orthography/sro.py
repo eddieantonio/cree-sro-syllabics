@@ -119,7 +119,7 @@ def sro2syllabics(sro_text: str) -> str:
     >>> sro2syllabics("tân'si")
     'ᑖᓂᓯ'
 
-    :param sro_text: the text with Cree words written in SRO.
+    :param str sro_text: the text with Cree words written in SRO.
     :return: the text with Cree words written in syllabics.
     :rtype: str
     """

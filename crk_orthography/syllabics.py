@@ -48,14 +48,33 @@ circumflex_to_macrons = str.maketrans('âêîô',
 
 def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     """
-    Transcribes all instances of syllabics in a string into their SRO
-    equivalents.
+    Convert Cree words written in syllabics to SRO.
 
-    :param produce_macrons: if true, produces macrons (āēīō) instead of
-                            circumflexes (âêîô). In both cases, the character
-                            produced will be a pre-composed character, as
-                            opposed to an ASCII character followed by a
-                            combining diacritical mark.
+    Finds all instances of syllabics in the given string, and converts it to
+    SRO. Anything that is not written in
+    syllabics is simply ignored:
+
+    >>> syllabics2sro('Eddie ᓂᑎᓯᔨᑲᓱᐣ')
+    'Eddie nitisiyikason'
+
+    By default, the SRO will be produced with circumflexes:
+
+    >>> syllabics2sro('ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ')
+    'êwêpâpîhkêwêpinamahk'
+
+    This can be changed to macrons by setting ``produce_macrons`` to ``True``:
+
+    >>> syllabics2sro('ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ', produce_macrons=True)
+    'ēwēpāpīhkēwēpinamahk'
+
+    In both cases, the character produced will be a pre-composed character,
+    rather than an ASCII character followed by a combining diacritical mark.
+
+    :param syllabics: the text with Cree words written in syllabics.
+    :param produce_macrons: if ``True``, produces macrons (āēīō) instead of
+                            circumflexes (âêîô).
+    :return: the text with Cree words written in SRO.
+    :rtype: str
     """
     def replace_syllabics(match):
         return transcribe_syllabics_word_to_sro(match.group(0))
