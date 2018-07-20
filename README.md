@@ -2,6 +2,7 @@ Plains Cree Orthography
 =======================
 
 [![Build Status](https://travis-ci.org/eddieantonio/crk_orthography.svg?branch=master)](https://travis-ci.org/eddieantonio/crk_orthography)
+[![Documentation Status](https://readthedocs.org/projects/crk-orthography/badge/?version=latest)](https://crk-orthography.readthedocs.io/en/latest/?badge=latest)
 [![PyPI package](https://img.shields.io/pypi/v/crk_orthography.svg)](https://pypi.org/project/crk_orthography/)
 [![Calver MAJOR.YYYY0M0D.PATCH](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
 

@@ -12,8 +12,9 @@ Function documentation
 .. autofunction:: crk_orthography.sro2syllabics
 .. autofunction:: crk_orthography.syllabics2sro
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`search`
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  glossary
