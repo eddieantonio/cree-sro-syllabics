@@ -75,7 +75,53 @@ TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
 
 def sro2syllabics(sro_text: str) -> str:
     """
-    Converts SRO text to syllabics.
+    Convert Cree words written in SRO text to syllabics.
+
+    Finds instances of SRO words in strings, and converts them all to
+    syllabics.
+
+    >>> sro2syllabics('Eddie nitisiyikason')
+    'Eddie ᓂᑎᓯᔨᑲᓱᐣ'
+
+    Any word that does not have the "structure" of a Plains Cree word is not
+    converted:
+
+    >>> sro2syllabics('Maskêkosihk trail')
+    'ᒪᐢᑫᑯᓯᕽ trail'
+    >>> sro2syllabics('Maskêkosihk tireyl')
+    'ᒪᐢᑫᑯᓯᕽ ᑎᕒᐁᕀᓬ'
+
+    ``sro2syllabics()`` can handle variations in orthography. For example,
+    it can convert circumflexes (âêîô):
+
+    >>> sro2syllabics('êwêpâpîhkêwêpinamahk')
+    'ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ'
+
+    It convert macrons (āēīō):
+
+    >>> sro2syllabics('ēwēpâpīhkēwēpinamahk')
+    'ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ'
+
+    And it can convert an unaccented "e" just as if it had the appropriate
+    accent:
+
+    >>> sro2syllabics('ewepapihkewepinamahk')
+    'ᐁᐍᐸᐱᐦᑫᐍᐱᓇᒪᕽ'
+
+    Additionally, apostrophes are interpreted as short-i's. For example,
+    converting "tânsi" will not work:
+
+    >>> sro2syllabics("tânsi")
+    "tânsi"
+
+    However, add an appostrophe after the 'n' and it will work correctly:
+
+    >>> sro2syllabics("tân'si")
+    'ᑖᓂᓯ'
+
+    :param sro_text: the text with Cree words written in SRO.
+    :return: the text with Cree words written in syllabics.
+    :rtype: str
     """
     def transcode_match(match) -> str:
         return transcode_sro_word_to_syllabics(match.group(0))
