@@ -53,11 +53,27 @@ Glossary
     A **circumflex** is the little hat on top of a vowel (◌̂), used to represent
     long vowels in nêhiyawêwin
 
-.. TODO
-
-  converter
-  transcriptor
   transliterator
+  transcriptor
+  converter
+    A **transliterator** is a tool that converts between two different writing
+    systems. Other words for such a tool include **transcriptor** and
+    **converter**.
+
+  Plains Cree
+  Cree Y-dialect
+  nêhiyawêwin
+    **Plains Cree**, **Cree Y-Dialect**, or **nêhiyawêwin** is the most populous
+    Cree dialect. Notably, many words which have a "th" in Woods Cree and words
+    that have a "n" in Swampy Cree have a "y" in Plains Cree, which is why
+    Plains Cree is also known as the Cree Y-dialect.
+
+.. These may be needed in future versions of the package.
+
+  sandhi
+    TODO: definition
+
+  soft hyphen
     TODO: definition
 
   crk
@@ -66,17 +82,6 @@ Glossary
   eng
     TODO: definition
 
-  Plains Cree
-  Cree Y-Dialect
-    TODO: definition
-
-.. These will be needed in future versions of the package.
-
-  sandhi
-    TODO: definition
-
-  soft hyphen
-    TODO: definition
 
 .. [Okimāsis] Jean Okimāsis and Arok Wolvengrey. 2008.
    *How to spell it in Cree: the standard Roman orthography*.
