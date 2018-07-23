@@ -28,9 +28,8 @@ syllabics2sro_lookup = {syl: sro for sro, syl in sro2syllabics_lookup.items()}
 assert len(syllabics2sro_lookup) == len(sro2syllabics_lookup)
 # Add alternate and "look-alike" forms:
 syllabics2sro_lookup.update({
-    # TODO: add wolvengrey citation and page number.
-    #
-    # See also:
+    # Some communities use the ᐝ symbol instead of ᕀ for the y-final.
+    # See:
     # https://en.wikipedia.org/w/index.php?title=Plains_Cree&oldid=848160114#Canadian_aboriginal_syllabics
     # for an explanation of this special y-final.
     '\N{CANADIAN SYLLABICS Y-CREE W}': 'y'
