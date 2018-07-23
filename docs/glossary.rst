@@ -1,7 +1,8 @@
 .. Glossary of terms
 
+--------
 Glossary
-========
+--------
 
 .. glossary::
   :sorted:
