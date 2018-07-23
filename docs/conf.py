@@ -25,10 +25,13 @@ project = 'Plains Cree Orthography'
 copyright = '2018, Eddie Antonio Santos'
 author = 'Eddie Antonio Santos'
 
-# The short X.Y version
-version = ''
+# Get the version number from the package itself.
+from crk_orthography import __version__ as package_version  # noqa
+
 # The full version, including alpha/beta/rc tags
-release = '0.20180720.0'
+release = package_version
+# The short X.Y version
+version = '.'.join(release.split('.')[:2])
 
 
 # -- General configuration ---------------------------------------------------
