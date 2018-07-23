@@ -57,12 +57,13 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     >>> syllabics2sro('Eddie ᓂᑎᓯᔨᑲᓱᐣ')
     'Eddie nitisiyikason'
 
-    By default, the SRO will be produced with circumflexes:
+    By default, the SRO will be produced with circumflexes (âêîô):
 
     >>> syllabics2sro('ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ')
     'êwêpâpîhkêwêpinamahk'
 
-    This can be changed to macrons by setting ``produce_macrons`` to ``True``:
+    This can be changed to macrons (āēīō) by setting ``produce_macrons`` to
+    ``True``:
 
     >>> syllabics2sro('ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ', produce_macrons=True)
     'ēwēpāpīhkēwēpinamahk'
