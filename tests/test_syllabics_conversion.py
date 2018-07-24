@@ -109,15 +109,15 @@ def test_macrons(sro, syllabics):
     assert syllabics2sro(syllabics, produce_macrons=True) == sro
 
 
-@pytest.mark.parametrize("sro,syllabics", [
-    ('osk-âya', 'ᐅᐢᑳᔭ'),
+@pytest.mark.parametrize("sro,syllabics,alt_syllabics", [
+    ('osk-âya', 'ᐅᐢᑳᔭ', 'ᐅᐢᐠ-ᐊᔭ'),
     # NOTE: this /still/ might not be the right transliteration, but
     # the correct transliteration requires even more phonological knowledge,
     # so I'm not even going to go there...
-    ('miyw-âyâw', 'ᒥᔼᔮᐤ'),
-    ('pîhc-âyihk', 'ᐲᐦᒑᔨᕽ'),
+    ('miyw-âyâw', 'ᒥᔼᔮᐤ', 'ᒥᕀᐤ-ᐋᔮᐤ'),
+    ('pîhc-âyihk', 'ᐲᐦᒑᔨᕽ', 'ᐲᐦᐨ-ᐋᔨᕽ'),
 ])
-def test_sandhi(sro, syllabics):
+def test_sandhi(sro, syllabics, alt_syllabics):
     """
     Test that sandhi orthographic rule is applied when converting to
     syllabics.
@@ -125,6 +125,8 @@ def test_sandhi(sro, syllabics):
     See: Wolvengrey 2001, pp. xxvi–xviii
     """
     assert sro2syllabics(sro) == syllabics
+    assert sro2syllabics(sro, sandhi=False) == alt_syllabics
+
 
 # TODO: test look-alikes.
 # TODO: test replace «-» with soft hyphen
