@@ -115,7 +115,7 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     >>> sro2syllabics('êwêpâpîhkêwêpinamahk')
     'ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ'
 
-    It convert macrons (āēīō):
+    It can convert macrons (āēīō):
 
     >>> sro2syllabics('ēwēpâpīhkēwēpinamahk')
     'ᐁᐍᐹᐲᐦᑫᐍᐱᓇᒪᕽ'
@@ -132,15 +132,42 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     >>> sro2syllabics("tânsi")
     "tânsi"
 
-    However, add an appostrophe after the 'n' and it will work correctly:
+    However, add an apostrophe after the 'n' and it will work correctly:
 
     >>> sro2syllabics("tân'si")
     'ᑖᓂᓯ'
 
-    .. TODO
-        Write documentation for sandhi=True
+    Sandhi orthographic rule
+    ------------------------
+
+    In SRO, the most orthographically correct way to write certain compounds
+    is to separate two *morphemes* with a hyphen. For example:
+
+        | pîhc-âyihk — inside
+        | nîhc-âyihk — outside
+
+    However, both words are pronounced as if discarding the hyphen:
+
+        | pîhcâyihk — inside
+        | nîhcâyihk — outside
+
+    This is called :term:`sandhi`.  When transliterated into syllabics,
+    the transcription should follow the latter, blended interpretation, rather
+    than the former, separated interpretation. By default, ``sro2syllabics()``
+    applies the sandhi rule and joins the syllable as if there were no hyphen:
+
+    >>> sro2syllabics('pîhc-âyihk')
+    'ᐲᐦᒑᔨᕽ'
+
+    However, if this is not desired, you can set ``sandhi=False`` as a keyword
+    argument:
+
+    >>> sro2syllabics('pîhc-âyihk', sandhi=False)
+    'ᐲᐦᐨ-ᐋᔨᕽ'
 
     :param str sro: the text with Cree words written in SRO.
+    :param bool sandhi: whether to apply sandhi orthography rule (default:
+                        ``True``).
     :return: the text with Cree words written in syllabics.
     :rtype: str
     """
