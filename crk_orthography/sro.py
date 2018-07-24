@@ -19,9 +19,27 @@
 import re
 from unicodedata import normalize
 
+CONSONANT = '[ptkcshmnyw]'
+STRICT_VOWEL = '[aioâêîô]'
+VOWEL = "{STRICT_VOWEL}|[e'āēīō]".format(**globals())
 
 # Match an SRO syllable.
 sro_pattern = re.compile(r'''
+    # A syllable that should be joined under the sandhi rule
+    # Basically, we're setting this up so that the onset (consonant and
+    # optional w) can be glued together with the vowel. The concatenated
+    # sounds are joined to form one syllable, even though the hyphen indicates
+    # that they are in separate morphemes. That's sandhi!
+    # See the front-matter in Arok Wolvengrey's dictionary for more
+    # information and examples.
+    #   Wolvengrey, Arokk, ed. "ᓀᐦᐃᔭᐍᐏᐣ: ᐃᑗᐏᓇ / nēhiýawēwin: itwēwina/Cree:
+    #   Words". Canadian Plains Research Center, 15 October 2001.
+
+    ({CONSONANT}w?)-({STRICT_VOWEL}) |
+
+    # Listing all of the syllables. Note! List the longer syllable first, since
+    # the regular expression will match the first alternative that will
+    # work—which must be the longest match!
     wê|wi|wî|wo|wô|wa|wâ|w|
     pê|pi|pî|po|pô|pa|pâ|pwê|pwi|pwî|pwo|pwô|pwa|pwâ|p|
     tê|ti|tî|to|tô|ta|tâ|twê|twi|twî|two|twô|twa|twâ|t|
@@ -33,7 +51,7 @@ sro_pattern = re.compile(r'''
     yê|yi|yî|yo|yô|ya|yâ|ywê|ywi|ywî|ywo|ywô|ywa|ywâ|y|
     h|l|r|
     ê|i|î|o|ô|a|â
-''', re.VERBOSE)
+'''.format(**globals()), re.VERBOSE)
 
 
 # A complete SRO to syllabics look-up table.
@@ -62,10 +80,10 @@ sro2syllabics_lookup = {
 
 # TODO: Document these regular expressions:
 ONSET = '[ptkcshmny]w?|w'
-VOWEL = "[aâāi'îīoôōeêē]"
 CODA = '[hs]?[ptkcmn]|h|s|y|w'
-SYLLABLE = '(?:{ONSET})?{VOWEL}(?:{CODA})?|r|l'.format(**globals())
-WORD = r'\b(?:{SYLLABLE})+\b'.format(**globals())
+SYLLABLE = '(?:{ONSET})?(?:{VOWEL})(?:{CODA})?|r|l'.format(**globals())
+SYLLABLES = r'(?:{SYLLABLE})+'.format(**globals())
+WORD = r'\b{SYLLABLES}(?:(?:{CODA})?-{SYLLABLES})*\b'.format(**globals())
 word_pattern = re.compile(WORD, re.IGNORECASE)
 
 # Converts macron and alternate forms of vowels into "canonical" forms.
@@ -140,8 +158,15 @@ def transcode_sro_word_to_syllabics(sro_word) -> str:
 
     match = sro_pattern.match(to_transcribe)
     while match:
+        onset, vowel = match.groups()
+        if onset and vowel:
+            # Apply sandhi rule
+            syllable = onset + vowel
+        else:
+            syllable = match.group(0)
+
         # Get the syllabic
-        syllabic = sro2syllabics_lookup[match.group(0)]
+        syllabic = sro2syllabics_lookup[syllable]
         parts.append(syllabic)
         # Chop off transcribed part
         to_transcribe = to_transcribe[match.end():]
