@@ -64,15 +64,24 @@ Glossary
   Plains Cree
   Cree Y-dialect
   nêhiyawêwin
-    **Plains Cree**, **Cree Y-Dialect**, or **nêhiyawêwin** is the most populous
-    Cree dialect. Notably, many words which have a "th" in Woods Cree and words
-    that have a "n" in Swampy Cree have a "y" in Plains Cree, which is why
-    Plains Cree is also known as the Cree Y-dialect.
-
-.. These may be needed in future versions of the package.
+    **Plains Cree**, **Cree Y-Dialect**, or **nêhiyawêwin** is the most
+    widely-spoken Cree dialect. Notably, many words which have a "th" in Woods
+    Cree and words that have a "n" in Swampy Cree have a "y" in Plains Cree;
+    this is why Plains Cree is also known as the Cree Y-dialect.
 
   sandhi
-    TODO: definition
+    Changes to pronunciation across word and *morpheme* boundaries. In Cree,
+    this may when two morphemes are joined such as *pîhc-* and *-âyihk*. Written
+    in SRO, it's *pîhc-âyihk*. Sandhi in Cree means that the "c" in the first
+    morpheme and the "â" in the next morpheme should be pronounced together. Hence,
+    it is pronounced as \* *pîh-câ-yihk*. The syllabics transliteration should be
+    written as it is pronounced, thus *pîhc-âyihk* should be rendered as
+    **ᐲᐦᒑᔨᕽ** and not as **ᐲᐦᐨ-ᐋᔨᕽ**.
+
+    For a more thorough description of sandhi in Cree, see [Wolfart]_ and
+    [Wolvengrey]_.
+
+.. These may be needed in future versions of the package.
 
   soft hyphen
     TODO: definition
@@ -84,6 +93,14 @@ Glossary
     TODO: definition
 
 
-.. [Okimāsis] Jean Okimāsis and Arok Wolvengrey. 2008.
-   *How to spell it in Cree: the standard Roman orthography*.
-   http://resources.atlas-ling.ca/media/How_To_Spell_It_In_Cree-Standard_Orthography-Plains-Cree.pdf
+.. [Okimāsis] Okimāsis, Jean and Wolvengrey, Arok.
+   |title|_. Houghton Boston, 2008.
+.. _title: http://resources.atlas-ling.ca/media/How_To_Spell_It_In_Cree-Standard_Orthography-Plains-Cree.pdf
+.. |title| replace:: *How to spell it in Cree: the standard Roman orthography*
+.. [Wolvengrey] Wolvengrey, Arok, ed.
+   *ᓀᐦᐃᔭᐍᐏᐣ: ᐃᑗᐏᓇ / nēhiýawēwin: itwēwina/Cree: Words*.
+   Canadian Plains Research Center, October 2001. pp. xvi–xviii.
+.. [Wolfart] Wolfart, H. Christoph. 1996.
+   *Sketch of Cree, an Algonquian Language*.
+   In Goddard, Ives (ed.), *Handbook of American Indians*.
+   Washington: Smithsonian Institute, 1996. Volume 17: Languages, pp. 390-439.
