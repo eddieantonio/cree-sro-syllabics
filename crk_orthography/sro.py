@@ -25,19 +25,19 @@ VOWEL = "{STRICT_VOWEL}|[e'āēīō]".format(**globals())
 
 # Match an SRO syllable.
 sro_pattern = re.compile(r'''
-    # A syllable that should be joined under the sandhi rule
-    # Basically, we're setting this up so that the onset (consonant and
-    # optional w) can be glued together with the vowel. The concatenated
-    # sounds are joined to form one syllable, even though the hyphen indicates
-    # that they are in separate morphemes. That's sandhi!
-    # See the front-matter in Arok Wolvengrey's dictionary for more
-    # information and examples.
-    #   Wolvengrey, Arokk, ed. "ᓀᐦᐃᔭᐍᐏᐣ: ᐃᑗᐏᓇ / nēhiýawēwin: itwēwina/Cree:
-    #   Words". Canadian Plains Research Center, 15 October 2001.
+    # A syllable that should be joined under the sandhi rule:
+    # We're setting this up so that the onset (consonant and optional w) can
+    # be glued together with the vowel. The parts are joined to
+    # form one syllable, even though the intervening hyphen indicates that
+    # they are in separate morphemes. That's sandhi!  See the front-matter in
+    # Arok Wolvengrey's dictionary for more information and examples.
+    #   Wolvengrey, Arok, ed. "ᓀᐦᐃᔭᐍᐏᐣ: ᐃᑗᐏᓇ / nēhiýawēwin: itwēwina/Cree:
+    #   Words". Canadian Plains Research Center, October 2001. pp. xvi–xviii.
 
     ({CONSONANT}w?)-({STRICT_VOWEL}) |
 
-    # Listing all of the syllables. Note! List the longer syllable first, since
+    # Listing all of the syllables.
+    # NOTE: List the longer syllable first, since
     # the regular expression will match the first alternative that will
     # work—which must be the longest match!
     wê|wi|wî|wo|wô|wa|wâ|w|
