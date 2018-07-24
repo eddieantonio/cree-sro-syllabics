@@ -70,7 +70,7 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     In both cases, the character produced will be a pre-composed character,
     rather than an ASCII character followed by a combining diacritical mark.
 
-    :param syllabics: the text with Cree words written in syllabics.
+    :param str syllabics: the text with Cree words written in syllabics.
     :param produce_macrons: if ``True``, produces macrons (āēīō) instead of
                             circumflexes (âêîô).
     :return: the text with Cree words written in SRO.

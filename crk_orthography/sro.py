@@ -91,7 +91,7 @@ TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
                                     'âiîôêê')
 
 
-def sro2syllabics(sro_text: str) -> str:
+def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     """
     Convert Cree words written in SRO text to syllabics.
 
@@ -137,16 +137,19 @@ def sro2syllabics(sro_text: str) -> str:
     >>> sro2syllabics("tân'si")
     'ᑖᓂᓯ'
 
-    :param str sro_text: the text with Cree words written in SRO.
+    .. TODO
+        Write documentation for sandhi=True
+
+    :param str sro: the text with Cree words written in SRO.
     :return: the text with Cree words written in syllabics.
     :rtype: str
     """
     def transcode_match(match) -> str:
-        return transcode_sro_word_to_syllabics(match.group(0))
-    return word_pattern.sub(transcode_match, nfc(sro_text))
+        return transcode_sro_word_to_syllabics(match.group(0), sandhi)
+    return word_pattern.sub(transcode_match, nfc(sro))
 
 
-def transcode_sro_word_to_syllabics(sro_word) -> str:
+def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:
     """
     Transcribes one word at a time.
     """
@@ -159,17 +162,36 @@ def transcode_sro_word_to_syllabics(sro_word) -> str:
     match = sro_pattern.match(to_transcribe)
     while match:
         onset, vowel = match.groups()
-        if onset and vowel:
+        if sandhi and onset is not None:
             # Apply sandhi rule
+            assert vowel is not None
             syllable = onset + vowel
+            next_syllable_pos = match.end()
+        elif onset is not None:
+            # This is a consonant
+            syllable = onset[:1]
+            # Skip the first consonant.
+            next_syllable_pos = 1
+            assert syllable in CONSONANT
         else:
             syllable = match.group(0)
+            next_syllable_pos = match.end()
 
         # Get the syllabic
         syllabic = sro2syllabics_lookup[syllable]
         parts.append(syllabic)
+
+        # XXX: When handling the "no sandhi" case, right before the hypen:
+        #      C-V   or Cw-V
+        #      ^         ^
+        # Add the hyphen manually and skip it so that we don't attempt to
+        # transcribe it.
+        if not sandhi and onset and to_transcribe[1] == '-':
+            parts.append('-')
+            next_syllable_pos += 1
+
         # Chop off transcribed part
-        to_transcribe = to_transcribe[match.end():]
+        to_transcribe = to_transcribe[next_syllable_pos:]
         match = sro_pattern.match(to_transcribe)
 
     # Special-case word-final 'hk': we did not convert it in the above loop,

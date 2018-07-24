@@ -110,7 +110,7 @@ def test_macrons(sro, syllabics):
 
 
 @pytest.mark.parametrize("sro,syllabics,alt_syllabics", [
-    ('osk-âya', 'ᐅᐢᑳᔭ', 'ᐅᐢᐠ-ᐊᔭ'),
+    ('osk-âya', 'ᐅᐢᑳᔭ', 'ᐅᐢᐠ-ᐋᔭ'),
     # NOTE: this /still/ might not be the right transliteration, but
     # the correct transliteration requires even more phonological knowledge,
     # so I'm not even going to go there...
@@ -124,7 +124,7 @@ def test_sandhi(sro, syllabics, alt_syllabics):
 
     See: Wolvengrey 2001, pp. xxvi–xviii
     """
-    assert sro2syllabics(sro) == syllabics
+    assert sro2syllabics(sro) == sro2syllabics(sro, sandhi=True) == syllabics
     assert sro2syllabics(sro, sandhi=False) == alt_syllabics
 
 
