@@ -25,6 +25,7 @@ Defines command line applications.
 """
 
 import sys
+import argparse
 
 from crk_orthography import sro2syllabics, syllabics2sro
 
@@ -45,6 +46,6 @@ def sro2syllabics_cli() -> None:
     convert_with(sro2syllabics)
 
 
-# if invoked as python3 -m crk_orthography, run as sro2syllabics
+# if invoked as python3 -m crk_orthography, run as sro2syllabics(1)
 if __name__ == '__main__':
-    sro2syllabics()
+    sro2syllabics_cli()

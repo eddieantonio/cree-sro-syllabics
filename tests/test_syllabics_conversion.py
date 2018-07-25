@@ -118,12 +118,12 @@ def test_hyphens(sro, syllabics):
 
 
 @pytest.mark.parametrize("sro,syllabics,alt_syllabics", [
-    ('osk-âya', 'ᐅᐢᑳᔭ', 'ᐅᐢᐠ-ᐋᔭ'),
+    ('osk-âya', 'ᐅᐢᑳᔭ', 'ᐅᐢᐠᐋᔭ'),
     # NOTE: this /still/ might not be the right transliteration, but
     # the correct transliteration requires even more phonological knowledge,
     # so I'm not even going to go there...
-    ('miyw-âyâw', 'ᒥᔼᔮᐤ', 'ᒥᕀᐤ-ᐋᔮᐤ'),
-    ('pîhc-âyihk', 'ᐲᐦᒑᔨᕽ', 'ᐲᐦᐨ-ᐋᔨᕽ'),
+    ('miyw-âyâw', 'ᒥᔼᔮᐤ', 'ᒥᕀᐤᐋᔮᐤ'),
+    ('pîhc-âyihk', 'ᐲᐦᒑᔨᕽ', 'ᐲᐦᐨᐋᔨᕽ'),
 ])
 def test_sandhi(sro, syllabics, alt_syllabics):
     """

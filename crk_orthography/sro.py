@@ -18,6 +18,7 @@
 
 import re
 from unicodedata import normalize
+from collections import ChainMap
 
 CONSONANT = '[ptkcshmnyw]'
 STRICT_VOWEL = '[aioâêîô]'
@@ -50,7 +51,8 @@ sro_pattern = re.compile(r'''
     sê|si|sî|so|sô|sa|sâ|swê|swi|swî|swo|swô|swa|swâ|s|
     yê|yi|yî|yo|yô|ya|yâ|ywê|ywi|ywî|ywo|ywô|ywa|ywâ|y|
     h|l|r|
-    ê|i|î|o|ô|a|â
+    ê|i|î|o|ô|a|â|
+    -
 '''.format(**globals()), re.VERBOSE)
 
 
@@ -163,7 +165,7 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     argument:
 
     >>> sro2syllabics('pîhc-âyihk', sandhi=False)
-    'ᐲᐦᐨ-ᐋᔨᕽ'
+    'ᐲᐦᐨᐋᔨᕽ'
 
     :param str sro: the text with Cree words written in SRO.
     :param bool sandhi: whether to apply sandhi orthography rule (default:
@@ -183,6 +185,10 @@ def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:
 
     to_transcribe = sro_word.lower().\
         translate(TRANSLATE_ALT_FORMS)
+
+    # Augment the lookup table with an entry for «-» so that we can simply
+    # delete all instances of '-' easily.
+    lookup = ChainMap({'-': ''}, sro2syllabics_lookup)
 
     parts = []
 
@@ -205,17 +211,8 @@ def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:
             next_syllable_pos = match.end()
 
         # Get the syllabic
-        syllabic = sro2syllabics_lookup[syllable]
+        syllabic = lookup[syllable]
         parts.append(syllabic)
-
-        # XXX: When handling the "no sandhi" case, right before the hypen:
-        #      C-V   or Cw-V
-        #      ^         ^
-        # Add the hyphen manually and skip it so that we don't attempt to
-        # transcribe it.
-        if not sandhi and onset and to_transcribe[1] == '-':
-            parts.append('-')
-            next_syllable_pos += 1
 
         # Chop off transcribed part
         to_transcribe = to_transcribe[next_syllable_pos:]

@@ -7,6 +7,15 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
 ## [Unreleased]
 
+### Fixed
+ - Fix a bug in `sro2syllabics()` that crashes when transcribing a word
+   with one or more hyphens.
+
+### Changed
+
+ - **Breaking change**: hyphens are no longer produced when calling
+   `sro2syllabics(..., sandhi=False)`.
+
 ## [0.20180724.0]
 
 ### Changed
