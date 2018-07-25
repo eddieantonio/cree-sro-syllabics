@@ -17,33 +17,60 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import argparse
 
-from crk_orthography import sro2syllabics
+from crk_orthography import sro2syllabics, syllabics2sro
 
 """
 Defines command line applications.
 """
 
-import sys
-import argparse
 
-from crk_orthography import sro2syllabics, syllabics2sro
-
-
-def convert_with(converter: str) -> None:
+def stream_from_name(filename=None):
     """
-    Runs the converter on each line and prints the result.
+    Opens the filename. If the filename is '-', opens stdin (as per UNIX
+    convention).
     """
-    for line in sys.stdin:
-        print(converter(line), end='')
+    if filename is None or filename == '-':
+        return sys.stdin
+    return open(filename, 'r')
 
 
-def syllabics2sro_cli() -> None:
-    convert_with(syllabics2sro)
+def convert_with(converter: str, stream) -> None:
+    """
+    Runs the suplied converter on each line and prints the result.
+    """
+
+    with stream:
+        for line in stream:
+            print(converter(line), end='')
+
+
+def add_filename_argument(parser) -> None:
+    parser.add_argument('filename', nargs='?',
+                        help=('The filename to be converted. '
+                              'If provided as a single hyphen (-) '
+                              'stdin is opened instead.'),
+                        type=stream_from_name,
+                        default=stream_from_name())
 
 
 def sro2syllabics_cli() -> None:
-    convert_with(sro2syllabics)
+    parser = argparse.ArgumentParser(
+        description='convert Cree text in SRO to syllabics'
+    )
+    add_filename_argument(parser)
+    args = parser.parse_args()
+    convert_with(sro2syllabics, args.filename)
+
+
+def syllabics2sro_cli() -> None:
+    parser = argparse.ArgumentParser(
+        description='convert Cree text in syllabics to SRO'
+    )
+    add_filename_argument(parser)
+    args = parser.parse_args()
+    convert_with(syllabics2sro, sys.stdin)
 
 
 # if invoked as python3 -m crk_orthography, run as sro2syllabics(1)
