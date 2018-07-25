@@ -21,5 +21,6 @@ import sys
 from crk_orthography import sro2syllabics
 
 
-for line in sys.stdin:
-    print(sro2syllabics(line), end='')
+if __name__ == '__main__':
+    for line in sys.stdin:
+        print(sro2syllabics(line), end='')

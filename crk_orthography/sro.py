@@ -127,10 +127,10 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     'ᐁᐍᐸᐱᐦᑫᐍᐱᓇᒪᕽ'
 
     Additionally, apostrophes are interpreted as short-i's. For example,
-    converting "tânsi" will not work:
+    converting "tânsi" will not work as expected:
 
     >>> sro2syllabics("tânsi")
-    "tânsi"
+    'ᑖᐣᓯ'
 
     However, add an apostrophe after the 'n' and it will work correctly:
 
