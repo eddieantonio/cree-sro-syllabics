@@ -100,7 +100,7 @@ Glossary
 .. [Wolvengrey] Wolvengrey, Arok, ed.
    *ᓀᐦᐃᔭᐍᐏᐣ: ᐃᑗᐏᓇ / nēhiýawēwin: itwēwina/Cree: Words*.
    Canadian Plains Research Center, October 2001. pp. xvi–xviii.
-.. [Wolfart] Wolfart, H. Christoph. 1996.
+.. [Wolfart] Wolfart, H. Christoph.
    |sketch|_.
    In Goddard, Ives (ed.), *Handbook of American Indians*.
    Washington: Smithsonian Institute, 1996. Volume 17: Languages, pp. 390-439.

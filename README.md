@@ -18,7 +18,7 @@ Usage
 -----
 
 [Visit the full documentation here][documentation]! Confused about
-words like "syllabics", "transliterator", or even "orthography"? Visit
+words like "syllabics", "transliterator", or "orthography"? Visit
 [the glossary][glossary]!
 
 [documentation]: https://crk-orthography.readthedocs.io/en/stable/
