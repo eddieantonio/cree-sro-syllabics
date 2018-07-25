@@ -104,9 +104,10 @@ setup(
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
-    # entry_points={
-    #     'console_scripts': ['mycli=mymodule:cli'],
-    # },
+    entry_points={
+        'console_scripts': ['sro2syllabics = crk_orthography.cli:sro2syllabics_cli',
+                            'syllabics2sro = crk_orthography.cli:syllabics2sro_cli'],
+    },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,
