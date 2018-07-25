@@ -20,7 +20,31 @@ import sys
 
 from crk_orthography import sro2syllabics
 
+"""
+Defines command line applications.
+"""
 
-if __name__ == '__main__':
+import sys
+
+from crk_orthography import sro2syllabics, syllabics2sro
+
+
+def convert_with(converter: str) -> None:
+    """
+    Runs the converter on each line and prints the result.
+    """
     for line in sys.stdin:
-        print(sro2syllabics(line), end='')
+        print(converter(line), end='')
+
+
+def syllabics2sro_cli() -> None:
+    convert_with(syllabics2sro)
+
+
+def sro2syllabics_cli() -> None:
+    convert_with(sro2syllabics)
+
+
+# if invoked as python3 -m crk_orthography, run as sro2syllabics
+if __name__ == '__main__':
+    sro2syllabics()

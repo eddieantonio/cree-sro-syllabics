@@ -105,8 +105,10 @@ setup(
     # py_modules=['mypackage'],
 
     entry_points={
-        'console_scripts': ['sro2syllabics = crk_orthography.cli:sro2syllabics_cli',
-                            'syllabics2sro = crk_orthography.cli:syllabics2sro_cli'],
+        'console_scripts': [
+            'sro2syllabics = crk_orthography.__main__:sro2syllabics_cli',
+            'syllabics2sro = crk_orthography.__main__:syllabics2sro_cli',
+        ],
     },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
