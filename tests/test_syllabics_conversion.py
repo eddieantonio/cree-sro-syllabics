@@ -109,6 +109,14 @@ def test_macrons(sro, syllabics):
     assert syllabics2sro(syllabics, produce_macrons=True) == sro
 
 
+@pytest.mark.parametrize("sro,syllabics", [
+    ('paskwâwi-mostos', 'ᐸᐢᒁᐏᒧᐢᑐᐢ'),
+    ('amiskwaciy-waskahikan', 'ᐊᒥᐢᑿᒋᕀᐘᐢᑲᐦᐃᑲᐣ'),
+])
+def test_hyphens(sro, syllabics):
+    assert sro2syllabics(sro) == syllabics
+
+
 @pytest.mark.parametrize("sro,syllabics,alt_syllabics", [
     ('osk-âya', 'ᐅᐢᑳᔭ', 'ᐅᐢᐠ-ᐋᔭ'),
     # NOTE: this /still/ might not be the right transliteration, but
