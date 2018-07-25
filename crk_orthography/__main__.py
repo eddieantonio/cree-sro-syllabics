@@ -70,7 +70,7 @@ def syllabics2sro_cli() -> None:
     )
     add_filename_argument(parser)
     args = parser.parse_args()
-    convert_with(syllabics2sro, sys.stdin)
+    convert_with(syllabics2sro, args.filename)
 
 
 # if invoked as python3 -m crk_orthography, run as sro2syllabics(1)
