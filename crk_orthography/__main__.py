@@ -20,6 +20,7 @@ import sys
 import argparse
 
 from crk_orthography import sro2syllabics, syllabics2sro
+from crk_orthography import __version__ as version
 
 """
 Defines command line applications.
@@ -46,7 +47,10 @@ def convert_with(converter: str, stream) -> None:
             print(converter(line), end='')
 
 
-def add_filename_argument(parser) -> None:
+def add_common_arguments(parser) -> None:
+    parser.add_argument('-v', '--version',
+                        action='version',
+                        version='%(prog)s ' + version)
     parser.add_argument('filename', nargs='?',
                         help=('The filename to be converted. '
                               'If provided as a single hyphen (-) '
@@ -59,7 +63,7 @@ def sro2syllabics_cli() -> None:
     parser = argparse.ArgumentParser(
         description='convert Cree text in SRO to syllabics'
     )
-    add_filename_argument(parser)
+    add_common_arguments(parser)
     args = parser.parse_args()
     convert_with(sro2syllabics, args.filename)
 
@@ -68,7 +72,7 @@ def syllabics2sro_cli() -> None:
     parser = argparse.ArgumentParser(
         description='convert Cree text in syllabics to SRO'
     )
-    add_filename_argument(parser)
+    add_common_arguments(parser)
     args = parser.parse_args()
     convert_with(syllabics2sro, args.filename)
 
