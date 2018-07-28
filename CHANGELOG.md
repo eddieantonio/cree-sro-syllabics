@@ -8,7 +8,7 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 ## [Unreleased]
 
 ### Added
- - New command line utilities: `sro2syllabics(1)` and `syllabics2sro(1)`!
+ - New command line utilities: `sro2syllabics` and `syllabics2sro`!
 
 ### Fixed
  - Fix a bug in `sro2syllabics()` that crashes when transcribing a word

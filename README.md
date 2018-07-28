@@ -46,12 +46,36 @@ Convert syllabics to SRO:
 
 ### On the command line
 
-Once installed as a Python module, you can invoke its command line mode
-by writing `python3 -m crk_orthography`. When invoked this way, it
-converts each line of input from SRO to syllabics.
+`crk_orthography` installs two command line programs:
 
-    $ echo "minôs" | python3 -m crk_orthography
+#### sro2syllabics
+
+Use this to convert text from a file or from `stdin` to syllabics.
+
+    $ echo "minôs" | sro2syllabics
     ᒥᓅᐢ
+    $ sro2syllabics my-file-in-sro.txt
+    ᒥᓅᐢ
+
+For more information over its options, type:
+
+    sro2syllabics --help
+
+#### syllabics2sro
+
+Use this to convert text from a file or from `stdin` to SRO.
+
+    $ echo "ᒥᓅᐢ" | syllabics2sro
+    minôs
+    $ syllabics2sro my-file-in-syllabics.txt
+    minôs
+    $ syllabics2sro --macrons my-file-in-syllabics.txt
+    minōs
+
+
+For more information over its options, type:
+
+    syllabics2sro --help
 
 
 See also
