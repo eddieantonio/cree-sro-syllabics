@@ -37,14 +37,14 @@ def stream_from_name(filename=None):
     return open(filename, 'r')
 
 
-def convert_with(converter: str, stream) -> None:
+def convert_with(stream: str, converter, *args, **kwargs) -> None:
     """
     Runs the suplied converter on each line and prints the result.
     """
 
     with stream:
         for line in stream:
-            print(converter(line), end='')
+            print(converter(line, *args, **kwargs), end='')
 
 
 def add_common_arguments(parser) -> None:
@@ -65,7 +65,7 @@ def sro2syllabics_cli() -> None:
     )
     add_common_arguments(parser)
     args = parser.parse_args()
-    convert_with(sro2syllabics, args.filename)
+    convert_with(args.filename, sro2syllabics)
 
 
 def syllabics2sro_cli() -> None:
@@ -73,8 +73,19 @@ def syllabics2sro_cli() -> None:
         description='convert Cree text in syllabics to SRO'
     )
     add_common_arguments(parser)
+    parser.add_argument(
+            '-^', '--circumflexes',
+            action='store_false', dest='produce_macrons', default=False,
+            help='write long vowels with circumflexes (âêîô) [default]'
+    )
+    parser.add_argument(
+            '-_', '--macrons',
+            action='store_true', dest='produce_macrons',
+            help='write long vowels with macrons (āēīō)'
+    )
     args = parser.parse_args()
-    convert_with(syllabics2sro, args.filename)
+    convert_with(args.filename, syllabics2sro,
+                 produce_macrons=args.produce_macrons)
 
 
 # if invoked as python3 -m crk_orthography, run as sro2syllabics(1)
