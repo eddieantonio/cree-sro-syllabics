@@ -64,8 +64,19 @@ def sro2syllabics_cli() -> None:
         description='convert Cree text in SRO to syllabics'
     )
     add_common_arguments(parser)
+    parser.add_argument(
+            '-s', '--sandhi',
+            action='store_true', dest='sandhi', default=True,
+            help='apply sandhi orthographic rule'
+    )
+    parser.add_argument(
+            '-S', '--no-sandhi',
+            action='store_false', dest='sandhi',
+            help='do not apply sandhi orthographic rule'
+    )
     args = parser.parse_args()
-    convert_with(args.filename, sro2syllabics)
+    convert_with(args.filename, sro2syllabics,
+                 sandhi=args.sandhi)
 
 
 def syllabics2sro_cli() -> None:
