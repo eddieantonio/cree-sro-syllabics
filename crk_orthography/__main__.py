@@ -64,16 +64,18 @@ def sro2syllabics_cli() -> None:
         description='convert Cree text in SRO to syllabics'
     )
     add_common_arguments(parser)
-    parser.add_argument(
+    sandhi = parser.add_mutually_exclusive_group()
+    sandhi.add_argument(
             '-s', '--sandhi',
-            action='store_true', dest='sandhi', default=True,
+            action='store_true', dest='sandhi',
             help='apply sandhi orthographic rule'
     )
-    parser.add_argument(
+    sandhi.add_argument(
             '-S', '--no-sandhi',
             action='store_false', dest='sandhi',
             help='do not apply sandhi orthographic rule'
     )
+    parser.set_defaults(sandhi=True)
     args = parser.parse_args()
     convert_with(args.filename, sro2syllabics,
                  sandhi=args.sandhi)
@@ -84,16 +86,18 @@ def syllabics2sro_cli() -> None:
         description='convert Cree text in syllabics to SRO'
     )
     add_common_arguments(parser)
-    parser.add_argument(
+    macrons = parser.add_mutually_exclusive_group()
+    macrons.add_argument(
             '-^', '--circumflexes',
             action='store_false', dest='produce_macrons', default=False,
             help='write long vowels with circumflexes (âêîô) [default]'
     )
-    parser.add_argument(
+    macrons.add_argument(
             '-_', '--macrons',
             action='store_true', dest='produce_macrons',
             help='write long vowels with macrons (āēīō)'
     )
+    parser.set_defaults(produce_macrons=False)
     args = parser.parse_args()
     convert_with(args.filename, syllabics2sro,
                  produce_macrons=args.produce_macrons)
