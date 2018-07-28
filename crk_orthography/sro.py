@@ -22,7 +22,7 @@ from collections import ChainMap
 
 CONSONANT = '[ptkcshmnyw]'
 STRICT_VOWEL = '[aioâêîô]'
-VOWEL = "{STRICT_VOWEL}|[e'āēīō]".format(**globals())
+VOWEL = "{STRICT_VOWEL}|[e'āēīō]".format_map(globals())
 
 # Match an SRO syllable.
 sro_pattern = re.compile(r'''
@@ -53,7 +53,7 @@ sro_pattern = re.compile(r'''
     h|l|r|
     ê|i|î|o|ô|a|â|
     -
-'''.format(**globals()), re.VERBOSE)
+'''.format_map(globals()), re.VERBOSE)
 
 
 # A complete SRO to syllabics look-up table.
@@ -83,9 +83,9 @@ sro2syllabics_lookup = {
 # TODO: Document these regular expressions:
 ONSET = '[ptkcshmny]w?|w'
 CODA = '[hs]?[ptkcmn]|h|s|y|w'
-SYLLABLE = '(?:{ONSET})?(?:{VOWEL})(?:{CODA})?|r|l'.format(**globals())
-SYLLABLES = r'(?:{SYLLABLE})+'.format(**globals())
-WORD = r'\b{SYLLABLES}(?:(?:{CODA})?-{SYLLABLES})*\b'.format(**globals())
+SYLLABLE = '(?:{ONSET})?(?:{VOWEL})(?:{CODA})?|r|l'.format_map(globals())
+SYLLABLES = r'(?:{SYLLABLE})+'.format_map(globals())
+WORD = r'\b{SYLLABLES}(?:(?:{CODA})?-{SYLLABLES})*\b'.format_map(globals())
 word_pattern = re.compile(WORD, re.IGNORECASE)
 
 # Converts macron and alternate forms of vowels into "canonical" forms.
