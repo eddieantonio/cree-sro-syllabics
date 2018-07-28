@@ -30,37 +30,6 @@ Defines command line applications.
 EPILOG = 'Report bugs at https://github.com/eddieantonio/crk_orthography/issues'
 
 
-def stream_from_name(filename=None):
-    """
-    Opens the filename. If the filename is '-', opens stdin (as per UNIX
-    convention).
-    """
-    if filename is None or filename == '-':
-        return sys.stdin
-    return open(filename, 'r')
-
-
-def convert_with(stream: str, converter, *args, **kwargs) -> None:
-    """
-    Runs the suplied converter on each line and prints the result.
-    """
-
-    with stream:
-        for line in stream:
-            print(converter(line, *args, **kwargs), end='')
-
-
-def add_common_arguments(parser) -> None:
-    parser.add_argument('-v', '--version', action='version',
-                        version='%(prog)s ' + version)
-    parser.add_argument('filename', nargs='?',
-                        help=('The filename to be converted. '
-                              'If provided as a single hyphen (-) '
-                              'stdin is opened instead.'),
-                        type=stream_from_name,
-                        default=stream_from_name())
-
-
 def sro2syllabics_cli() -> None:
     parser = argparse.ArgumentParser(
         description='convert Cree text in SRO to syllabics',
@@ -105,6 +74,37 @@ def syllabics2sro_cli() -> None:
     args = parser.parse_args()
     convert_with(args.filename, syllabics2sro,
                  produce_macrons=args.produce_macrons)
+
+
+def convert_with(stream: str, converter, *args, **kwargs) -> None:
+    """
+    Runs the suplied converter on each line and prints the result.
+    """
+
+    with stream:
+        for line in stream:
+            print(converter(line, *args, **kwargs), end='')
+
+
+def add_common_arguments(parser) -> None:
+    parser.add_argument('-v', '--version', action='version',
+                        version='%(prog)s ' + version)
+    parser.add_argument('filename', nargs='?',
+                        help=('The filename to be converted. '
+                              'If provided as a single hyphen (-) '
+                              'stdin is opened instead.'),
+                        type=stream_from_name,
+                        default=stream_from_name())
+
+
+def stream_from_name(filename=None):
+    """
+    Opens the filename. If the filename is '-', opens stdin (as per UNIX
+    convention).
+    """
+    if filename is None or filename == '-':
+        return sys.stdin
+    return open(filename, 'r')
 
 
 # if invoked as python3 -m crk_orthography, run as sro2syllabics(1)
