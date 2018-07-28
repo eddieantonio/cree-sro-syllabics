@@ -27,6 +27,9 @@ Defines command line applications.
 """
 
 
+EPILOG = 'Report bugs at https://github.com/eddieantonio/crk_orthography/issues'
+
+
 def stream_from_name(filename=None):
     """
     Opens the filename. If the filename is '-', opens stdin (as per UNIX
@@ -48,8 +51,7 @@ def convert_with(stream: str, converter, *args, **kwargs) -> None:
 
 
 def add_common_arguments(parser) -> None:
-    parser.add_argument('-v', '--version',
-                        action='version',
+    parser.add_argument('-v', '--version', action='version',
                         version='%(prog)s ' + version)
     parser.add_argument('filename', nargs='?',
                         help=('The filename to be converted. '
@@ -61,7 +63,8 @@ def add_common_arguments(parser) -> None:
 
 def sro2syllabics_cli() -> None:
     parser = argparse.ArgumentParser(
-        description='convert Cree text in SRO to syllabics'
+        description='convert Cree text in SRO to syllabics',
+        epilog=EPILOG
     )
     add_common_arguments(parser)
     sandhi = parser.add_mutually_exclusive_group()
@@ -83,7 +86,8 @@ def sro2syllabics_cli() -> None:
 
 def syllabics2sro_cli() -> None:
     parser = argparse.ArgumentParser(
-        description='convert Cree text in syllabics to SRO'
+        description='convert Cree text in syllabics to SRO',
+        epilog=EPILOG
     )
     add_common_arguments(parser)
     macrons = parser.add_mutually_exclusive_group()
