@@ -6,8 +6,9 @@ Plains Cree Orthography
 [![PyPI package](https://img.shields.io/pypi/v/crk_orthography.svg)](https://pypi.org/project/crk_orthography/)
 [![Calver MAJOR.YYYY0M0D.PATCH](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
 
-Convert between nêhiyawêwin/ᓀᐦᐃᔭᐍᐏᐣ (Plains Cree Y-dialect) Standard
-Roman Orthography (SRO) and Canadian Aboriginal syllabics!
+Python 3 library and command line programs to convert between
+nêhiyawêwin/ᓀᐦᐃᔭᐍᐏᐣ (Plains Cree Y-dialect) **standard Roman
+Orthography** (SRO) to **syllabics** and back again!
 
 Install
 -------
@@ -17,7 +18,7 @@ Install
 Usage
 -----
 
-[Visit the full documentation here][documentation]! Confused about
+[Visit the full documentation here][documentation]! Wondering about
 words like "syllabics", "transliterator", or "orthography"? Visit
 [the glossary][glossary]!
 
