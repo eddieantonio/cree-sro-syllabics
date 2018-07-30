@@ -13,7 +13,7 @@ Orthography** (SRO) to **syllabics** and back again!
 Install
 -------
 
-    pip install crk_orthography
+    pip install crk-orthography
 
 Usage
 -----
