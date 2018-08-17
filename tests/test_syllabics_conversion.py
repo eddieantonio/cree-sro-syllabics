@@ -69,9 +69,9 @@ def test_unicode_normalization():
 
 
 @pytest.mark.parametrize("sro,syllabics", [
-    ('\t namoya  tataspêyihtam. ', '\t ᓇᒧᔭ  ᑕᑕᐢᐯᔨᐦᑕᒼ. '),
     ('obviously english text', 'obviously english text'),
     ('write nêhiyawêwin', 'write ᓀᐦᐃᔭᐍᐏᐣ'),
+    ('\t namoya  tataspêyihtam. ', '\t ᓇᒧᔭ  ᑕᑕᐢᐯᔨᐦᑕᒼ᙮ '),
 ])
 def test_multiple_words(sro, syllabics):
     """
