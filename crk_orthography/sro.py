@@ -117,10 +117,18 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     >>> sro2syllabics('Maskêkosihk tireyl')
     'ᒪᐢᑫᑯᓯᕽ ᑎᕒᐁᕀᓬ'
 
-    Roman full-stops/periods (".") are converted into the syllabics full-stops.
+    Roman full-stops/periods (".") are converted into syllabics full-stops.
 
-    >>> sro2syllabics('Eddie nitisiyikason.')
-    'Eddie ᓂᑎᓯᔨᑲᓱᐣ᙮'
+    >>> sro2syllabics('Eddie nitisiyihkâson.')
+    'Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'
+
+    Note that the substitution of full-stops only takes place after syllabics;
+    if it doesn't "look" like Cree, it will not be converted:
+
+    >>> sro2syllabics("tânisi. ninêhiyawân.")
+    'ᑖᓂᓯ᙮ ᓂᓀᐦᐃᔭᐚᐣ᙮'
+    >>> sro2syllabics("Howdy. This be English.")
+    'Howdy. This be English.'
 
     ``sro2syllabics()`` can handle variations in orthography. For example,
     it can convert circumflexes (âêîô):
