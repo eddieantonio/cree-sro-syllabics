@@ -173,9 +173,13 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     :return: the text with Cree words written in syllabics.
     :rtype: str
     """
-    def transcode_match(match) -> str:
+    def transliterate_word(match) -> str:
         return transcode_sro_word_to_syllabics(match.group(0), sandhi)
-    return word_pattern.sub(transcode_match, nfc(sro))
+
+    # Replace each Cree word with its syllabics transliteration.
+    transliteration = word_pattern.sub(transliterate_word, nfc(sro))
+    # Replace Latin full-stops with syllabics full-stops.
+    return transliteration.replace('.', '\u166E')
 
 
 def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:

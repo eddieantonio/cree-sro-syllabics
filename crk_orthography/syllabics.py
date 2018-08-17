@@ -32,7 +32,10 @@ syllabics2sro_lookup.update({
     # See:
     # https://en.wikipedia.org/w/index.php?title=Plains_Cree&oldid=848160114#Canadian_aboriginal_syllabics
     # for an explanation of this special y-final.
-    '\N{CANADIAN SYLLABICS Y-CREE W}': 'y'
+    '\N{CANADIAN SYLLABICS Y-CREE W}': 'y',
+
+    # Convert ᙮ into a Latin full-stop.
+    '\N{CANADIAN SYLLABICS FULL STOP}': '.',
 })
 
 # Translation table to convert syllabics to SRO.
@@ -53,8 +56,8 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     SRO. Anything that is not written in
     syllabics is simply ignored:
 
-    >>> syllabics2sro('Eddie ᓂᑎᓯᔨᑲᓱᐣ')
-    'Eddie nitisiyikason'
+    >>> syllabics2sro('Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ')
+    'Eddie nitisiyihkâson'
 
     By default, the SRO will be produced with circumflexes (âêîô):
 
