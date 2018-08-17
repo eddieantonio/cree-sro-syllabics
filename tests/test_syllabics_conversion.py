@@ -136,5 +136,11 @@ def test_sandhi(sro, syllabics, alt_syllabics):
     assert sro2syllabics(sro, sandhi=False) == alt_syllabics
 
 
+def test_full_stop():
+    """
+    Tests that full stops in SRO get converted into <U+166E CANADIAN SYLLABICS FULL STOP>.
+    """
+    assert sro2syllabics('etî nitisiyihkâson.') == 'ᐁᑏ ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'
+
 # TODO: test look-alikes.
-# TODO: test replace «-» with soft hyphen
+# TODO: test replace «-» with NNBSP
