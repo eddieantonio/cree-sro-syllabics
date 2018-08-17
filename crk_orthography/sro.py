@@ -100,8 +100,8 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     Finds instances of SRO words in strings, and converts them all to
     syllabics.
 
-    >>> sro2syllabics('Eddie nitisiyikason')
-    'Eddie ᓂᑎᓯᔨᑲᓱᐣ'
+    >>> sro2syllabics('Eddie nitisiyihkâson')
+    'Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ'
 
     Any word that does not have the "structure" of a Plains Cree word is not
     converted:
@@ -110,6 +110,11 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     'ᒪᐢᑫᑯᓯᕽ trail'
     >>> sro2syllabics('Maskêkosihk tireyl')
     'ᒪᐢᑫᑯᓯᕽ ᑎᕒᐁᕀᓬ'
+
+    Roman full-stops/periods (".") are converted into the syllabics full-stops.
+
+    >>> sro2syllabics('Eddie nitisiyikason.')
+    'Eddie ᓂᑎᓯᔨᑲᓱᐣ᙮'
 
     ``sro2syllabics()`` can handle variations in orthography. For example,
     it can convert circumflexes (âêîô):

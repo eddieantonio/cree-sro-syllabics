@@ -56,8 +56,8 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     SRO. Anything that is not written in
     syllabics is simply ignored:
 
-    >>> syllabics2sro('Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ')
-    'Eddie nitisiyihkâson'
+    >>> syllabics2sro('Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ᙮')
+    'Eddie nitisiyihkâson.'
 
     By default, the SRO will be produced with circumflexes (âêîô):
 
@@ -72,6 +72,7 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
 
     In both cases, the character produced will be a pre-composed character,
     rather than an ASCII character followed by a combining diacritical mark.
+    That is, vowels are returned in *NFC normalization form*.
 
     :param str syllabics: the text with Cree words written in syllabics.
     :param produce_macrons: if ``True``, produces macrons (āēīō) instead of

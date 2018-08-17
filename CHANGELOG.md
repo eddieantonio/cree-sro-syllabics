@@ -7,6 +7,11 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
 ## [Unreleased]
 
+### Added
+
+ - **Breaking change**: Added bidirectional conversion of full-stop
+   character (᙮).
+
 ### Changed
 
  - Minor updates to documentation.
@@ -38,3 +43,8 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
  - Proofread and enhanced glossary.
 
 [sandhi]: https://crk-orthography.readthedocs.io/en/stable/glossary.html#term-sandhi
+
+
+[Unreleased]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180728.0...master
+[0.20180728.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180724.0...v0.20180728.0
+[0.20180724.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180723.0...v0.20180724.0
