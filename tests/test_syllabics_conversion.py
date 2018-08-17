@@ -110,10 +110,18 @@ def test_macrons(sro, syllabics):
 
 
 @pytest.mark.parametrize("sro,syllabics", [
-    ('paskwâwi-mostos', 'ᐸᐢᒁᐏᒧᐢᑐᐢ'),
-    ('amiskwaciy-waskahikan', 'ᐊᒥᐢᑿᒋᕀᐘᐢᑲᐦᐃᑲᐣ'),
+    # NOTE: the embedded NARROW NO-BREAK SPACE (NNBSP) characters
+    # in the syllabics transliteration may not render properly in
+    # fixed-width fonts!
+    ('paskwâwi-mostos', 'ᐸᐢᒁᐏ ᒧᐢᑐᐢ'),
+    ('amiskwaciy-waskahikan', 'ᐊᒥᐢᑿᒋᕀ ᐘᐢᑲᐦᐃᑲᐣ'),
+    ('kâ-mahihkani-pimohtêt isiyihkâsow', 'ᑳ ᒪᐦᐃᐦᑲᓂ ᐱᒧᐦᑌᐟ ᐃᓯᔨᐦᑳᓱᐤ'),
 ])
 def test_hyphens(sro, syllabics):
+    """
+    Tests that intraword hyphens are converted to NARROW NO-BREAK SPACES
+    characters in the transliteration.
+    """
     assert sro2syllabics(sro) == syllabics
 
 
@@ -148,6 +156,7 @@ def test_full_stop(sro, syllabics):
     """
     assert sro2syllabics(sro) == syllabics
     assert syllabics2sro(syllabics) == sro
+
 
 # TODO: test look-alikes.
 # TODO: test replace «-» with NNBSP
