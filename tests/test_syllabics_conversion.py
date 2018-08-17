@@ -140,7 +140,10 @@ def test_full_stop():
     """
     Tests that full stops in SRO get converted into <U+166E CANADIAN SYLLABICS FULL STOP>.
     """
-    assert sro2syllabics('etî nitisiyihkâson.') == 'ᐁᑏ ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'
+    sro = 'êtî nitisiyihkâson.'
+    syllabics = 'ᐁᑏ ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'
+    assert sro2syllabics(sro) == syllabics
+    assert syllabics2sro(syllabics) == sro
 
 # TODO: test look-alikes.
 # TODO: test replace «-» with NNBSP
