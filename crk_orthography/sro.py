@@ -87,6 +87,12 @@ SYLLABLE = '(?:{ONSET})?(?:{VOWEL})(?:{CODA})?|r|l'.format_map(globals())
 SYLLABLES = r'(?:{SYLLABLE})+'.format_map(globals())
 WORD = r'\b{SYLLABLES}(?:(?:{CODA})?-{SYLLABLES})*\b'.format_map(globals())
 word_pattern = re.compile(WORD, re.IGNORECASE)
+# This regex prevents matching EVERY period, instead only matching periods
+# after Cree words, or, as an exception, as the only item in a string.
+full_stop_pattern = re.compile(r'''
+    (?<=[\u1400-\u167f])[.] |   # Match a full-stop after syllabics
+    \A[.]\Z                     # or match as the only item.
+''', re.VERBOSE)
 
 # Converts macron and alternate forms of vowels into "canonical" forms.
 TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
@@ -184,7 +190,7 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     # Replace each Cree word with its syllabics transliteration.
     transliteration = word_pattern.sub(transliterate_word, nfc(sro))
     # Replace Latin full-stops with syllabics full-stops.
-    return transliteration.replace('.', '\u166E')
+    return full_stop_pattern.sub('\u166E', transliteration)
 
 
 def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:
