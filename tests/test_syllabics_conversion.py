@@ -136,12 +136,16 @@ def test_sandhi(sro, syllabics, alt_syllabics):
     assert sro2syllabics(sro, sandhi=False) == alt_syllabics
 
 
-def test_full_stop():
+@pytest.mark.parametrize("sro,syllabics", [
+    ('êtî nitisiyihkâson.', 'ᐁᑏ ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'),
+    ('She told Dr. Thunder: "ninôhtêhkatân."',
+        'She told Dr. Thunder: "ᓂᓅᐦᑌᐦᑲᑖᐣ᙮"'),
+])
+def test_full_stop(sro, syllabics):
     """
-    Tests that full stops in SRO get converted into <U+166E CANADIAN SYLLABICS FULL STOP>.
+    Tests that full stops in SRO get converted into
+    <U+166E CANADIAN SYLLABICS FULL STOP>, and vice-versa.
     """
-    sro = 'êtî nitisiyihkâson.'
-    syllabics = 'ᐁᑏ ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'
     assert sro2syllabics(sro) == syllabics
     assert syllabics2sro(syllabics) == sro
 
