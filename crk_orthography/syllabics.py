@@ -91,6 +91,21 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     rather than an ASCII character followed by a combining diacritical mark.
     That is, vowels are returned in *NFC normalization form*.
 
+    In some syllabics text, syllabics with a 'w' dot are rendered as two
+    characters: the syllabic without the 'w' dot followed by <U+1427 CANADIAN
+    SYLLABICS FINAL MIDDLE DOT>; this differs from the more appropriate
+    pre-composed syllabic character with the 'w' dot. For example,
+
+        | ᐃᑘᐏᓇ  --- pre-composed syllabic
+        | ᐃᑌᐧᐃᐧᓇ --- syllabic + ``CANADIAN SYLLABICS FINAL MIDDLE DOT``
+
+    `syllabics2sro()` can converts both cases appropriately:
+
+    >>> syllabics2sro('ᐃᑘᐏᓇ')
+    'itwêwina'
+    >>> syllabics2sro('ᐃᑌᐧᐃᐧᓇ')
+    'itwêwina'
+
     :param str syllabics: the text with Cree words written in syllabics.
     :param produce_macrons: if ``True``, produces macrons (āēīō) instead of
                             circumflexes (âêîô).
@@ -99,6 +114,7 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     """
 
     def fix_final_dot(match):
+        "Translate syllabic + FINAL MIDDLE DOT to syllabic with 'w'"
         return SYLLABIC_WITH_DOT[match.group(1)]
 
     def replace_syllabics(match):

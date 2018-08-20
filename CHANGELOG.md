@@ -19,6 +19,9 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
  - Minor updates to documentation.
  - **Breaking change**: hyphens are converted to \<U+02025 NARROW
    NO-BREAK SPACE> by default.
+ - `syllabics2sro()` now converts sequences of a "w-less" syllabic + \<U+1427
+   CANADIAN SYLLABICS FINAL MIDDLE DOT> as if they were the pre-composed
+   "with w-dot" variant.
 
 ## [0.20180728.0]
 
