@@ -40,17 +40,24 @@ def sro2syllabics_cli() -> None:
     sandhi.add_argument(
             '-s', '--sandhi',
             action='store_true', dest='sandhi',
-            help='apply sandhi orthographic rule'
+            help='apply sandhi orthographic rule (default)'
     )
     sandhi.add_argument(
             '-S', '--no-sandhi',
             action='store_false', dest='sandhi',
             help='do not apply sandhi orthographic rule'
     )
-    parser.set_defaults(sandhi=True)
+    parser.add_argument('-H', '--hyphens',
+                        choices=['nnbsp', 'space', 'none'],
+                        help='replace hyphens with this character (default: nnbsp)')
+    name2character = dict(nnbsp='\N{NARROW NO-BREAK SPACE}',
+                          space=' ',
+                          none='')
+    parser.set_defaults(sandhi=True, hyphens='nnbsp')
+
     args = parser.parse_args()
     convert_with(args.filename, sro2syllabics,
-                 sandhi=args.sandhi)
+                 sandhi=args.sandhi, hyphens=name2character[args.hyphens])
 
 
 def syllabics2sro_cli() -> None:
