@@ -124,6 +124,7 @@ def test_hyphens(sro, syllabics):
     """
     assert sro2syllabics(sro) == syllabics ==\
         sro2syllabics(sro, hyphens="\N{NARROW NO-BREAK SPACE}")
+    assert syllabics2sro(syllabics) == sro
 
 
 @pytest.mark.parametrize("sro,syllabics,hyphens,alt_syllabics", [
