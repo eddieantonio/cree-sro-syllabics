@@ -209,9 +209,11 @@ def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:
     to_transcribe = sro_word.lower().\
         translate(TRANSLATE_ALT_FORMS)
 
-    # Augment the lookup table with an entry for «-» so that we can simply
-    # delete all instances of '-' easily.
-    lookup = ChainMap({'-': ''}, sro2syllabics_lookup)
+    # Augment the lookup table with an entry for «-» so that we can replace
+    # all instances of '-' easily.
+    lookup = ChainMap({
+        '-': '\N{NARROW NO-BREAK SPACE}'
+    }, sro2syllabics_lookup)
 
     parts = []
 
