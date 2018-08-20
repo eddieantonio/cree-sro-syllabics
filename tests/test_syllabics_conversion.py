@@ -119,10 +119,11 @@ def test_macrons(sro, syllabics):
 ])
 def test_hyphens(sro, syllabics):
     """
-    Tests that intraword hyphens are converted to NARROW NO-BREAK SPACES
+    Tests that intraword hyphens are converted to NARROW NO-BREAK SPACE
     characters in the transliteration.
     """
-    assert sro2syllabics(sro) == syllabics
+    assert sro2syllabics(sro) == syllabics ==\
+        sro2syllabics(sro, hyphens="\N{NARROW NO-BREAK SPACE}")
 
 
 @pytest.mark.parametrize("sro,syllabics,hyphens,alt_syllabics", [
@@ -141,7 +142,7 @@ def test_sandhi(sro, syllabics, hyphens, alt_syllabics):
     See: Wolvengrey 2001, pp. xxvi–xviii
     """
     assert sro2syllabics(sro) == sro2syllabics(sro, sandhi=True) == syllabics
-    assert sro2syllabics(sro, sandhi=False, hypens=hyphens) == alt_syllabics
+    assert sro2syllabics(sro, sandhi=False, hyphens=hyphens) == alt_syllabics
 
 
 @pytest.mark.parametrize("sro,syllabics", [
