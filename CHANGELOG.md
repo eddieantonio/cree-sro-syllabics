@@ -12,6 +12,7 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
  - **Breaking change**: Added bidirectional conversion of full-stop
    character (᙮).
  - Added `sro2syllabics()` `hyphens=` keyword argument.
+ - Added `sro2syllabics -H/--hyphens` option.
 
 ### Changed
 
