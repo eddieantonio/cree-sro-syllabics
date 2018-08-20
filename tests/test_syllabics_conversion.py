@@ -158,4 +158,13 @@ def test_full_stop(sro, syllabics):
     assert sro2syllabics(sro) == syllabics
     assert syllabics2sro(syllabics) == sro
 
+
+def test_final_middle_dot():
+    """
+    Test that final middle dots get converted into their "w" syllabic
+    equivilent.
+    """
+    assert syllabics2sro('ᐋᐧᐱ ᑭᐦᐃᐤ') == 'wâpi kihiw'
+    assert sro2syllabics(syllabics2sro('ᐋᐧᐱ ᑭᐦᐃᐤ')) == 'ᐚᐱ ᑭᐦᐃᐤ'
+
 # TODO: test look-alikes.
