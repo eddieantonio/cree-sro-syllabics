@@ -125,15 +125,15 @@ def test_hyphens(sro, syllabics):
     assert sro2syllabics(sro) == syllabics
 
 
-@pytest.mark.parametrize("sro,syllabics,alt_syllabics", [
-    ('osk-âya', 'ᐅᐢᑳᔭ', 'ᐅᐢᐠᐋᔭ'),
+@pytest.mark.parametrize("sro,syllabics,hyphens,alt_syllabics", [
+    ('osk-âya', 'ᐅᐢᑳᔭ', '', 'ᐅᐢᐠᐋᔭ'),
     # NOTE: this /still/ might not be the right transliteration, but
     # the correct transliteration requires even more phonological knowledge,
     # so I'm not even going to go there...
-    ('miyw-âyâw', 'ᒥᔼᔮᐤ', 'ᒥᕀᐤᐋᔮᐤ'),
-    ('pîhc-âyihk', 'ᐲᐦᒑᔨᕽ', 'ᐲᐦᐨᐋᔨᕽ'),
+    ('miyw-âyâw', 'ᒥᔼᔮᐤ', '', 'ᒥᕀᐤᐋᔮᐤ'),
+    ('pîhc-âyihk', 'ᐲᐦᒑᔨᕽ', '', 'ᐲᐦᐨᐋᔨᕽ'),
 ])
-def test_sandhi(sro, syllabics, alt_syllabics):
+def test_sandhi(sro, syllabics, hyphens, alt_syllabics):
     """
     Test that sandhi orthographic rule is applied when converting to
     syllabics.
@@ -141,7 +141,7 @@ def test_sandhi(sro, syllabics, alt_syllabics):
     See: Wolvengrey 2001, pp. xxvi–xviii
     """
     assert sro2syllabics(sro) == sro2syllabics(sro, sandhi=True) == syllabics
-    assert sro2syllabics(sro, sandhi=False) == alt_syllabics
+    assert sro2syllabics(sro, sandhi=False, hypens=hyphens) == alt_syllabics
 
 
 @pytest.mark.parametrize("sro,syllabics", [
@@ -157,6 +157,4 @@ def test_full_stop(sro, syllabics):
     assert sro2syllabics(sro) == syllabics
     assert syllabics2sro(syllabics) == sro
 
-
 # TODO: test look-alikes.
-# TODO: test replace «-» with NNBSP
