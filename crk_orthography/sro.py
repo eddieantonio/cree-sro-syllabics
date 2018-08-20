@@ -20,6 +20,9 @@ import re
 from unicodedata import normalize
 from collections import ChainMap
 
+
+DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
+
 CONSONANT = '[ptkcshmnyw]'
 STRICT_VOWEL = '[aioâêîô]'
 VOWEL = "{STRICT_VOWEL}|[e'āēīō]".format_map(globals())
@@ -99,7 +102,9 @@ TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
                                     'âiîôêê')
 
 
-def sro2syllabics(sro: str, sandhi: bool = True) -> str:
+def sro2syllabics(sro: str,
+                  hyphens: str = DEFAULT_HYPHENS,
+                  sandhi: bool = True) -> str:
     """
     Convert Cree words written in SRO text to syllabics.
 
@@ -184,7 +189,7 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     argument:
 
     >>> sro2syllabics('pîhc-âyihk', sandhi=False)
-    'ᐲᐦᐨᐋᔨᕽ'
+    'ᐲᐦᐨ ᐋᔨᕽ'
 
     :param str sro: the text with Cree words written in SRO.
     :param bool sandhi: whether to apply sandhi orthography rule (default:
@@ -192,8 +197,9 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     :return: the text with Cree words written in syllabics.
     :rtype: str
     """
+
     def transliterate_word(match) -> str:
-        return transcode_sro_word_to_syllabics(match.group(0), sandhi)
+        return transcode_sro_word_to_syllabics(match.group(0), hyphens, sandhi)
 
     # Replace each Cree word with its syllabics transliteration.
     transliteration = word_pattern.sub(transliterate_word, nfc(sro))
@@ -201,7 +207,7 @@ def sro2syllabics(sro: str, sandhi: bool = True) -> str:
     return full_stop_pattern.sub('\u166E', transliteration)
 
 
-def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:
+def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) -> str:
     """
     Transcribes one word at a time.
     """
@@ -212,7 +218,7 @@ def transcode_sro_word_to_syllabics(sro_word: str, sandhi: bool) -> str:
     # Augment the lookup table with an entry for «-» so that we can replace
     # all instances of '-' easily.
     lookup = ChainMap({
-        '-': '\N{NARROW NO-BREAK SPACE}'
+        '-': hyphen
     }, sro2syllabics_lookup)
 
     parts = []
