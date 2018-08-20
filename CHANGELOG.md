@@ -11,10 +11,13 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
  - **Breaking change**: Added bidirectional conversion of full-stop
    character (᙮).
+ - Added `sro2syllabics()` `hyphens=` keyword argument.
 
 ### Changed
 
  - Minor updates to documentation.
+ - **Breaking change**: hyphens are converted to \<U+02025 NARROW
+   NO-BREAK SPACE> by default.
 
 ## [0.20180728.0]
 

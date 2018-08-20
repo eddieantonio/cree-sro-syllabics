@@ -105,7 +105,7 @@ TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
 def sro2syllabics(sro: str,
                   hyphens: str = DEFAULT_HYPHENS,
                   sandhi: bool = True) -> str:
-    """
+    r"""
     Convert Cree words written in SRO text to syllabics.
 
     Finds instances of SRO words in strings, and converts them all to
@@ -163,6 +163,46 @@ def sro2syllabics(sro: str,
     >>> sro2syllabics("tân'si")
     'ᑖᓂᓯ'
 
+    Hyphens
+    -------
+
+    Hyphens in Plains Cree words are replaced with ``<U+202F
+    NARROW NO BREAK SPACE>>`` (NNBSP) by default. This is a space that is narrower
+    than the normal space character. NNBSP also prevents breaking the
+    word across line breaks. We chose the NNBSP character as the default, as
+    it helps visually distinguish between meaningful sub-elements within
+    words, while being less likely to be mistaken as word-separating
+    whitespace by most text processing applications.
+
+    Compare the following hyphen replacement schemes:
+
+    ===================== ====================================
+     Replace hyphens with  kâ-mahihkani-pimohtêt isiyihkâsow
+    ===================== ====================================
+     (nothing)             ᑳᒪᐦᐃᐦᑲᓂᐱᒧᐦᑌᐟ ᐃᓯᔨᐦᑳᓱᐤ
+     NNBSP                 ᑳ ᒪᐦᐃᐦᑲᓂ ᐱᒧᐦᑌᐟ ᐃᓯᔨᐦᑳᓱᐤ
+     Space                 ᑳ ᒪᐦᐃᐦᑲᓂ ᐱᒧᐦᑌᐟ  ᐃᓯᔨᐦᑳᓱᐤ
+    ===================== ====================================
+
+    We discourage using an ordinary space character (U+0020), as it is often
+    interpreted as separating words, both by computers and people alike. If
+    you are viewing this documentation in a web browser, try double clicking
+    the syllabics rendition of "kâ-mahihkani-pimohtêt" with NNBSP separators
+    versus the one with space separators. Double clicking typically selects an
+    entire word by default, and this is often the case when double clicking
+    the word with NNBSP characters; however this fails for the rendition with
+    space characters.
+
+    Despite this, you can chose any character of your liking to replace
+    hyphens in syllabics by providing the ``hyphens=`` keyword argument:
+
+    >>> sro2syllabics('kâ-mahihkani-pimohtêt', hyphens='\N{NARROW NO-BREAK SPACE}')
+    'ᑳ ᒪᐦᐃᐦᑲᓂ ᐱᒧᐦᑌᐟ'
+    >>> sro2syllabics('kâ-mahihkani-pimohtêt', hyphens='')
+    'ᑳᒪᐦᐃᐦᑲᓂᐱᒧᐦᑌᐟ'
+    >>> sro2syllabics('kâ-mahihkani-pimohtêt', hyphens=' ')
+    'ᑳ ᒪᐦᐃᐦᑲᓂ ᐱᒧᐦᑌᐟ'
+
     Sandhi orthographic rule
     ------------------------
 
@@ -192,6 +232,8 @@ def sro2syllabics(sro: str,
     'ᐲᐦᐨ ᐋᔨᕽ'
 
     :param str sro: the text with Cree words written in SRO.
+    :param str hyphens: what to replace hyphens with
+                        (default: ```<U+202F NARROW NO BREAK SPACE>>``).
     :param bool sandhi: whether to apply sandhi orthography rule (default:
                         ``True``).
     :return: the text with Cree words written in syllabics.
