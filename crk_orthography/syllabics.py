@@ -123,7 +123,11 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     # Normalize all SYLLABIC + FINAL MIDDLE DOT to the composed variant of the
     # syllabic.
     normalized = final_dot_pattern.sub(fix_final_dot, syllabics)
+    # **AFTER** normalization, convert to SRO
     sro_string = syllabics_pattern.sub(replace_syllabics, normalized)
+    # Convert any NNBSP within syllabics to hyphens to support round-trip
+    # conversion.
+    sro_string = sro_string.replace('\N{NARROW NO-BREAK SPACE}', '-')
 
     if produce_macrons:
         return sro_string.translate(circumflex_to_macrons)
