@@ -91,6 +91,13 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     rather than an ASCII character followed by a combining diacritical mark.
     That is, vowels are returned in *NFC normalization form*.
 
+    For compatibility with :py:meth:`crk_orthography.sro2syllabics`,
+    ``syllabics2sro`` will convert any instances of \<U+202F NARROW NO BREAK
+    SPACE\> to a hyphen in the SRO transliteration.
+
+    >>> syllabics2sro('ᑳ ᒪᐦᐃᐦᑲᓂ ᐱᒧᐦᑌᐟ')
+    'kâ-mahihkani-pimohtêt'
+
     In some syllabics text, syllabics with a 'w' dot are rendered as two
     characters: the syllabic without the 'w' dot followed by <U+1427 CANADIAN
     SYLLABICS FINAL MIDDLE DOT>; this differs from the more appropriate
