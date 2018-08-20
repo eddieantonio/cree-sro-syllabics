@@ -41,8 +41,25 @@ syllabics2sro_lookup.update({
 # Translation table to convert syllabics to SRO.
 SYLLABICS_TO_SRO = str.maketrans(syllabics2sro_lookup)
 
+# TODO: only cover characters we explicitly handle!
 # Match a stretch of characters entirely within the CANADIAN SYLLABICS block.
 syllabics_pattern = re.compile(r'[\u1400-\u167f]+')
+
+# For use when converting SYLLABIC + FINAL MIDDLE DOT into the syllabic with a 'w'
+SYLLABIC_WITH_DOT = {
+    'ᐁ': 'ᐍ', 'ᐃ': 'ᐏ', 'ᐄ': 'ᐑ', 'ᐅ': 'ᐓ', 'ᐆ': 'ᐕ', 'ᐊ': 'ᐘ', 'ᐋ': 'ᐚ',
+    'ᐯ': 'ᐻ', 'ᐱ': 'ᐽ', 'ᐲ': 'ᐿ', 'ᐳ': 'ᑁ', 'ᐴ': 'ᑃ', 'ᐸ': 'ᑅ', 'ᐹ': 'ᑇ',
+    'ᑌ': 'ᑘ', 'ᑎ': 'ᑚ', 'ᑏ': 'ᑜ', 'ᑐ': 'ᑞ', 'ᑑ': 'ᑠ', 'ᑕ': 'ᑢ', 'ᑖ': 'ᑤ',
+    'ᑫ': 'ᑵ', 'ᑭ': 'ᑷ', 'ᑮ': 'ᑹ', 'ᑯ': 'ᑻ', 'ᑰ': 'ᑽ', 'ᑲ': 'ᑿ', 'ᑳ': 'ᒁ',
+    'ᒉ': 'ᒓ', 'ᒋ': 'ᒕ', 'ᒌ': 'ᒗ', 'ᒍ': 'ᒙ', 'ᒎ': 'ᒛ', 'ᒐ': 'ᒝ', 'ᒑ': 'ᒟ',
+    'ᒣ': 'ᒭ', 'ᒥ': 'ᒯ', 'ᒦ': 'ᒱ', 'ᒧ': 'ᒳ', 'ᒨ': 'ᒵ', 'ᒪ': 'ᒷ', 'ᒫ': 'ᒹ',
+    'ᓀ': 'ᓊ',                                         'ᓇ': 'ᓌ', 'ᓈ': 'ᓎ',
+    'ᓭ': 'ᓷ', 'ᓯ': 'ᓹ', 'ᓰ': 'ᓻ', 'ᓱ': 'ᓽ', 'ᓲ': 'ᓿ', 'ᓴ': 'ᔁ', 'ᓵ': 'ᔃ',
+    'ᔦ': 'ᔰ', 'ᔨ': 'ᔲ', 'ᔩ': 'ᔴ', 'ᔪ': 'ᔶ', 'ᔫ': 'ᔸ', 'ᔭ': 'ᔺ', 'ᔮ': 'ᔼ',
+}
+final_dot_pattern = re.compile(r'([{without_dot}])ᐧ'.format(
+    without_dot=''.join(SYLLABIC_WITH_DOT.keys())
+))
 
 circumflex_to_macrons = str.maketrans('âêîô',
                                       'āēīō')
@@ -80,10 +97,17 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     :return: the text with Cree words written in SRO.
     :rtype: str
     """
+
+    def fix_final_dot(match):
+        return SYLLABIC_WITH_DOT[match.group(1)]
+
     def replace_syllabics(match):
         return transcribe_syllabics_word_to_sro(match.group(0))
 
-    sro_string = syllabics_pattern.sub(replace_syllabics, syllabics)
+    # Normalize all SYLLABIC + FINAL MIDDLE DOT to the composed variant of the
+    # syllabic.
+    normalized = final_dot_pattern.sub(fix_final_dot, syllabics)
+    sro_string = syllabics_pattern.sub(replace_syllabics, normalized)
 
     if produce_macrons:
         return sro_string.translate(circumflex_to_macrons)
