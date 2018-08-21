@@ -106,7 +106,7 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
         | ᐃᑘᐏᓇ  --- pre-composed syllabic
         | ᐃᑌᐧᐃᐧᓇ --- syllabic + ``CANADIAN SYLLABICS FINAL MIDDLE DOT``
 
-    `syllabics2sro()` can converts both cases appropriately:
+    `syllabics2sro()` can convert both cases appropriately:
 
     >>> syllabics2sro('ᐃᑘᐏᓇ')
     'itwêwina'

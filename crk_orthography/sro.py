@@ -122,7 +122,7 @@ def sro2syllabics(sro: str,
     >>> sro2syllabics('Maskêkosihk tireyl')
     'ᒪᐢᑫᑯᓯᕽ ᑎᕒᐁᕀᓬ'
 
-    Roman full-stops/periods (".") are converted into syllabics full-stops.
+    Roman full-stops/periods (".") are converted into syllabics full-stops:
 
     >>> sro2syllabics('Eddie nitisiyihkâson.')
     'Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'
@@ -167,7 +167,7 @@ def sro2syllabics(sro: str,
     -------
 
     Hyphens in Plains Cree words are replaced with ``<U+202F
-    NARROW NO BREAK SPACE>>`` (NNBSP) by default. This is a space that is narrower
+    NARROW NO-BREAK SPACE>`` (NNBSP) by default. This is a space that is narrower
     than the normal space character. NNBSP also prevents breaking the
     word across line breaks. We chose the NNBSP character as the default, as
     it helps visually distinguish between meaningful sub-elements within
@@ -233,7 +233,7 @@ def sro2syllabics(sro: str,
 
     :param str sro: the text with Cree words written in SRO.
     :param str hyphens: what to replace hyphens with
-                        (default: ```<U+202F NARROW NO BREAK SPACE>>``).
+                        (default: ``<U+202F NARROW NO-BREAK SPACE>``).
     :param bool sandhi: whether to apply sandhi orthography rule (default:
                         ``True``).
     :return: the text with Cree words written in syllabics.
