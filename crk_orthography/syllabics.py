@@ -41,14 +41,14 @@ syllabics2sro_lookup.update({
     '\N{CANADIAN SYLLABICS T}': 'm',  # ᑦ looks like ᒼ or "m"
     '\N{CANADIAN SYLLABICS SAYISI YI}': 'hk',  # ᕁ looks like ᕽ or "hk"
     '\N{CANADIAN SYLLABICS FINAL PLUS}': 'y',  # ᐩ looks like ᕀ or "y"
+
+    # Convert NNBSP within syllabics to hyphens to support round-trip
+    # conversion between syllabics and SRO.
+    '\N{NARROW NO-BREAK SPACE}': '-',
 })
 
 # Translation table to convert syllabics to SRO.
 SYLLABICS_TO_SRO = str.maketrans(syllabics2sro_lookup)
-
-# TODO: only cover characters we explicitly handle!
-# Match a stretch of characters entirely within the CANADIAN SYLLABICS block.
-syllabics_pattern = re.compile(r'[\u1400-\u167f]+')
 
 # For use when converting SYLLABIC + FINAL MIDDLE DOT into the syllabic with a 'w'
 SYLLABIC_WITH_DOT = {
@@ -118,6 +118,27 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     >>> syllabics2sro('ᐃᑌᐧᐃᐧᓇ')
     'itwêwina'
 
+    Some syllabics converters produce erroneous yet very similar looking
+    characters. `syllabics2sro()` knows the following look-alike characters:
+
+     ================================= ==================================
+      Look-alike                        Correct character
+     ================================= ==================================
+      ᐩ CANADIAN SYLLABICS FINAL PLUS   ᕀ CANADIAN SYLLABICS WEST-CREE Y
+      ᑦ CANADIAN SYLLABICS T            ᒼ CANADIAN SYLLABICS WEST-CREE M
+      ᕁ CANADIAN SYLLABICS SAYISI YI    ᕽ CANADIAN SYLLABICS HK
+     ================================= ==================================
+
+    `syllabics2sro()` automatically interprets erroneous look-alikes as their
+    visually equivalent characters.
+
+    >>> syllabics2sro('ᒌᐯᐦᑕᑳᐧᐱᑲᐧᓂᐩ')
+    'cîpêhtakwâpikwaniy'
+    >>> syllabics2sro('ᐊᓴᒧᐱᑕᑦ')
+    'asamopitam'
+    >>> syllabics2sro('ᒫᒥᕁ')
+    'mâmihk'
+
     :param str syllabics: the text with Cree words written in syllabics.
     :param produce_macrons: if ``True``, produces macrons (āēīō) instead of
                             circumflexes (âêîô).
@@ -129,22 +150,12 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
         "Translate syllabic + FINAL MIDDLE DOT to syllabic with 'w'"
         return SYLLABIC_WITH_DOT[match.group(1)]
 
-    def replace_syllabics(match):
-        return transcribe_syllabics_word_to_sro(match.group(0))
-
     # Normalize all SYLLABIC + FINAL MIDDLE DOT to the composed variant of the
     # syllabic.
     normalized = final_dot_pattern.sub(fix_final_dot, syllabics)
-    # **AFTER** normalization, convert to SRO
-    sro_string = syllabics_pattern.sub(replace_syllabics, normalized)
-    # Convert any NNBSP within syllabics to hyphens to support round-trip
-    # conversion.
-    sro_string = sro_string.replace('\N{NARROW NO-BREAK SPACE}', '-')
+    # **AFTER** normalization, translate syllabics characters to SRO
+    sro_string = normalized.translate(SYLLABICS_TO_SRO)
 
     if produce_macrons:
         return sro_string.translate(circumflex_to_macrons)
     return sro_string
-
-
-def transcribe_syllabics_word_to_sro(word):
-    return word.translate(SYLLABICS_TO_SRO)
