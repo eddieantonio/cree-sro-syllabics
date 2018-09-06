@@ -36,6 +36,11 @@ syllabics2sro_lookup.update({
 
     # Convert ᙮ into a Latin full-stop.
     '\N{CANADIAN SYLLABICS FULL STOP}': '.',
+
+    # Look-alikes characters:
+    '\N{CANADIAN SYLLABICS T}': 'm',  # ᑦ looks like ᒼ or "m"
+    '\N{CANADIAN SYLLABICS SAYISI YI}': 'hk',  # ᕁ looks like ᕽ or "hk"
+    '\N{CANADIAN SYLLABICS FINAL PLUS}': 'y',  # ᐩ looks like ᕀ or "y"
 })
 
 # Translation table to convert syllabics to SRO.
