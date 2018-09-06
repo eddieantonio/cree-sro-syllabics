@@ -162,10 +162,23 @@ def test_full_stop(sro, syllabics):
 
 def test_final_middle_dot():
     """
-    Test that final middle dots get converted into their "w" syllabic
+    Test that final middle dots <U+1427> get converted into their "w" syllabic
     equivilent.
     """
     assert syllabics2sro('ᐋᐧᐱ ᑭᐦᐃᐤ') == 'wâpi kihiw'
     assert sro2syllabics(syllabics2sro('ᐋᐧᐱ ᑭᐦᐃᐤ')) == 'ᐚᐱ ᑭᐦᐃᐤ'
 
-# TODO: test look-alikes.
+
+@pytest.mark.parametrize("erroneous_syllabics,sro,correct_syllabics", [
+    ('ᐚᐸ\u1466', 'wâpam', 'ᐚᐸᒼ'),  # ᑦ|ᒼ <U+1466 CANADIAN SYLLABICS T>
+    ('ᓂᐲ\u1541', 'nipîhk', 'ᓂᐲᕽ'),  # ᕁ|ᕽ <U+1541 CANADIAN SYLLABICS SAYISI YI>
+    ('ᓂᐱ\u1429', 'nipiy', 'ᓂᐱᕀ'),  # ᐩ|ᕀ <U+1429 CANADIAN SYLLABICS FINAL PLUS>
+])
+def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
+    assert erroneous_syllabics != correct_syllabics
+    assert syllabics2sro(erroneous_syllabics) == sro
+    assert sro2syllabics(syllabics2sro(erroneous_syllabics)) ==\
+        correct_syllabics
+
+
+# TODO: what's the deal with ᐵ?
