@@ -66,8 +66,17 @@ Glossary
   nêhiyawêwin
     **Plains Cree**, **Cree Y-Dialect**, or **nêhiyawêwin** is the most
     widely-spoken western Cree dialect. Notably, many words which have a "th" in
-    Woods Cree and words that have a "n" in Swampy Cree have a "y" in Plains
+    :term:`Woods Cree` and words that have a "n" in Swampy Cree have a "y" in Plains
     Cree; this is why Plains Cree is also known as the Cree Y-dialect.
+
+  Woods Cree
+  Cree Th-dialect
+  nēhithawēwin
+    **Woods Cree**, **Cree Th-Dialect**, or **nēhithawēwin** is a Cree dialect
+    spoken in Northern Saskatchewan and Northern Manitoba. It is distinct from
+    :term:`Plains Cree` in that many words that have a "th" in them are spoken
+    with a "y" in Plains Cree; this is why Woods Cree is also known as Cree
+    Th-dialect.
 
   sandhi
     Changes to pronunciation across word and morpheme boundaries. In Cree,
@@ -80,17 +89,6 @@ Glossary
 
     For a more thorough description of sandhi in Cree, see [Wolfart]_ and
     [Wolvengrey]_.
-
-.. These may be needed in future versions of the package.
-
-  soft hyphen
-    TODO: definition
-
-  crk
-    TODO: definition
-
-  eng
-    TODO: definition
 
 
 .. [Okimāsis] Okimāsis, Jean and Wolvengrey, Arok.
