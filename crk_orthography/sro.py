@@ -24,8 +24,8 @@ from collections import ChainMap
 DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
 
 CONSONANT = '[ptkcshmnyw]'
-STRICT_VOWEL = '[aioâêîô]'  # TODO: Cree order.
-VOWEL = "{STRICT_VOWEL}|[e'āēīō]".format_map(globals())
+STRICT_VOWEL = '[êioaîôâ]'
+VOWEL = "{STRICT_VOWEL}|[eēī'ōā]".format_map(globals())
 
 # Match an SRO syllable.
 sro_pattern = re.compile(r'''
@@ -108,8 +108,8 @@ full_stop_pattern = re.compile(r'''
 ''', re.VERBOSE)
 
 # Converts macron and alternate forms of vowels into "canonical" forms.
-TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
-                                    'âiîôêê')  # TODO: Cree order
+TRANSLATE_ALT_FORMS = str.maketrans("eē'īōā",
+                                    "êêiîôâ")
 
 
 def sro2syllabics(sro: str,
@@ -142,8 +142,8 @@ def sro2syllabics(sro: str,
 
     >>> sro2syllabics("tânisi. ninêhiyawân.")
     'ᑖᓂᓯ᙮ ᓂᓀᐦᐃᔭᐚᐣ᙮'
-    >>> sro2syllabics("Howdy, English text!")
-    'Howdy, English text!'
+    >>> sro2syllabics("Howdy, English text.")
+    'Howdy, English text.'
 
     ``sro2syllabics()`` can handle variations in orthography. For example,
     it can convert circumflexes (âêîô):

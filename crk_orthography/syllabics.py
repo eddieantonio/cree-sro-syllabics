@@ -66,8 +66,8 @@ final_dot_pattern = re.compile(r'([{without_dot}])ᐧ'.format(
     without_dot=''.join(SYLLABIC_WITH_DOT.keys())
 ))
 
-circumflex_to_macrons = str.maketrans('âêîô',
-                                      'āēīō')
+circumflex_to_macrons = str.maketrans('êîôâ',
+                                      'ēīōā')
 
 
 def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
