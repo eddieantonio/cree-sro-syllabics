@@ -83,7 +83,7 @@ def syllabics2sro_cli() -> None:
                  produce_macrons=args.produce_macrons)
 
 
-def convert_with(stream: str, converter, *args, **kwargs) -> None:
+def convert_with(stream, converter, *args, **kwargs) -> None:
     """
     Runs the suplied converter on each line and prints the result.
     """
