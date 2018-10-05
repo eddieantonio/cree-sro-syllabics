@@ -124,7 +124,21 @@ def sro2syllabics(sro: str,
     >>> sro2syllabics('Eddie nitisiyihkâson')
     'Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ'
 
-    Any word that does not have the "structure" of a Plains Cree word is not
+    You should be able to write words in all the West Cree dialects.
+
+    Y-dialect (a.k.a., Plains Cree):
+    >>> sro2syllabics('niya')
+    'ᓂᔭ'
+
+    Th-dialect (a.k.a., Woods Cree):
+    >>> sro2syllabics('nitha')
+    'ᓂᖬ'
+
+    N-dialect:
+    >>> sro2syllabics('nīna')
+    'ᓃᓇ'
+
+    Any word that does not have the "structure" of a Cree word is not
     converted:
 
     >>> sro2syllabics('Maskêkosihk trail')
@@ -176,13 +190,13 @@ def sro2syllabics(sro: str,
     Hyphens
     -------
 
-    Hyphens in Plains Cree words are replaced with ``<U+202F
-    NARROW NO-BREAK SPACE>`` (NNBSP) by default. This is a space that is narrower
-    than the normal space character. NNBSP also prevents breaking the
-    word across line breaks. We chose the NNBSP character as the default, as
-    it helps visually distinguish between meaningful sub-elements within
-    words, while being less likely to be mistaken as word-separating
-    whitespace by most text processing applications.
+    Hyphens in Cree words are replaced with ``<U+202F NARROW NO-BREAK SPACE>``
+    (NNBSP) by default. This is a space that is narrower than the normal space
+    character. NNBSP also prevents breaking the word across line breaks. We
+    chose the NNBSP character as the default, as it helps visually distinguish
+    between meaningful sub-elements within words, while being less likely to
+    be mistaken as word-separating whitespace by most text processing
+    applications.
 
     Compare the following hyphen replacement schemes:
 

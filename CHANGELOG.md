@@ -7,6 +7,10 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
 ## [Unreleased]
 
+### Added
+
+ - Support th-dialect syllabics; i.e., "ᖧᖨᖩᖪᖫᖬᖭᖮ"
+
 ### Changed
 
  - Fixed minor documentation typos and formatting issues.
