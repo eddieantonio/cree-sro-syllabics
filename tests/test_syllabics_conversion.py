@@ -181,4 +181,15 @@ def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
         correct_syllabics
 
 
+@pytest.mark.parametrize('sro,syllabics', [
+    ('wīhthēw', 'ᐑᐦᖧᐤ'),
+    ('nampithi-sīpīhk', 'ᓇᒼᐱᖨ ᓰᐲᕽ'),
+    ('mithomon', 'ᒥᖪᒧᐣ'),
+    ('namōtha', 'ᓇᒨᖬ'),
+    ('thāhkan', 'ᖭᐦᑲᐣ'),
+    ('namēpith', 'ᓇᒣᐱᖮ'),
+])
+def test_cree_th_dialect(sro, syllabics):
+    assert sro2syllabics(sro) == syllabics
+
 # TODO: what's the deal with ᐵ?
