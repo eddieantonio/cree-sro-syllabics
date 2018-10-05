@@ -24,7 +24,7 @@ from collections import ChainMap
 DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
 
 CONSONANT = '[ptkcshmnyw]'
-STRICT_VOWEL = '[aioâêîô]'
+STRICT_VOWEL = '[aioâêîô]'  # TODO: Cree order.
 VOWEL = "{STRICT_VOWEL}|[e'āēīō]".format_map(globals())
 
 # Match an SRO syllable.
@@ -45,6 +45,7 @@ sro_pattern = re.compile(r'''
     # the regular expression will match the first alternative that will
     # work—which must be the longest match!
     wê|wi|wî|wo|wô|wa|wâ|w|
+    thê|thi|tî|tho|thô|tha|thâ|th|
     pê|pi|pî|po|pô|pa|pâ|pwê|pwi|pwî|pwo|pwô|pwa|pwâ|p|
     tê|ti|tî|to|tô|ta|tâ|twê|twi|twî|two|twô|twa|twâ|t|
     kê|ki|kî|ko|kô|ka|kâ|kwê|kwi|kwî|kwo|kwô|kwa|kwâ|k|
@@ -79,13 +80,22 @@ sro2syllabics_lookup = {
     "swê": "ᓷ", "swi": "ᓹ", "swî": "ᓻ", "swo": "ᓽ", "swô": "ᓿ", "swa": "ᔁ", "swâ": "ᔃ",
     "y": "ᕀ", "yê": "ᔦ", "yi": "ᔨ", "yî": "ᔩ", "yo": "ᔪ", "yô": "ᔫ", "ya": "ᔭ", "yâ": "ᔮ",
     "ywê": "ᔰ", "ywi": "ᔲ", "ywî": "ᔴ", "ywo": "ᔶ", "ywô": "ᔸ", "ywa": "ᔺ", "ywâ": "ᔼ",
+    "th": "ᖮ", "thê": "ᖧ", "thi": "ᖨ", "thî": "ᖩ", "tho": "ᖪ", "thô": "ᖫ", "tha": "ᖬ", "thâ": "ᖭ",
     "l": "ᓬ", "r": "ᕒ", "h": "ᐦ", "hk": "ᕽ",
 }
 
 
-# TODO: Document these regular expressions:
-ONSET = '[ptkcshmny]w?|w'
-CODA = '[hs]?[ptkcmn]|h|s|y|w'
+# These regular expressions are intended to strictly match Cree words
+# We want to match *CREE* words, because we want to avoid accidentally
+# transliterate words from other languages.
+#
+# These regular expressions are based on a simplification of Cree
+# phonotactics—that is, how you glue sounds in the language together to make
+# syllables and words, and what combinations sounds allowed and where.
+#
+# For more information, see: https://en.wikipedia.org/wiki/Plains_Cree#Phonotactics
+ONSET = 'th|w|[ptkcshmny]w?'
+CODA = 'th|[hs]?[ptkcmn]|h|s|y|w'
 SYLLABLE = '(?:{ONSET})?(?:{VOWEL})(?:{CODA})?|r|l'.format_map(globals())
 SYLLABLES = r'(?:{SYLLABLE})+'.format_map(globals())
 WORD = r'\b{SYLLABLES}(?:(?:{CODA})?-{SYLLABLES})*\b'.format_map(globals())
@@ -99,7 +109,7 @@ full_stop_pattern = re.compile(r'''
 
 # Converts macron and alternate forms of vowels into "canonical" forms.
 TRANSLATE_ALT_FORMS = str.maketrans("ā'īōeē",
-                                    'âiîôêê')
+                                    'âiîôêê')  # TODO: Cree order
 
 
 def sro2syllabics(sro: str,
@@ -128,12 +138,12 @@ def sro2syllabics(sro: str,
     'Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'
 
     Note that the substitution of full-stops only takes place after syllabics;
-    if it doesn't "look" like Cree, it will not be converted:
+    if it is obviously not Cree (like most English), it will not be converted:
 
     >>> sro2syllabics("tânisi. ninêhiyawân.")
     'ᑖᓂᓯ᙮ ᓂᓀᐦᐃᔭᐚᐣ᙮'
-    >>> sro2syllabics("Howdy. This be English.")
-    'Howdy. This be English.'
+    >>> sro2syllabics("Howdy, English text!")
+    'Howdy, English text!'
 
     ``sro2syllabics()`` can handle variations in orthography. For example,
     it can convert circumflexes (âêîô):
@@ -320,5 +330,3 @@ def test_word_pattern():
     assert entire_word.match('amisk')
     assert entire_word.match('meriy')
     assert entire_word.match('waskahikanahk')
-
-# ᖧ	ᖨ	ᖩ	ᖪ	ᖫ	ᖬ	ᖭ	ᖮ
