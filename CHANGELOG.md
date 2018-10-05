@@ -5,11 +5,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html),
 with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
+## [Unreleased]
+
+### Changed
+
+ - Fixed minor documentation typos and formatting issues.
+
+### Removed
+
+ - Inaccessible AT&T FST parser.
+
 ## [0.20180906.0]
 
 ### Changed
 
- - **Breaking change**: `syllabics2sro()` no converts look-alike characters
+ - **Breaking change**: `syllabics2sro()` now converts look-alike characters
    in addition to the "canonical" syllabics characters.
  - Moderate refactoring to `syllabics2sro()`.
 
@@ -68,6 +78,7 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 [sandhi]: https://crk-orthography.readthedocs.io/en/stable/glossary.html#term-sandhi
 
 
+[Unreleased]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180906.0...master
 [0.20180906.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180820.1...v0.20180906.0
 [0.20180820.1]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180820.0...v0.20180820.1
 [0.20180820.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180728.0...v0.20180820.0

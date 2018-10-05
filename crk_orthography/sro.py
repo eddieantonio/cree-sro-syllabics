@@ -320,3 +320,5 @@ def test_word_pattern():
     assert entire_word.match('amisk')
     assert entire_word.match('meriy')
     assert entire_word.match('waskahikanahk')
+
+# ᖧ	ᖨ	ᖩ	ᖪ	ᖫ	ᖬ	ᖭ	ᖮ

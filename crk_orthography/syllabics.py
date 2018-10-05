@@ -104,14 +104,14 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     'kâ-mahihkani-pimohtêt'
 
     In some syllabics text, syllabics with a 'w' dot are rendered as two
-    characters: the syllabic without the 'w' dot followed by <U+1427 CANADIAN
-    SYLLABICS FINAL MIDDLE DOT>; this differs from the more appropriate
+    characters: the syllabic without the 'w' dot followed by \<U+1427 CANADIAN
+    SYLLABICS FINAL MIDDLE DOT\>; this differs from the more appropriate
     pre-composed syllabic character with the 'w' dot. For example,
 
         | ᐃᑘᐏᓇ  --- pre-composed syllabic
         | ᐃᑌᐧᐃᐧᓇ --- syllabic + ``CANADIAN SYLLABICS FINAL MIDDLE DOT``
 
-    `syllabics2sro()` can convert both cases appropriately:
+    ``syllabics2sro()`` can convert both cases appropriately:
 
     >>> syllabics2sro('ᐃᑘᐏᓇ')
     'itwêwina'
@@ -119,7 +119,7 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     'itwêwina'
 
     Some syllabics converters produce erroneous yet very similar looking
-    characters. `syllabics2sro()` knows the following look-alike characters:
+    characters. ``syllabics2sro()`` knows the following look-alike characters:
 
      ================================= ==================================
       Look-alike                        Correct character
@@ -129,7 +129,7 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
       ᕁ CANADIAN SYLLABICS SAYISI YI    ᕽ CANADIAN SYLLABICS HK
      ================================= ==================================
 
-    `syllabics2sro()` automatically interprets erroneous look-alikes as their
+    ``syllabics2sro()`` automatically interprets erroneous look-alikes as their
     visually equivalent characters.
 
     >>> syllabics2sro('ᒌᐯᐦᑕᑳᐧᐱᑲᐧᓂᐩ')
