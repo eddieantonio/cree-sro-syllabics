@@ -182,6 +182,9 @@ def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
 
 
 @pytest.mark.parametrize('sro,syllabics', [
+    # I've anecdotally noticed that Saskatchewan writers prefer macrons,
+    # and th-dialect is primarily spoke in northern Saskatchewan,
+    # hence, long vowels in this test are written with macrons.
     ('wīhthēw', 'ᐑᐦᖧᐤ'),
     ('nampithi-sīpīhk', 'ᓇᒼᐱᖨ ᓰᐲᕽ'),
     ('mithomon', 'ᒥᖪᒧᐣ'),
@@ -191,5 +194,4 @@ def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
 ])
 def test_cree_th_dialect(sro, syllabics):
     assert sro2syllabics(sro) == syllabics
-
-# TODO: what's the deal with ᐵ?
+    assert syllabics2sro(syllabics, produce_macrons=True) == sro
