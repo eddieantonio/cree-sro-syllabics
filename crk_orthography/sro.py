@@ -124,19 +124,15 @@ def sro2syllabics(sro: str,
     >>> sro2syllabics('Eddie nitisiyihkâson')
     'Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ'
 
-    You should be able to write words in all the West Cree dialects.
+    You should be able to write words in Y-dialect (a.k.a., Plains Cree):
 
-    Y-dialect (a.k.a., Plains Cree):
     >>> sro2syllabics('niya')
     'ᓂᔭ'
 
-    Th-dialect (a.k.a., Woods Cree):
+    ...and Th-dialect (a.k.a., Woods Cree):
+
     >>> sro2syllabics('nitha')
     'ᓂᖬ'
-
-    N-dialect:
-    >>> sro2syllabics('nīna')
-    'ᓃᓇ'
 
     Any word that does not have the "structure" of a Cree word is not
     converted:

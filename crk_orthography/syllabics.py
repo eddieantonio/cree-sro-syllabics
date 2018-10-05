@@ -81,19 +81,15 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     >>> syllabics2sro('Eddie ᓂᑎᓯᔨᐦᑳᓱᐣ᙮')
     'Eddie nitisiyihkâson.'
 
-    You should be able to convert words written in any Western Cree dialect.
+    You should be able to convert words written in Y-dialect (a.k.a., Plains Cree):
 
-    Y-dialect (a.k.a., Plains Cree):
     >>> syllabics2sro('ᓂᔭ')
     'niya'
 
-    Th-dialect (a.k.a., Woods Cree):
+    ... and Th-dialect (a.k.a., Woods Cree):
+
     >>> syllabics2sro('ᓂᖬ')
     'nitha'
-
-    N-dialect (a.k.a., Swampy Cree):
-    >>> syllabics2sro('ᓃᓇ')
-    'nîna'
 
     By default, the SRO will be produced with circumflexes (âêîô):
 
