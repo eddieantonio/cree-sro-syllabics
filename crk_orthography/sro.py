@@ -45,7 +45,7 @@ sro_pattern = re.compile(r'''
     # the regular expression will match the first alternative that will
     # work—which must be the longest match!
     wê|wi|wî|wo|wô|wa|wâ|w|
-    thê|thi|tî|tho|thô|tha|thâ|th|
+    thê|thi|thî|tho|thô|tha|thâ|th|
     pê|pi|pî|po|pô|pa|pâ|pwê|pwi|pwî|pwo|pwô|pwa|pwâ|p|
     tê|ti|tî|to|tô|ta|tâ|twê|twi|twî|two|twô|twa|twâ|t|
     kê|ki|kî|ko|kô|ka|kâ|kwê|kwi|kwî|kwo|kwô|kwa|kwâ|k|
