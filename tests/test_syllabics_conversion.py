@@ -191,6 +191,8 @@ def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
     ('namōtha', 'ᓇᒨᖬ'),
     ('thāhkan', 'ᖭᐦᑲᐣ'),
     ('namēpith', 'ᓇᒣᐱᖮ'),
+    # Test each syllable.
+    ('thē thi tho tha thī thō thā', 'ᖧ ᖨ ᖪ ᖬ ᖩ ᖫ ᖭ'),
 ])
 def test_cree_th_dialect(sro, syllabics):
     assert sro2syllabics(sro) == syllabics
