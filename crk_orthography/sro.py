@@ -44,16 +44,16 @@ sro_pattern = re.compile(r'''
     # NOTE: List the longer syllable first, since
     # the regular expression will match the first alternative that will
     # work—which must be the longest match!
-    wê|wi|wî|wo|wô|wa|wâ|w|
-    thê|thi|thî|tho|thô|tha|thâ|th|
-    pê|pi|pî|po|pô|pa|pâ|pwê|pwi|pwî|pwo|pwô|pwa|pwâ|p|
-    tê|ti|tî|to|tô|ta|tâ|twê|twi|twî|two|twô|twa|twâ|t|
-    kê|ki|kî|ko|kô|ka|kâ|kwê|kwi|kwî|kwo|kwô|kwa|kwâ|k|
-    cê|ci|cî|co|cô|ca|câ|cwê|cwi|cwî|cwo|cwô|cwa|cwâ|c|
-    mê|mi|mî|mo|mô|ma|mâ|mwê|mwi|mwî|mwo|mwô|mwa|mwâ|m|
-    nê|ni|nî|no|nô|na|nâ|nwê|nwa|nwâ|n|
-    sê|si|sî|so|sô|sa|sâ|swê|swi|swî|swo|swô|swa|swâ|s|
-    yê|yi|yî|yo|yô|ya|yâ|ywê|ywi|ywî|ywo|ywô|ywa|ywâ|y|
+    thê|thi|tho|tha|thî|thô|thâ                            |th|
+    wê |wi |wo |wa |wî |wô |wâ                             |w |
+    pê |pi |po |pa |pî |pô |pâ |pwê|pwi|pwo|pwa|pwî|pwô|pwâ|p |
+    tê |ti |to |ta |tî |tô |tâ |twê|twi|two|twa|twî|twô|twâ|t |
+    kê |ki |ko |ka |kî |kô |kâ |kwê|kwi|kwo|kwa|kwî|kwô|kwâ|k |
+    cê |ci |co |ca |cî |cô |câ |cwê|cwi|cwo|cwa|cwî|cwô|cwâ|c |
+    mê |mi |mo |ma |mî |mô |mâ |mwê|mwi|mwo|mwa|mwî|mwô|mwâ|m |
+    nê |ni |no |na |nî |nô |nâ |nwê|nwa        |nwâ        |n |
+    sê |si |so |sa |sî |sô |sâ |swê|swi|swo|swa|swî|swô|swâ|s |
+    yê |yi |yo |ya |yî |yô |yâ |ywê|ywi|ywo|ywa|ywî|ywô|ywâ|y |
     h|l|r|
     ê|i|î|o|ô|a|â|
     -
