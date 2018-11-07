@@ -197,3 +197,18 @@ def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
 def test_cree_th_dialect(sro, syllabics):
     assert sro2syllabics(sro) == syllabics
     assert syllabics2sro(syllabics, produce_macrons=True) == sro
+
+
+@pytest.mark.parametrize('sro,syllabics', [
+    # Test each syllable.
+    ('nwe nwa nwā', 'ᓊ ᓌ ᓎ'),
+])
+def test_rare_nwV_forms(sro, syllabics):
+    """
+    Not all nwV forms are attested in Western Cree. Only
+    nwe, nwa, and nwâ exist. However, the CAS extended extended Unicode block
+    includes Ojibway syllabics that fill in the rest of the nwV syllabics.
+    For now, I am NOT including the Ojibway syllabics; only the syllabics
+    explicitly intended for Plains Cree.
+    """
+    assert sro2syllabics(sro) == syllabics
