@@ -134,6 +134,9 @@ def test_hyphens(sro, syllabics):
     # so I'm not even going to go there...
     ('miyw-âyâw', 'ᒥᔼᔮᐤ', '', 'ᒥᕀᐤᐋᔮᐤ'),
     ('pîhc-âyihk', 'ᐲᐦᒑᔨᕽ', '', 'ᐲᐦᐨᐋᔨᕽ'),
+
+    # NOTE: not orthographically correct, but demonstrates Sandhi in th-Cree
+    ('wîhth-owin', 'ᐑᐦᖪᐏᐣ', '', 'ᐑᐦᖮᐅᐏᐣ'),
 ])
 def test_sandhi(sro, syllabics, hyphens, alt_syllabics):
     """
