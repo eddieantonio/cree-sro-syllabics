@@ -23,7 +23,7 @@ from collections import ChainMap
 
 DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
 
-CONSONANT = '[ptkcshmnyw]'
+CONSONANT = '[ptkcshmnyw]|th'
 STRICT_VOWEL = '[êioaîôâ]'
 VOWEL = "{STRICT_VOWEL}|[eēī'ōā]".format_map(globals())
 
@@ -38,7 +38,7 @@ sro_pattern = re.compile(r'''
     #   Wolvengrey, Arok, ed. "ᓀᐦᐃᔭᐍᐏᐣ: ᐃᑗᐏᓇ / nēhiýawēwin: itwēwina/Cree:
     #   Words". Canadian Plains Research Center, October 2001. pp. xvi–xviii.
 
-    ({CONSONANT}w?)-({STRICT_VOWEL}) |
+    ((?:{CONSONANT})w?)-({STRICT_VOWEL}) |
 
     # Listing all of the syllables.
     # NOTE: List the longer syllable first, since
@@ -294,10 +294,11 @@ def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) ->
             syllable = onset + vowel
             next_syllable_pos = match.end()
         elif onset is not None:
-            # This is a consonant
-            syllable = onset[:1]
+            # Not Sandhi -- let's consume the onset (consonant)
+            # Do NOT consume the labialized w!
+            syllable = 'w' if onset == 'w' else onset.rstrip('w')
             # Skip the first consonant.
-            next_syllable_pos = 1
+            next_syllable_pos = len(syllable)
             assert syllable in CONSONANT
         else:
             syllable = match.group(0)
