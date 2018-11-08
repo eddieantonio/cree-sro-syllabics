@@ -20,7 +20,7 @@ Install
 
 Using `pip`:
 
-    pip install crk-orthography
+    pip install cree-sro-syllabics
 
 Or, you can copy-paste or download [`cree_sro_syllabics.py`][download] into
 your own Python 3 project!
