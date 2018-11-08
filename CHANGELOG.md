@@ -10,15 +10,17 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 ### Changed
 
  - Write deliberate test cases for nwV syllables.
+ - Change word matching specification to disallow adjacent vowels.
+ - Make "word boundary" more explicit, instead of using `\b`.
 
 ### Fixed
 
- - typo in support for 'thî'/ᖩ syllabic.
- - fix edge-case involving th-syllable in non-Sandhi conversion.
+ - Typo in support for 'thî'/ᖩ syllabic.
+ - Fix edge-case involving th-syllable in non-Sandhi conversion.
 
 ## [0.20181005.0]
 
-### Added
+#w## Added
 
  - Support th-dialect syllabics; i.e., "ᖧᖨᖩᖪᖫᖬᖭᖮ"
 
@@ -28,7 +30,7 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
 ### Removed
 
- - Inaccessible AT&T FST parser.
+ - Inaccessible AT&T FST parser.Change word matching specification (
 
 ## [0.20180906.0]
 

@@ -87,19 +87,67 @@ sro2syllabics_lookup = {
 
 # These regular expressions are intended to strictly match Cree words
 # We want to match *CREE* words, because we want to avoid accidentally
-# transliterate words from other languages.
+# transliterating words from other languages (e.g., English, French).
 #
-# These regular expressions are based on a simplification of Cree
+# These regular expressions are based on a HUGE simplification of Cree
 # phonotactics—that is, how you glue sounds in the language together to make
 # syllables and words, and what combinations sounds allowed and where.
 #
 # For more information, see: https://en.wikipedia.org/wiki/Plains_Cree#Phonotactics
-ONSET = 'th|w|[ptkcshmny]w?'
+WORD_INITIAL = r'''
+    [ptkcmnsyh]w? |    # consonants that allow 'w' after
+    (?:th|[rl]) |  # consonants that don't
+    w |
+    # can start with no consonant.
+'''
+
+WORD_MEDIAL = r'''
+    # TODO: there should be a constraint that the constants cannot be
+    # duplicated, but capturing groups won't work if these regex
+    # snippets are concatenated into bigger regexes.
+    (?:[hsmnwy]|th)? (?:[ptkcmnsyh]|th) w? |
+    w |
+    [yw]? [rl]  # for loan words
+'''
+
+WORD_FINAL = r'''
+    [hs]? (?:[ptcksmnwy]|th) |
+    [yw]? [rl]  # for loan word
+    |  # can end with no consonant
+'''
+
+# NOTE: VOWEL is defined way near the top of the file.
+
 CODA = 'th|[hs]?[ptkcmn]|h|s|y|w'
-SYLLABLE = '(?:{ONSET})?(?:{VOWEL})(?:{CODA})?|r|l'.format_map(globals())
-SYLLABLES = r'(?:{SYLLABLE})+'.format_map(globals())
-WORD = r'\b{SYLLABLES}(?:(?:{CODA})?-{SYLLABLES})*\b'.format_map(globals())
-word_pattern = re.compile(WORD, re.IGNORECASE)
+MORPHEME = r'''
+    (?:{WORD_INITIAL}) (?:{VOWEL})
+        (?: (?:{WORD_MEDIAL}) (?:{VOWEL}) )*
+    (?:{WORD_FINAL})
+'''.format_map(globals())
+
+# TODO: DRY these up!
+BEGIN_WORD = r'''
+(?:
+        ^  # Either the start of a string; or,
+        |  # at the edge of "letters".
+        (?<=[^a-zêioaîôâeēī'ōā])
+)
+'''
+END_WORD = r'''
+(?:
+        (?=[^a-zêioaîôâeēī'ōā]) |
+        $
+)
+'''
+
+WORD = r'''
+    # CODA before the hyphen to account for Sandhi.
+    # It's possible to accept TWO codas using this formulation, but
+    # I think that loss of precision is okay.
+    {BEGIN_WORD} {MORPHEME} (?: (?:{CODA})?-{MORPHEME})* {END_WORD}
+'''.format_map(globals())
+word_pattern = re.compile(WORD, re.IGNORECASE | re.VERBOSE)
+
 # This regex prevents matching EVERY period, instead only matching periods
 # after Cree words, or, as an exception, as the only item in a string.
 full_stop_pattern = re.compile(r'''
@@ -331,6 +379,7 @@ def nfc(text):
     return normalize('NFC', text)
 
 
+# TODO: delete redundant, misplaced test:
 def test_word_pattern():
     """
     Test that the WORD regex can match entire nêhiyawêwin words and loanwords,
