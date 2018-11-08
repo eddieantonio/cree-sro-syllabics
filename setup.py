@@ -46,7 +46,7 @@ except FileNotFoundError:
 # Load the package's __init__.py module as a dictionary.
 about = {}
 if not VERSION:
-    # Assume the version is defined in the __init__.py file.
+    # Assume the version is defined in the module file.
     with open(os.path.join(here, NAME + '.py')) as f:
         exec([l for l in f.readlines() if l.startswith('__version__')][0], about)
 else:

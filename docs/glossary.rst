@@ -71,8 +71,8 @@ Glossary
 
   Woods Cree
   Cree Th-dialect
-  nēhithawēwin
-    **Woods Cree**, **Cree Th-Dialect**, or **nēhithawēwin** is a Cree dialect
+  nīhithawīwin
+    **Woods Cree**, **Cree Th-Dialect**, or **nīhithawīwin** is a Cree dialect
     spoken in Northern Saskatchewan and Northern Manitoba. It is distinct from
     :term:`Plains Cree` in that many words that have a "th" in them are spoken
     with a "y" in Plains Cree; this is why Woods Cree is also known as Cree
