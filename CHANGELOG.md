@@ -5,12 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html),
 with [Calendar Versioning](https://calver.org/).
 
-## [Unreleased]
+## [2018.11.08]
+
+ - First stable release! 🎉
 
 ### Changed
 
  * Changed name from **crk-orthography** to **cree-sro-syllabics**.
- - Changed calver scheme from `0.YYYY0M0D.PATCH` to `YYYY.0M.0D`.
+ - Changed CalVer scheme from `0.YYYY0M0D.PATCH` to `YYYY.0M.0D`.
 
 ## [0.20181108.0]
 
@@ -107,7 +109,7 @@ with [Calendar Versioning](https://calver.org/).
 [sandhi]: https://crk-orthography.readthedocs.io/en/stable/glossary.html#term-sandhi
 
 
-[Unreleased]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20181108.0...master
+[2018.11.08]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20181108.0...v2018.11.08
 [0.20181108.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20181005.0...v0.20181108.0
 [0.20181005.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180906.0...v0.20181005.0
 [0.20180906.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180820.1...v0.20180906.0
