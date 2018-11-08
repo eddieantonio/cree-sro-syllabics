@@ -18,6 +18,10 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
  - Typo in support for 'thî'/ᖩ syllabic.
  - Fix edge-case involving th-syllable in non-Sandhi conversion.
 
+### Removed
+
+ - **Removed** command line tools: `sro2syllabics(1)` and `syllabics2sro(1)`
+
 ## [0.20181005.0]
 
 #w## Added
