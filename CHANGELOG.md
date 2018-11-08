@@ -3,13 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html),
-with a [Calendar Versioning](https://calver.org/) for 0.x releases.
+with [Calendar Versioning](https://calver.org/).
 
 ## [Unreleased]
 
 ### Changed
 
  * Changed name from **crk-orthography** to **cree-sro-syllabics**.
+ - Changed calver scheme from `0.YYYY0M0D.PATCH` to `YYYY.0M.0D`.
 
 ## [0.20181108.0]
 
