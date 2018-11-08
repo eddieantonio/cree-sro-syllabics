@@ -6,14 +6,27 @@ Plains Cree Orthography
 [![PyPI package](https://img.shields.io/pypi/v/crk_orthography.svg)](https://pypi.org/project/crk_orthography/)
 [![Calver MAJOR.YYYY0M0D.PATCH](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
 
-Python 3 library to convert between
-nêhiyawêwin/ᓀᐦᐃᔭᐍᐏᐣ (Plains Cree Y-dialect) **standard Roman
+Python 3 library to convert between Western Cree **standard Roman
 Orthography** (SRO) to **syllabics** and back again!
+
+Can be used for:
+
+ - nêhiyawêwin/ᓀᐦᐃᔭᐍᐏᐣ/Cree Y-dialect
+ - nīhithawīwin/ᓃᐦᐃᖬᐑᐏᐣ/Cree Th-dialect
+ - nēhinawēwin/ᓀᐦᐃᓇᐍᐏᐣ/Cree N-dialect
 
 Install
 -------
 
+Using `pip`:
+
     pip install crk-orthography
+
+Or, you can copy-paste or download [`crk_othography.py`][download] into
+your own Python 3 project!
+
+[download]: https://github.com/eddieantonio/crk_orthography/raw/master/crk_orthography.py
+
 
 Usage
 -----
