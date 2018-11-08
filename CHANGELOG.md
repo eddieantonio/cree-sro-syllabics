@@ -7,9 +7,14 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
 ## [Unreleased]
 
+### Changed
+
+ - Write deliberate test cases for nwV syllables.
+
 ### Fixed
 
  - typo in support for 'thî'/ᖩ syllabic.
+ - fix edge-case involving th-syllable in non-Sandhi conversion.
 
 ## [0.20181005.0]
 
