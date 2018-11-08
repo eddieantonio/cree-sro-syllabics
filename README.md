@@ -6,7 +6,7 @@ Plains Cree Orthography
 [![PyPI package](https://img.shields.io/pypi/v/crk_orthography.svg)](https://pypi.org/project/crk_orthography/)
 [![Calver MAJOR.YYYY0M0D.PATCH](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
 
-Python 3 library and command line programs to convert between
+Python 3 library to convert between
 nêhiyawêwin/ᓀᐦᐃᔭᐍᐏᐣ (Plains Cree Y-dialect) **standard Roman
 Orthography** (SRO) to **syllabics** and back again!
 
@@ -43,40 +43,6 @@ Convert syllabics to SRO:
     'acimosis'
     >>> syllabics2sro(' → ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᕀᓬ ')
     ' → maskêkosihk  tireyl '
-
-
-### On the command line
-
-`crk_orthography` installs two command line programs:
-
-#### sro2syllabics
-
-Use this to convert text from a file or from `stdin` to syllabics.
-
-    $ echo "minôs" | sro2syllabics
-    ᒥᓅᐢ
-    $ sro2syllabics my-file-in-sro.txt
-    ᒥᓅᐢ
-
-For more information over its options, type:
-
-    sro2syllabics --help
-
-#### syllabics2sro
-
-Use this to convert text from a file or from `stdin` to SRO.
-
-    $ echo "ᒥᓅᐢ" | syllabics2sro
-    minôs
-    $ syllabics2sro my-file-in-syllabics.txt
-    minôs
-    $ syllabics2sro --macrons my-file-in-syllabics.txt
-    minōs
-
-
-For more information over its options, type:
-
-    syllabics2sro --help
 
 
 See also
