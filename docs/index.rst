@@ -3,14 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Plains Cree Orthography
-=======================
+Cree SRO/Syllabics
+==================
 
 Function documentation
 ----------------------
 
-.. autofunction:: crk_orthography.sro2syllabics
-.. autofunction:: crk_orthography.syllabics2sro
+.. autofunction:: cree_sro_syllabics.sro2syllabics
+.. autofunction:: cree_sro_syllabics.syllabics2sro
 
 
 .. toctree::

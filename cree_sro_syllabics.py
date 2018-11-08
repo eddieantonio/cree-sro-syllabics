@@ -467,7 +467,7 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     rather than an ASCII character followed by a combining diacritical mark.
     That is, vowels are returned in *NFC normalization form*.
 
-    For compatibility with :py:meth:`crk_orthography.sro2syllabics`,
+    For compatibility with :py:meth:`cree_sro_syllabics.sro2syllabics`,
     ``syllabics2sro`` will convert any instances of \<U+202F NARROW NO BREAK
     SPACE\> to a hyphen in the SRO transliteration.
 

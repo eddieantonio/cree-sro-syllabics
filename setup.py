@@ -9,11 +9,11 @@ import os
 import sys
 from shutil import rmtree
 
-from setuptools import find_packages, setup, Command
+from setuptools import setup, Command
 
 # Package meta-data.
-NAME = 'crk_orthography'
-DESCRIPTION = 'Convert between Plains Cree SRO and syllabics'
+NAME = 'cree_sro_syllabics'
+DESCRIPTION = 'Convert between Western Cree SRO and syllabics'
 URL = 'https://github.com/eddieantonio/crk_orthography'
 EMAIL = 'easantos@ualberta.ca'
 AUTHOR = 'Eddie Antonio Santos'

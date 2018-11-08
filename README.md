@@ -1,5 +1,5 @@
-Plains Cree Orthography
-=======================
+Cree SRO/Syllabics
+==================
 
 [![Build Status](https://travis-ci.org/eddieantonio/crk_orthography.svg?branch=master)](https://travis-ci.org/eddieantonio/crk_orthography)
 [![Documentation Status](https://readthedocs.org/projects/crk-orthography/badge/?version=stable)](https://crk-orthography.readthedocs.io/en/stable/?badge=stable)
@@ -22,10 +22,10 @@ Using `pip`:
 
     pip install crk-orthography
 
-Or, you can copy-paste or download [`crk_othography.py`][download] into
+Or, you can copy-paste or download [`cree_sro_syllabics.py`][download] into
 your own Python 3 project!
 
-[download]: https://github.com/eddieantonio/crk_orthography/raw/master/crk_orthography.py
+[download]: https://github.com/eddieantonio/crk_orthography/raw/master/cree_sro_syllabics.py
 
 
 Usage
@@ -43,7 +43,7 @@ words like "syllabics", "transliterator", or "orthography"? Visit
 
 Convert SRO to syllabics:
 
-    >>> from crk_orthography import sro2syllabics
+    >>> from cree_sro_syllabics import sro2syllabics
     >>> sro2syllabics('nêhiyawêwin')
     'ᓀᐦᔭᐍᐏᐣ'
     >>> sro2syllabics('write nêhiyawêwin')
@@ -51,7 +51,7 @@ Convert SRO to syllabics:
 
 Convert syllabics to SRO:
 
-    >>> from crk_orthography import syllabics2sro
+    >>> from cree_sro_syllabics import syllabics2sro
     >>> syllabics2sro('ᐊᒋᒧᓯᐢ')
     'acimosis'
     >>> syllabics2sro(' → ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᕀᓬ ')

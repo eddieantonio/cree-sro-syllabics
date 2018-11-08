@@ -21,12 +21,12 @@ sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Plains Cree Orthography'
+project = 'Cree SRO/Syllabics'
 copyright = '2018, Eddie Antonio Santos'
 author = 'Eddie Antonio Santos'
 
 # Get the version number from the package itself.
-from crk_orthography import __version__ as package_version  # noqa
+from cree_sro_syllabics import __version__ as package_version  # noqa
 
 # The full version, including alpha/beta/rc tags
 release = package_version
@@ -112,7 +112,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'PlainsCreeOrthographydoc'
+htmlhelp_basename = 'cree-sro-syllabics'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -139,7 +139,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'PlainsCreeOrthography.tex', 'Plains Cree Orthography Documentation',
+    (master_doc, 'cree-sro-syllabics.tex', 'Cree SRO/Syllabics Documentation',
      'Eddie Antonio Santos', 'manual'),
 ]
 
@@ -149,7 +149,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'plainscreeorthography', 'Plains Cree Orthography Documentation',
+    (master_doc, 'cree-sro-syllabics', 'Cree SRO/Syllabics Documentation',
      [author], 1)
 ]
 
@@ -160,7 +160,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'PlainsCreeOrthography', 'Plains Cree Orthography Documentation',
-     author, 'PlainsCreeOrthography', 'One line description of project.',
+    (master_doc, 'CreeSROSyllabics', 'Cree SRO/Syllabics Documentation',
+     author, 'CreeSROSyllabics', 'One line description of project.',
      'Miscellaneous'),
 ]

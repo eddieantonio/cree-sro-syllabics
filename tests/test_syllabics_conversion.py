@@ -18,7 +18,7 @@
 
 import pytest  # type: ignore
 
-from crk_orthography import sro2syllabics, syllabics2sro
+from cree_sro_syllabics import sro2syllabics, syllabics2sro
 
 COMBINING_CIRCUMFLEX = '\u0302'
 
