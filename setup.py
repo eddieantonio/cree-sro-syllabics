@@ -47,7 +47,7 @@ except FileNotFoundError:
 about = {}
 if not VERSION:
     # Assume the version is defined in the __init__.py file.
-    with open(os.path.join(here, NAME, '__init__.py')) as f:
+    with open(os.path.join(here, NAME + '.py')) as f:
         exec([l for l in f.readlines() if l.startswith('__version__')][0], about)
 else:
     about['__version__'] = VERSION
@@ -101,9 +101,8 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(exclude=('tests',)),
     # If your package is a single module, use this instead of 'packages':
-    # py_modules=['mypackage'],
+    py_modules=[NAME],
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,

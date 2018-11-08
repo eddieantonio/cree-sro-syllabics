@@ -9,6 +9,7 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 
 ### Changed
 
+ - ‼︎ Convert from a package (a folder) to a module (a single `.py` file)!
  - Write deliberate test cases for nwV syllables.
  - Change word matching specification to disallow adjacent vowels.
  - Make "word boundary" more explicit, instead of using `\b`.
