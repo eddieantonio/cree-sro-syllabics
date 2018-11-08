@@ -14,16 +14,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from collections import ChainMap
+from unicodedata import normalize
 
 from .__version__ import __version__
 
 
 __all__ = ['sro2syllabics', 'syllabics2sro']
-
-
-import re
-from unicodedata import normalize
-from collections import ChainMap
 
 
 DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
@@ -98,7 +95,8 @@ sro2syllabics_lookup = {
 # phonotactics—that is, how you glue sounds in the language together to make
 # syllables and words, and what combinations sounds allowed and where.
 #
-# For more information, see: https://en.wikipedia.org/wiki/Plains_Cree#Phonotactics
+# For more information, see:
+# https://en.wikipedia.org/wiki/Plains_Cree#Phonotactics
 WORD_INITIAL = r'''
     [ptkcmnsyh]w? |    # consonants that allow 'w' after
     (?:th|[rl]) |  # consonants that don't
@@ -413,7 +411,8 @@ syllabics2sro_lookup.update({
 # Translation table to convert syllabics to SRO.
 SYLLABICS_TO_SRO = str.maketrans(syllabics2sro_lookup)
 
-# For use when converting SYLLABIC + FINAL MIDDLE DOT into the syllabic with a 'w'
+# For use when converting SYLLABIC + FINAL MIDDLE DOT into the syllabic
+# with a 'w'
 SYLLABIC_WITH_DOT = {
     'ᐁ': 'ᐍ', 'ᐃ': 'ᐏ', 'ᐄ': 'ᐑ', 'ᐅ': 'ᐓ', 'ᐆ': 'ᐕ', 'ᐊ': 'ᐘ', 'ᐋ': 'ᐚ',
     'ᐯ': 'ᐻ', 'ᐱ': 'ᐽ', 'ᐲ': 'ᐿ', 'ᐳ': 'ᑁ', 'ᐴ': 'ᑃ', 'ᐸ': 'ᑅ', 'ᐹ': 'ᑇ',
