@@ -43,11 +43,12 @@ try:
 except FileNotFoundError:
     long_description = DESCRIPTION
 
-# Load the package's __version__.py module as a dictionary.
+# Load the package's __init__.py module as a dictionary.
 about = {}
 if not VERSION:
-    with open(os.path.join(here, NAME, '__version__.py')) as f:
-        exec(f.read(), about)
+    # Assume the version is defined in the __init__.py file.
+    with open(os.path.join(here, NAME, '__init__.py')) as f:
+        exec([l for l in f.readlines() if l.startswith('__version__')][0], about)
 else:
     about['__version__'] = VERSION
 

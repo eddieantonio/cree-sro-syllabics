@@ -17,10 +17,9 @@ import re
 from collections import ChainMap
 from unicodedata import normalize
 
-from .__version__ import __version__
-
 
 __all__ = ['sro2syllabics', 'syllabics2sro']
+__version__ = '0.20181010.0'
 
 
 DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
