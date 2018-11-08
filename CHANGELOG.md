@@ -106,11 +106,11 @@ with a [Calendar Versioning](https://calver.org/) for 0.x releases.
 [sandhi]: https://crk-orthography.readthedocs.io/en/stable/glossary.html#term-sandhi
 
 
-[Unreleased]: https://github.com/eddieantonio/crk_orthography/compare/v0.20181108.0...master
-[0.20181108.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20181005.0...v0.20181108.0
-[0.20181005.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180906.0...v0.20181005.0
-[0.20180906.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180820.1...v0.20180906.0
-[0.20180820.1]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180820.0...v0.20180820.1
-[0.20180820.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180728.0...v0.20180820.0
-[0.20180728.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180724.0...v0.20180728.0
-[0.20180724.0]: https://github.com/eddieantonio/crk_orthography/compare/v0.20180723.0...v0.20180724.0
+[Unreleased]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20181108.0...master
+[0.20181108.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20181005.0...v0.20181108.0
+[0.20181005.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180906.0...v0.20181005.0
+[0.20180906.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180820.1...v0.20180906.0
+[0.20180820.1]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180820.0...v0.20180820.1
+[0.20180820.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180728.0...v0.20180820.0
+[0.20180728.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180724.0...v0.20180728.0
+[0.20180724.0]: https://github.com/eddieantonio/cree-sro-syllabics/compare/v0.20180723.0...v0.20180724.0

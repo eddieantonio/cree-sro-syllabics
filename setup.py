@@ -14,7 +14,7 @@ from setuptools import setup, Command
 # Package meta-data.
 NAME = 'cree_sro_syllabics'
 DESCRIPTION = 'Convert between Western Cree SRO and syllabics'
-URL = 'https://github.com/eddieantonio/crk_orthography'
+URL = 'https://github.com/eddieantonio/cree-sro-syllabics'
 EMAIL = 'easantos@ualberta.ca'
 AUTHOR = 'Eddie Antonio Santos'
 REQUIRES_PYTHON = '>=3.4.0'

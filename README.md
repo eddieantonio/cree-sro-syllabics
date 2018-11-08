@@ -1,7 +1,7 @@
 Cree SRO/Syllabics
 ==================
 
-[![Build Status](https://travis-ci.org/eddieantonio/crk_orthography.svg?branch=master)](https://travis-ci.org/eddieantonio/crk_orthography)
+[![Build Status](https://travis-ci.org/eddieantonio/cree-sro-syllabics.svg?branch=master)](https://travis-ci.org/eddieantonio/cree-sro-syllabics)
 [![Documentation Status](https://readthedocs.org/projects/crk-orthography/badge/?version=stable)](https://crk-orthography.readthedocs.io/en/stable/?badge=stable)
 [![PyPI package](https://img.shields.io/pypi/v/crk_orthography.svg)](https://pypi.org/project/crk_orthography/)
 [![Calver MAJOR.YYYY0M0D.PATCH](https://img.shields.io/badge/calver-MAJOR.YYYY0M0D.PATCH-22bfda.svg)](http://calver.org/)
@@ -25,7 +25,7 @@ Using `pip`:
 Or, you can copy-paste or download [`cree_sro_syllabics.py`][download] into
 your own Python 3 project!
 
-[download]: https://github.com/eddieantonio/crk_orthography/raw/master/cree_sro_syllabics.py
+[download]: https://github.com/eddieantonio/cree-sro-syllabics/raw/master/cree_sro_syllabics.py
 
 
 Usage
