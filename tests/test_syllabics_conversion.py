@@ -211,3 +211,10 @@ def test_rare_nwV_forms():
     for Plains Cree.
     """
     assert sro2syllabics('nwe nwa nwā') == 'ᓊ ᓌ ᓎ'
+
+
+def test_word_cannot_match_adjacent_vowels():
+    """
+    The word matching should not be able to match adjacent, de-normalized vowels.
+    """
+    assert sro2syllabics("I'm") == "I'm"
