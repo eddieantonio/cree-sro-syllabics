@@ -377,16 +377,3 @@ def nfc(text):
     Return NFC-normalized text.
     """
     return normalize('NFC', text)
-
-
-# TODO: delete redundant, misplaced test:
-def test_word_pattern():
-    """
-    Test that the WORD regex can match entire nêhiyawêwin words and loanwords,
-    NFC-normalized.
-    """
-    entire_word = re.compile('^' + WORD + '$')
-    assert entire_word.match("n'")
-    assert entire_word.match('amisk')
-    assert entire_word.match('meriy')
-    assert entire_word.match('waskahikanahk')
