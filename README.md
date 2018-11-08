@@ -1,6 +1,8 @@
 Plains Cree Orthography
 =======================
 
+> **NAME CHANGED**: [cree-sro-syllabics](https://github.com/eddieantonio/cree-sro-syllabics).
+
 [![Build Status](https://travis-ci.org/eddieantonio/crk_orthography.svg?branch=master)](https://travis-ci.org/eddieantonio/crk_orthography)
 [![Documentation Status](https://readthedocs.org/projects/crk-orthography/badge/?version=stable)](https://crk-orthography.readthedocs.io/en/stable/?badge=stable)
 [![PyPI package](https://img.shields.io/pypi/v/crk_orthography.svg)](https://pypi.org/project/crk_orthography/)

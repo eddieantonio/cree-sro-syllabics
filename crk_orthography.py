@@ -14,12 +14,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+import warnings
 from collections import ChainMap
 from unicodedata import normalize
 
+from warnings import warn
+
+warn("""This package has been renamed to cree-sro-syllabics.
+Update your Pipfile or requirements.txt and reinstall:
+
+        pip install cree-sro-syllabics
+""", ImportWarning)
+
 
 __all__ = ['sro2syllabics', 'syllabics2sro']
-__version__ = '0.20181108.0'
+__version__ = '0.20181108.1'
 
 
 DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
