@@ -2,6 +2,7 @@ Cree SRO/Syllabics
 ==================
 
 [![Build Status](https://travis-ci.org/eddieantonio/cree-sro-syllabics.svg?branch=master)](https://travis-ci.org/eddieantonio/cree-sro-syllabics)
+[![codecov](https://codecov.io/gh/eddieantonio/cree-sro-syllabics/branch/master/graph/badge.svg)](https://codecov.io/gh/eddieantonio/cree-sro-syllabics)
 [![Documentation Status](https://readthedocs.org/projects/crk-orthography/badge/?version=stable)](https://crk-orthography.readthedocs.io/en/stable/?badge=stable)
 [![PyPI package](https://img.shields.io/pypi/v/cree-sro-syllabics.svg)](https://pypi.org/project/cree-sro-syllabics/)
 [![Calver YYYY.0M.0D](https://img.shields.io/badge/calver-YYYY.0M.0D-22bfda.svg)](http://calver.org/)
