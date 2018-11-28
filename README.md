@@ -40,24 +40,25 @@ words like "syllabics", "transliterator", or "orthography"? Visit
 [glossary]: https://crk-orthography.readthedocs.io/en/stable/glossary.html
 
 
-### As a Python module
-
 Convert SRO to syllabics:
 
-    >>> from cree_sro_syllabics import sro2syllabics
-    >>> sro2syllabics('nêhiyawêwin')
-    'ᓀᐦᔭᐍᐏᐣ'
-    >>> sro2syllabics('write nêhiyawêwin')
-    'write ᓀᐦᐃᔭᐍᐏᐣ'
+```python
+>>> from cree_sro_syllabics import sro2syllabics
+>>> sro2syllabics('nêhiyawêwin')
+'ᓀᐦᔭᐍᐏᐣ'
+>>> sro2syllabics('write nêhiyawêwin')
+'write ᓀᐦᐃᔭᐍᐏᐣ'
+```
 
 Convert syllabics to SRO:
 
-    >>> from cree_sro_syllabics import syllabics2sro
-    >>> syllabics2sro('ᐊᒋᒧᓯᐢ')
-    'acimosis'
-    >>> syllabics2sro(' → ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᕀᓬ ')
-    ' → maskêkosihk  tireyl '
-
+```python
+>>> from cree_sro_syllabics import syllabics2sro
+>>> syllabics2sro('ᐊᒋᒧᓯᐢ')
+'acimosis'
+>>> syllabics2sro(' → ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᕀᓬ ')
+' → maskêkosihk  tireyl '
+```
 
 See also
 --------
