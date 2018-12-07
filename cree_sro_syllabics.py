@@ -26,7 +26,7 @@ DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
 
 CONSONANT = '[ptkcshmnyw]|th'
 STRICT_VOWEL = '[êioaîôâ]'
-VOWEL = "{STRICT_VOWEL}|[eēī'ōā]".format_map(globals())
+VOWEL = "{STRICT_VOWEL}|[eēī'’ōā]".format_map(globals())
 
 # Match an SRO syllable.
 sro_pattern = re.compile(r'''
@@ -132,12 +132,12 @@ BEGIN_WORD = r'''
 (?:
         ^  # Either the start of a string; or,
         |  # at the edge of "letters".
-        (?<=[^a-zêioaîôâeēī'ōā])
+        (?<=[^a-zêioaîôâeēī'’ōā])
 )
 '''
 END_WORD = r'''
 (?:
-        (?=[^a-zêioaîôâeēī'ōā]) |
+        (?=[^a-zêioaîôâeēī'’ōā]) |
         $
 )
 '''
@@ -158,8 +158,8 @@ full_stop_pattern = re.compile(r'''
 ''', re.VERBOSE)
 
 # Converts macron and alternate forms of vowels into "canonical" forms.
-TRANSLATE_ALT_FORMS = str.maketrans("eē'īōā",
-                                    "êêiîôâ")
+TRANSLATE_ALT_FORMS = str.maketrans("eē'’īōā",
+                                    "êêiiîôâ")
 
 
 def sro2syllabics(sro: str,
