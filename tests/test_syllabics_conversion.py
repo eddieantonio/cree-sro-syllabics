@@ -191,6 +191,7 @@ def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
 
 @pytest.mark.parametrize("original_sro,syllabics,sro", [
     ("tân'si", 'ᑖᓂᓯ', 'tânisi'),
+    ("tân\N{RIGHT SINGLE QUOTATION MARK}si", 'ᑖᓂᓯ', 'tânisi'),
 ])
 def test_short_i_ellision(original_sro, syllabics, sro):
     """
