@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html),
 with [Calendar Versioning](https://calver.org/).
 
+## [2018.12.07]
+
+### Changed
+
+ - Consider <’> U+2018 RIGHT SINGLE QUOTATION MARK to mark an elided short-i.
+
 ## [2018.11.08]
 
  - First stable release! 🎉
