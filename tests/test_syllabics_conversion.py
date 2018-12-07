@@ -153,6 +153,7 @@ def test_sandhi(sro, syllabics, hyphens, alt_syllabics):
     ('êtî nitisiyihkâson.', 'ᐁᑏ ᓂᑎᓯᔨᐦᑳᓱᐣ᙮'),
     ('She told Dr. Thunder: "ninôhtêhkatân."',
         'She told Dr. Thunder: "ᓂᓅᐦᑌᐦᑲᑖᐣ᙮"'),
+    ('tânisi. êtî nitisiyihkâson. ', 'ᑖᓂᓯ᙮ ᐁᑏ ᓂᑎᓯᔨᐦᑳᓱᐣ᙮ '),
 ])
 def test_full_stop(sro, syllabics):
     """
@@ -163,13 +164,17 @@ def test_full_stop(sro, syllabics):
     assert syllabics2sro(syllabics) == sro
 
 
-def test_final_middle_dot():
+@pytest.mark.parametrize("original_syllabics,sro,clean_syllabics", [
+    ('ᐋᐧᐱ ᑭᐦᐃᐤ', 'wâpi kihiw', 'ᐚᐱ ᑭᐦᐃᐤ'),
+    ('ᐋᐱᐦᑕᐃᐧᑯᓯᓵᐣᐃᐢᑫᐧᐤ', 'âpihtawikosisâniskwêw', 'ᐋᐱᐦᑕᐏᑯᓯᓵᓂᐢᑵᐤ'),
+])
+def test_final_middle_dot(original_syllabics, sro, clean_syllabics):
     """
     Test that final middle dots <U+1427> get converted into their "w" syllabic
     equivilent.
     """
-    assert syllabics2sro('ᐋᐧᐱ ᑭᐦᐃᐤ') == 'wâpi kihiw'
-    assert sro2syllabics(syllabics2sro('ᐋᐧᐱ ᑭᐦᐃᐤ')) == 'ᐚᐱ ᑭᐦᐃᐤ'
+    assert syllabics2sro(original_syllabics) == sro
+    assert sro2syllabics(syllabics2sro(original_syllabics)) == clean_syllabics
 
 
 @pytest.mark.parametrize("erroneous_syllabics,sro,correct_syllabics", [
@@ -182,6 +187,17 @@ def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
     assert syllabics2sro(erroneous_syllabics) == sro
     assert sro2syllabics(syllabics2sro(erroneous_syllabics)) ==\
         correct_syllabics
+
+
+@pytest.mark.parametrize("original_sro,syllabics,sro", [
+    ("tân'si", 'ᑖᓂᓯ', 'tânisi'),
+])
+def test_short_i_ellision(original_sro, syllabics, sro):
+    """
+    Test that an apostrophe can be substituted instead of a short-i.
+    """
+    assert sro2syllabics(original_sro) == syllabics
+    assert syllabics2sro(sro2syllabics(original_sro)) == sro
 
 
 @pytest.mark.parametrize('sro,syllabics', [
