@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "*"
 
 [dev-packages]
 twine = "*"
 recommonmark = "*"
 sphinx = "*"
 sphinx-autobuild = "*"
+pytest = "*"
 pytest-cov = "*"
