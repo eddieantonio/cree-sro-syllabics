@@ -235,3 +235,15 @@ def test_word_cannot_match_adjacent_vowels():
     The word matching should not be able to match adjacent, de-normalized vowels.
     """
     assert sro2syllabics("I'm") == "I'm"
+
+
+@pytest.mark.parametrize('sro,syllabics', [
+    ('âh-ayinânêw', 'ᐋᐦᐊᔨᓈᓀᐤ'),
+    ('âh-ayîtaw', 'ᐋᐦᐊᔩᑕᐤ'),
+    ('mistah-âya', 'ᒥᐢᑕᐦᐋᔭ'),
+])
+def test_sandhi_with_h(sro, syllabics):
+    """
+    https://github.com/eddieantonio/cree-sro-syllabics/issues/17
+    """
+    assert sro2syllabics(sro, sandhi=True) == syllabics
