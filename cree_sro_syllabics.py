@@ -19,7 +19,7 @@ from unicodedata import normalize
 
 
 __all__ = ['sro2syllabics', 'syllabics2sro']
-__version__ = '2018.12.07'
+__version__ = '2019.2.18'
 
 
 DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
