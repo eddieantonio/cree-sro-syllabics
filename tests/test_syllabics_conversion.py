@@ -241,6 +241,8 @@ def test_word_cannot_match_adjacent_vowels():
     ('âh-ayinânêw', 'ᐋᐦᐊᔨᓈᓀᐤ'),
     ('âh-ayîtaw', 'ᐋᐦᐊᔩᑕᐤ'),
     ('mistah-âya', 'ᒥᐢᑕᐦᐋᔭ'),
+    # This is a fake word, but it tests an edge case:
+    ('atihw-âya', 'ᐊᑎᐦᐚᔭ'),
 ])
 def test_sandhi_with_h(sro, syllabics):
     """

@@ -339,6 +339,11 @@ def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) ->
     while match:
         onset, vowel = match.groups()
         if sandhi and onset is not None:
+            if onset.startswith('h'):
+                # Special case for /hw?-V/ sandhi case:
+                # add the 'h'/ᐦ syllabic, then proceed with the w?V as normal:
+                parts.append('ᐦ')
+                onset = onset[1:]
             # Apply sandhi rule
             assert vowel is not None
             syllable = onset + vowel
@@ -354,15 +359,8 @@ def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) ->
             syllable = match.group(0)
             next_syllable_pos = match.end()
 
-        # Special case for /hw?-V/ sandhi case:
-        # add the 'h'/ᐦ syllabic, then proceed with the w?V as normal:
-        if sandhi and onset == 'h':
-            parts.append('ᐦ')
-            syllable = syllable[1:]
-
         # Get the syllabic
         syllabic = lookup[syllable]
-        
         parts.append(syllabic)
 
         # Chop off transcribed part
