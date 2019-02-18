@@ -3,12 +3,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[packages]
-
 [dev-packages]
-twine = "*"
+pytest = "*"
+pytest-cov = "*"
 recommonmark = "*"
 sphinx = "*"
 sphinx-autobuild = "*"
-pytest = "*"
-pytest-cov = "*"
+twine = "*"
