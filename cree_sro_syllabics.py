@@ -437,7 +437,7 @@ circumflex_to_macrons = str.maketrans('êîôâ',
 
 
 def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
-    """
+    r"""
     Convert Cree words written in syllabics to SRO.
 
     Finds all instances of syllabics in the given string, and converts it to
