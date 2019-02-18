@@ -114,6 +114,7 @@ WORD_MEDIAL = r'''
 
 WORD_FINAL = r'''
     [hs]? (?:[ptcksmnwy]|th) |
+    h |
     [yw]? [rl]  # for loan word
     |  # can end with no consonant
 '''

@@ -30,6 +30,7 @@ COMBINING_CIRCUMFLEX = '\u0302'
     ('wîstihkêw', 'ᐑᐢᑎᐦᑫᐤ'),
     ('nêhiyawêwin', 'ᓀᐦᐃᔭᐍᐏᐣ'),
     ('tirêyl', 'ᑎᕒᐁᕀᓬ'),
+    ('mitêh', 'ᒥᑌᐦ'),
 ])
 def test_single_words(sro, syllabics):
     """
