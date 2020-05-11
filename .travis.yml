@@ -4,9 +4,12 @@ python:
   - '3.5'
   - '3.6'
   - '3.7-dev'
+before_install:
+  - pip install --upgrade pip
+  - pip install poetry
 install:
   - pip install 'pytest>=3.6' pytest-cov codecov
-  - pip install -e .
+  - poetry install -y
 script:
   - py.test --cov=cree_sro_syllabics
 
