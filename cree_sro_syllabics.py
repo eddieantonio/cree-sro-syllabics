@@ -17,19 +17,19 @@ import re
 from collections import ChainMap
 from unicodedata import normalize
 
+__all__ = ["sro2syllabics", "syllabics2sro"]
+__version__ = "2019.2.18"
 
-__all__ = ['sro2syllabics', 'syllabics2sro']
-__version__ = '2019.2.18'
 
+DEFAULT_HYPHENS = "\N{NARROW NO-BREAK SPACE}"
 
-DEFAULT_HYPHENS = '\N{NARROW NO-BREAK SPACE}'
-
-CONSONANT = '[ptkcshmnyw]|th'
-STRICT_VOWEL = '[êioaîôâ]'
+CONSONANT = "[ptkcshmnyw]|th"
+STRICT_VOWEL = "[êioaîôâ]"
 VOWEL = "{STRICT_VOWEL}|[eēī'’ōā]".format_map(globals())
 
 # Match an SRO syllable.
-sro_pattern = re.compile(r'''
+sro_pattern = re.compile(
+    r"""
     # A syllable that should be joined under the sandhi rule:
     # We're setting this up so that the onset (consonant and optional w) can
     # be glued together with the vowel. The parts are joined to
@@ -58,31 +58,158 @@ sro_pattern = re.compile(r'''
     h|l|r|
     ê|i|î|o|ô|a|â|
     -
-'''.format_map(globals()), re.VERBOSE)
+""".format_map(
+        globals()
+    ),
+    re.VERBOSE,
+)
 
 
 # A complete SRO to syllabics look-up table.
 sro2syllabics_lookup = {
-    "ê": "ᐁ", "i": "ᐃ", "î": "ᐄ", "o": "ᐅ", "ô": "ᐆ", "a": "ᐊ", "â": "ᐋ",
-    "wê": "ᐍ", "wi": "ᐏ", "wî": "ᐑ", "wo": "ᐓ", "wô": "ᐕ", "wa": "ᐘ", "wâ": "ᐚ", "w": "ᐤ",
-    "p": "ᑊ", "pê": "ᐯ", "pi": "ᐱ", "pî": "ᐲ", "po": "ᐳ", "pô": "ᐴ", "pa": "ᐸ", "pâ": "ᐹ",
-    "pwê": "ᐻ", "pwi": "ᐽ", "pwî": "ᐿ", "pwo": "ᑁ", "pwô": "ᑃ", "pwa": "ᑅ", "pwâ": "ᑇ",
-    "t": "ᐟ", "tê": "ᑌ", "ti": "ᑎ", "tî": "ᑏ", "to": "ᑐ", "tô": "ᑑ", "ta": "ᑕ", "tâ": "ᑖ",
-    "twê": "ᑘ", "twi": "ᑚ", "twî": "ᑜ", "two": "ᑞ", "twô": "ᑠ", "twa": "ᑢ", "twâ": "ᑤ",
-    "k": "ᐠ", "kê": "ᑫ", "ki": "ᑭ", "kî": "ᑮ", "ko": "ᑯ", "kô": "ᑰ", "ka": "ᑲ", "kâ": "ᑳ",
-    "kwê": "ᑵ", "kwi": "ᑷ", "kwî": "ᑹ", "kwo": "ᑻ", "kwô": "ᑽ", "kwa": "ᑿ", "kwâ": "ᒁ",
-    "c": "ᐨ", "cê": "ᒉ", "ci": "ᒋ", "cî": "ᒌ", "co": "ᒍ", "cô": "ᒎ", "ca": "ᒐ", "câ": "ᒑ",
-    "cwê": "ᒓ", "cwi": "ᒕ", "cwî": "ᒗ", "cwo": "ᒙ", "cwô": "ᒛ", "cwa": "ᒝ", "cwâ": "ᒟ",
-    "m": "ᒼ", "mê": "ᒣ", "mi": "ᒥ", "mî": "ᒦ", "mo": "ᒧ", "mô": "ᒨ", "ma": "ᒪ", "mâ": "ᒫ",
-    "mwê": "ᒭ", "mwi": "ᒯ", "mwî": "ᒱ", "mwo": "ᒳ", "mwô": "ᒵ", "mwa": "ᒷ", "mwâ": "ᒹ",
-    "n": "ᐣ", "nê": "ᓀ", "ni": "ᓂ", "nî": "ᓃ", "no": "ᓄ", "nô": "ᓅ", "na": "ᓇ", "nâ": "ᓈ",
-    "nwê": "ᓊ", "nwa": "ᓌ", "nwâ": "ᓎ",
-    "s": "ᐢ", "sê": "ᓭ", "si": "ᓯ", "sî": "ᓰ", "so": "ᓱ", "sô": "ᓲ", "sa": "ᓴ", "sâ": "ᓵ",
-    "swê": "ᓷ", "swi": "ᓹ", "swî": "ᓻ", "swo": "ᓽ", "swô": "ᓿ", "swa": "ᔁ", "swâ": "ᔃ",
-    "y": "ᕀ", "yê": "ᔦ", "yi": "ᔨ", "yî": "ᔩ", "yo": "ᔪ", "yô": "ᔫ", "ya": "ᔭ", "yâ": "ᔮ",
-    "ywê": "ᔰ", "ywi": "ᔲ", "ywî": "ᔴ", "ywo": "ᔶ", "ywô": "ᔸ", "ywa": "ᔺ", "ywâ": "ᔼ",
-    "th": "ᖮ", "thê": "ᖧ", "thi": "ᖨ", "thî": "ᖩ", "tho": "ᖪ", "thô": "ᖫ", "tha": "ᖬ", "thâ": "ᖭ",
-    "l": "ᓬ", "r": "ᕒ", "h": "ᐦ", "hk": "ᕽ",
+    "ê": "ᐁ",
+    "i": "ᐃ",
+    "î": "ᐄ",
+    "o": "ᐅ",
+    "ô": "ᐆ",
+    "a": "ᐊ",
+    "â": "ᐋ",
+    "wê": "ᐍ",
+    "wi": "ᐏ",
+    "wî": "ᐑ",
+    "wo": "ᐓ",
+    "wô": "ᐕ",
+    "wa": "ᐘ",
+    "wâ": "ᐚ",
+    "w": "ᐤ",
+    "p": "ᑊ",
+    "pê": "ᐯ",
+    "pi": "ᐱ",
+    "pî": "ᐲ",
+    "po": "ᐳ",
+    "pô": "ᐴ",
+    "pa": "ᐸ",
+    "pâ": "ᐹ",
+    "pwê": "ᐻ",
+    "pwi": "ᐽ",
+    "pwî": "ᐿ",
+    "pwo": "ᑁ",
+    "pwô": "ᑃ",
+    "pwa": "ᑅ",
+    "pwâ": "ᑇ",
+    "t": "ᐟ",
+    "tê": "ᑌ",
+    "ti": "ᑎ",
+    "tî": "ᑏ",
+    "to": "ᑐ",
+    "tô": "ᑑ",
+    "ta": "ᑕ",
+    "tâ": "ᑖ",
+    "twê": "ᑘ",
+    "twi": "ᑚ",
+    "twî": "ᑜ",
+    "two": "ᑞ",
+    "twô": "ᑠ",
+    "twa": "ᑢ",
+    "twâ": "ᑤ",
+    "k": "ᐠ",
+    "kê": "ᑫ",
+    "ki": "ᑭ",
+    "kî": "ᑮ",
+    "ko": "ᑯ",
+    "kô": "ᑰ",
+    "ka": "ᑲ",
+    "kâ": "ᑳ",
+    "kwê": "ᑵ",
+    "kwi": "ᑷ",
+    "kwî": "ᑹ",
+    "kwo": "ᑻ",
+    "kwô": "ᑽ",
+    "kwa": "ᑿ",
+    "kwâ": "ᒁ",
+    "c": "ᐨ",
+    "cê": "ᒉ",
+    "ci": "ᒋ",
+    "cî": "ᒌ",
+    "co": "ᒍ",
+    "cô": "ᒎ",
+    "ca": "ᒐ",
+    "câ": "ᒑ",
+    "cwê": "ᒓ",
+    "cwi": "ᒕ",
+    "cwî": "ᒗ",
+    "cwo": "ᒙ",
+    "cwô": "ᒛ",
+    "cwa": "ᒝ",
+    "cwâ": "ᒟ",
+    "m": "ᒼ",
+    "mê": "ᒣ",
+    "mi": "ᒥ",
+    "mî": "ᒦ",
+    "mo": "ᒧ",
+    "mô": "ᒨ",
+    "ma": "ᒪ",
+    "mâ": "ᒫ",
+    "mwê": "ᒭ",
+    "mwi": "ᒯ",
+    "mwî": "ᒱ",
+    "mwo": "ᒳ",
+    "mwô": "ᒵ",
+    "mwa": "ᒷ",
+    "mwâ": "ᒹ",
+    "n": "ᐣ",
+    "nê": "ᓀ",
+    "ni": "ᓂ",
+    "nî": "ᓃ",
+    "no": "ᓄ",
+    "nô": "ᓅ",
+    "na": "ᓇ",
+    "nâ": "ᓈ",
+    "nwê": "ᓊ",
+    "nwa": "ᓌ",
+    "nwâ": "ᓎ",
+    "s": "ᐢ",
+    "sê": "ᓭ",
+    "si": "ᓯ",
+    "sî": "ᓰ",
+    "so": "ᓱ",
+    "sô": "ᓲ",
+    "sa": "ᓴ",
+    "sâ": "ᓵ",
+    "swê": "ᓷ",
+    "swi": "ᓹ",
+    "swî": "ᓻ",
+    "swo": "ᓽ",
+    "swô": "ᓿ",
+    "swa": "ᔁ",
+    "swâ": "ᔃ",
+    "y": "ᕀ",
+    "yê": "ᔦ",
+    "yi": "ᔨ",
+    "yî": "ᔩ",
+    "yo": "ᔪ",
+    "yô": "ᔫ",
+    "ya": "ᔭ",
+    "yâ": "ᔮ",
+    "ywê": "ᔰ",
+    "ywi": "ᔲ",
+    "ywî": "ᔴ",
+    "ywo": "ᔶ",
+    "ywô": "ᔸ",
+    "ywa": "ᔺ",
+    "ywâ": "ᔼ",
+    "th": "ᖮ",
+    "thê": "ᖧ",
+    "thi": "ᖨ",
+    "thî": "ᖩ",
+    "tho": "ᖪ",
+    "thô": "ᖫ",
+    "tha": "ᖬ",
+    "thâ": "ᖭ",
+    "l": "ᓬ",
+    "r": "ᕒ",
+    "h": "ᐦ",
+    "hk": "ᕽ",
 }
 
 
@@ -96,76 +223,80 @@ sro2syllabics_lookup = {
 #
 # For more information, see:
 # https://en.wikipedia.org/wiki/Plains_Cree#Phonotactics
-WORD_INITIAL = r'''
+WORD_INITIAL = r"""
     [ptkcmnsyh]w? |    # consonants that allow 'w' after
     (?:th|[rl]) |  # consonants that don't
     w |
     # can start with no consonant.
-'''
+"""
 
-WORD_MEDIAL = r'''
+WORD_MEDIAL = r"""
     # TODO: there should be a constraint that the constants cannot be
     # duplicated, but capturing groups won't work if these regex
     # snippets are concatenated into bigger regexes.
     (?:[hsmnwy]|th)? (?:[ptkcmnsyh]|th) w? |
     w |
     [yw]? [rl]  # for loan words
-'''
+"""
 
-WORD_FINAL = r'''
+WORD_FINAL = r"""
     [hs]? (?:[ptcksmnwy]|th) |
     h |
     [yw]? [rl]  # for loan word
     |  # can end with no consonant
-'''
+"""
 
 # NOTE: VOWEL is defined way near the top of the file.
 
-CODA = 'th|[hs]?[ptkcmn]|h|s|y|w'
-MORPHEME = r'''
+CODA = "th|[hs]?[ptkcmn]|h|s|y|w"
+MORPHEME = r"""
     (?:{WORD_INITIAL}) (?:{VOWEL})
         (?: (?:{WORD_MEDIAL}) (?:{VOWEL}) )*
     (?:{WORD_FINAL})
-'''.format_map(globals())
+""".format_map(
+    globals()
+)
 
 # TODO: DRY these up!
-BEGIN_WORD = r'''
+BEGIN_WORD = r"""
 (?:
         ^  # Either the start of a string; or,
         |  # at the edge of "letters".
         (?<=[^a-zêioaîôâeēī'’ōā])
 )
-'''
-END_WORD = r'''
+"""
+END_WORD = r"""
 (?:
         (?=[^a-zêioaîôâeēī'’ōā]) |
         $
 )
-'''
+"""
 
-WORD = r'''
+WORD = r"""
     # CODA before the hyphen to account for Sandhi.
     # It's possible to accept TWO codas using this formulation, but
     # I think that loss of precision is okay.
     {BEGIN_WORD} {MORPHEME} (?: (?:{CODA})?-{MORPHEME})* {END_WORD}
-'''.format_map(globals())
+""".format_map(
+    globals()
+)
 word_pattern = re.compile(WORD, re.IGNORECASE | re.VERBOSE)
 
 # This regex prevents matching EVERY period, instead only matching periods
 # after Cree words, or, as an exception, as the only item in a string.
-full_stop_pattern = re.compile(r'''
+full_stop_pattern = re.compile(
+    r"""
     (?<=[\u1400-\u167f])[.] |   # Match a full-stop after syllabics
     \A[.]\Z                     # or match as the only item.
-''', re.VERBOSE)
+""",
+    re.VERBOSE,
+)
 
 # Converts macron and alternate forms of vowels into "canonical" forms.
-TRANSLATE_ALT_FORMS = str.maketrans("eē'’īōā",
-                                    "êêiiîôâ")
+TRANSLATE_ALT_FORMS = str.maketrans("eē'’īōā", "êêiiîôâ")
 
 
-def sro2syllabics(sro: str,
-                  hyphens: str = DEFAULT_HYPHENS,
-                  sandhi: bool = True) -> str:
+def sro2syllabics(sro: str, hyphens: str = DEFAULT_HYPHENS, sandhi: bool = True) -> str:
     r"""
     Convert Cree words written in SRO text to syllabics.
 
@@ -317,7 +448,7 @@ def sro2syllabics(sro: str,
     # Replace each Cree word with its syllabics transliteration.
     transliteration = word_pattern.sub(transliterate_word, nfc(sro))
     # Replace Latin full-stops with syllabics full-stops.
-    return full_stop_pattern.sub('\u166E', transliteration)
+    return full_stop_pattern.sub("\u166E", transliteration)
 
 
 def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) -> str:
@@ -325,14 +456,11 @@ def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) ->
     Transcribes one word at a time.
     """
 
-    to_transcribe = sro_word.lower().\
-        translate(TRANSLATE_ALT_FORMS)
+    to_transcribe = sro_word.lower().translate(TRANSLATE_ALT_FORMS)
 
     # Augment the lookup table with an entry for «-» so that we can replace
     # all instances of '-' easily.
-    lookup = ChainMap({
-        '-': hyphen
-    }, sro2syllabics_lookup)
+    lookup = ChainMap({"-": hyphen}, sro2syllabics_lookup)
 
     parts = []
 
@@ -340,10 +468,10 @@ def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) ->
     while match:
         onset, vowel = match.groups()
         if sandhi and onset is not None:
-            if onset.startswith('h'):
+            if onset.startswith("h"):
                 # Special case for /hw?-V/ sandhi case:
                 # add the 'h'/ᐦ syllabic, then proceed with the w?V as normal:
-                parts.append('ᐦ')
+                parts.append("ᐦ")
                 onset = onset[1:]
             # Apply sandhi rule
             assert vowel is not None
@@ -352,7 +480,7 @@ def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) ->
         elif onset is not None:
             # Not Sandhi -- let's consume the onset (consonant)
             # Do NOT consume the labialized w!
-            syllable = 'w' if onset == 'w' else onset.rstrip('w')
+            syllable = "w" if onset == "w" else onset.rstrip("w")
             # Skip the first consonant.
             next_syllable_pos = len(syllable)
             assert syllable in CONSONANT
@@ -373,18 +501,18 @@ def transcode_sro_word_to_syllabics(sro_word: str, hyphen: str, sandhi: bool) ->
     # in the prior loop, it would convert '-ihkwê-' -> 'ᐃᕽᐍ' instead of 'ᐃᐦᑵ'
     # as intended. We know the end of the word is 'hk' because it got
     # converted to «ᐦ» followed by «ᐠ».
-    if parts[-2:] == ['ᐦ', 'ᐠ']:
-        parts[-2:] = [sro2syllabics_lookup['hk']]
+    if parts[-2:] == ["ᐦ", "ᐠ"]:
+        parts[-2:] = [sro2syllabics_lookup["hk"]]
 
-    assert to_transcribe == '', 'could not transcribe %r' % (to_transcribe)
-    return ''.join(parts)
+    assert to_transcribe == "", "could not transcribe %r" % (to_transcribe)
+    return "".join(parts)
 
 
 def nfc(text):
     """
     Return NFC-normalized text.
     """
-    return normalize('NFC', text)
+    return normalize("NFC", text)
 
 
 # Derive the Syllabics -> SRO lookup table from the SRO -> Syllabics table.
@@ -393,25 +521,24 @@ syllabics2sro_lookup = {syl: sro for sro, syl in sro2syllabics_lookup.items()}
 # (hence, the two tables should have an equal amount of entries).
 assert len(syllabics2sro_lookup) == len(sro2syllabics_lookup)
 # Add alternate and "look-alike" forms:
-syllabics2sro_lookup.update({
-    # Some communities use the ᐝ symbol instead of ᕀ for the y-final.
-    # See:
-    # https://en.wikipedia.org/w/index.php?title=Plains_Cree&oldid=848160114#Canadian_aboriginal_syllabics
-    # for an explanation of this special y-final.
-    '\N{CANADIAN SYLLABICS Y-CREE W}': 'y',
-
-    # Convert ᙮ into a Latin full-stop.
-    '\N{CANADIAN SYLLABICS FULL STOP}': '.',
-
-    # Look-alikes characters:
-    '\N{CANADIAN SYLLABICS T}': 'm',  # ᑦ looks like ᒼ or "m"
-    '\N{CANADIAN SYLLABICS SAYISI YI}': 'hk',  # ᕁ looks like ᕽ or "hk"
-    '\N{CANADIAN SYLLABICS FINAL PLUS}': 'y',  # ᐩ looks like ᕀ or "y"
-
-    # Convert NNBSP within syllabics to hyphens to support round-trip
-    # conversion between syllabics and SRO.
-    '\N{NARROW NO-BREAK SPACE}': '-',
-})
+syllabics2sro_lookup.update(
+    {
+        # Some communities use the ᐝ symbol instead of ᕀ for the y-final.
+        # See:
+        # https://en.wikipedia.org/w/index.php?title=Plains_Cree&oldid=848160114#Canadian_aboriginal_syllabics
+        # for an explanation of this special y-final.
+        "\N{CANADIAN SYLLABICS Y-CREE W}": "y",
+        # Convert ᙮ into a Latin full-stop.
+        "\N{CANADIAN SYLLABICS FULL STOP}": ".",
+        # Look-alikes characters:
+        "\N{CANADIAN SYLLABICS T}": "m",  # ᑦ looks like ᒼ or "m"
+        "\N{CANADIAN SYLLABICS SAYISI YI}": "hk",  # ᕁ looks like ᕽ or "hk"
+        "\N{CANADIAN SYLLABICS FINAL PLUS}": "y",  # ᐩ looks like ᕀ or "y"
+        # Convert NNBSP within syllabics to hyphens to support round-trip
+        # conversion between syllabics and SRO.
+        "\N{NARROW NO-BREAK SPACE}": "-",
+    }
+)
 
 # Translation table to convert syllabics to SRO.
 SYLLABICS_TO_SRO = str.maketrans(syllabics2sro_lookup)
@@ -419,22 +546,71 @@ SYLLABICS_TO_SRO = str.maketrans(syllabics2sro_lookup)
 # For use when converting SYLLABIC + FINAL MIDDLE DOT into the syllabic
 # with a 'w'
 SYLLABIC_WITH_DOT = {
-    'ᐁ': 'ᐍ', 'ᐃ': 'ᐏ', 'ᐄ': 'ᐑ', 'ᐅ': 'ᐓ', 'ᐆ': 'ᐕ', 'ᐊ': 'ᐘ', 'ᐋ': 'ᐚ',
-    'ᐯ': 'ᐻ', 'ᐱ': 'ᐽ', 'ᐲ': 'ᐿ', 'ᐳ': 'ᑁ', 'ᐴ': 'ᑃ', 'ᐸ': 'ᑅ', 'ᐹ': 'ᑇ',
-    'ᑌ': 'ᑘ', 'ᑎ': 'ᑚ', 'ᑏ': 'ᑜ', 'ᑐ': 'ᑞ', 'ᑑ': 'ᑠ', 'ᑕ': 'ᑢ', 'ᑖ': 'ᑤ',
-    'ᑫ': 'ᑵ', 'ᑭ': 'ᑷ', 'ᑮ': 'ᑹ', 'ᑯ': 'ᑻ', 'ᑰ': 'ᑽ', 'ᑲ': 'ᑿ', 'ᑳ': 'ᒁ',
-    'ᒉ': 'ᒓ', 'ᒋ': 'ᒕ', 'ᒌ': 'ᒗ', 'ᒍ': 'ᒙ', 'ᒎ': 'ᒛ', 'ᒐ': 'ᒝ', 'ᒑ': 'ᒟ',
-    'ᒣ': 'ᒭ', 'ᒥ': 'ᒯ', 'ᒦ': 'ᒱ', 'ᒧ': 'ᒳ', 'ᒨ': 'ᒵ', 'ᒪ': 'ᒷ', 'ᒫ': 'ᒹ',
-    'ᓀ': 'ᓊ',                                         'ᓇ': 'ᓌ', 'ᓈ': 'ᓎ',
-    'ᓭ': 'ᓷ', 'ᓯ': 'ᓹ', 'ᓰ': 'ᓻ', 'ᓱ': 'ᓽ', 'ᓲ': 'ᓿ', 'ᓴ': 'ᔁ', 'ᓵ': 'ᔃ',
-    'ᔦ': 'ᔰ', 'ᔨ': 'ᔲ', 'ᔩ': 'ᔴ', 'ᔪ': 'ᔶ', 'ᔫ': 'ᔸ', 'ᔭ': 'ᔺ', 'ᔮ': 'ᔼ',
+    "ᐁ": "ᐍ",
+    "ᐃ": "ᐏ",
+    "ᐄ": "ᐑ",
+    "ᐅ": "ᐓ",
+    "ᐆ": "ᐕ",
+    "ᐊ": "ᐘ",
+    "ᐋ": "ᐚ",
+    "ᐯ": "ᐻ",
+    "ᐱ": "ᐽ",
+    "ᐲ": "ᐿ",
+    "ᐳ": "ᑁ",
+    "ᐴ": "ᑃ",
+    "ᐸ": "ᑅ",
+    "ᐹ": "ᑇ",
+    "ᑌ": "ᑘ",
+    "ᑎ": "ᑚ",
+    "ᑏ": "ᑜ",
+    "ᑐ": "ᑞ",
+    "ᑑ": "ᑠ",
+    "ᑕ": "ᑢ",
+    "ᑖ": "ᑤ",
+    "ᑫ": "ᑵ",
+    "ᑭ": "ᑷ",
+    "ᑮ": "ᑹ",
+    "ᑯ": "ᑻ",
+    "ᑰ": "ᑽ",
+    "ᑲ": "ᑿ",
+    "ᑳ": "ᒁ",
+    "ᒉ": "ᒓ",
+    "ᒋ": "ᒕ",
+    "ᒌ": "ᒗ",
+    "ᒍ": "ᒙ",
+    "ᒎ": "ᒛ",
+    "ᒐ": "ᒝ",
+    "ᒑ": "ᒟ",
+    "ᒣ": "ᒭ",
+    "ᒥ": "ᒯ",
+    "ᒦ": "ᒱ",
+    "ᒧ": "ᒳ",
+    "ᒨ": "ᒵ",
+    "ᒪ": "ᒷ",
+    "ᒫ": "ᒹ",
+    "ᓀ": "ᓊ",
+    "ᓇ": "ᓌ",
+    "ᓈ": "ᓎ",
+    "ᓭ": "ᓷ",
+    "ᓯ": "ᓹ",
+    "ᓰ": "ᓻ",
+    "ᓱ": "ᓽ",
+    "ᓲ": "ᓿ",
+    "ᓴ": "ᔁ",
+    "ᓵ": "ᔃ",
+    "ᔦ": "ᔰ",
+    "ᔨ": "ᔲ",
+    "ᔩ": "ᔴ",
+    "ᔪ": "ᔶ",
+    "ᔫ": "ᔸ",
+    "ᔭ": "ᔺ",
+    "ᔮ": "ᔼ",
 }
-final_dot_pattern = re.compile(r'([{without_dot}])ᐧ'.format(
-    without_dot=''.join(SYLLABIC_WITH_DOT.keys())
-))
+final_dot_pattern = re.compile(
+    r"([{without_dot}])ᐧ".format(without_dot="".join(SYLLABIC_WITH_DOT.keys()))
+)
 
-circumflex_to_macrons = str.maketrans('êîôâ',
-                                      'ēīōā')
+circumflex_to_macrons = str.maketrans("êîôâ", "ēīōā")
 
 
 def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
