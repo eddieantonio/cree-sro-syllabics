@@ -9,7 +9,7 @@ before_install:
   - pip install poetry
 install:
   - pip install 'pytest>=3.6' pytest-cov codecov
-  - poetry install -y
+  - poetry install -v
 script:
   - py.test --cov=cree_sro_syllabics
 
