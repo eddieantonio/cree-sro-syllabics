@@ -235,6 +235,8 @@ def test_short_i_ellision(original_sro, syllabics, sro):
         ("namōtha", "ᓇᒨᖬ"),
         ("thāhkan", "ᖭᐦᑲᐣ"),
         ("namēpith", "ᓇᒣᐱᖮ"),
+        ("ikw", "ᐃᐠᐤ"),
+        ("pokw", "ᐳᐠᐤ"),
         # Test each syllable.
         ("thē thi tho tha thī thō thā", "ᖧ ᖨ ᖪ ᖬ ᖩ ᖫ ᖭ"),
     ],
