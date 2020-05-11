@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html),
 with [Calendar Versioning](https://calver.org/).
 
+## [2020.5.11]
+
+### Added
+
+ - Support for the th-dialect final -kw cluster
+
+### Changed
+
+ - Build system now uses Poetry instead of Pipenv
+
+
 ## [2018.12.07]
 
 ### Changed
