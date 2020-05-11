@@ -18,7 +18,7 @@ from collections import ChainMap
 from unicodedata import normalize
 
 __all__ = ["sro2syllabics", "syllabics2sro"]
-__version__ = "2019.2.18"
+__version__ = "2020.5.11"
 
 
 DEFAULT_HYPHENS = "\N{NARROW NO-BREAK SPACE}"
