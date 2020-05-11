@@ -241,9 +241,10 @@ WORD_MEDIAL = r"""
 
 WORD_FINAL = r"""
     [hs]? (?:[ptcksmnwy]|th) |
+    kw | # For Woods Cree finals
     h |
-    [yw]? [rl]  # for loan word
-    |  # can end with no consonant
+    [yw]? [rl] | # for loan word
+    # can end with no consonant
 """
 
 # NOTE: VOWEL is defined way near the top of the file.
