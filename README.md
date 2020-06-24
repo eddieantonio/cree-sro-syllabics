@@ -56,7 +56,7 @@ Convert syllabics to SRO:
 >>> from cree_sro_syllabics import syllabics2sro
 >>> syllabics2sro('ᐊᒋᒧᓯᐢ')
 'acimosis'
->>> syllabics2sro(' → ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᕀᓬ ')
+>>> syllabics2sro(' → ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᐩᓬ ')
 ' → maskêkosihk  tireyl '
 ```
 
