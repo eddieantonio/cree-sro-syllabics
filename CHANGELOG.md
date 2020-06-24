@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html),
 with [Calendar Versioning](https://calver.org/).
 
+## [2020.6.23]
+
+### BREAKING CHANGE
+
+ - <U+1429 CANADIAN SYLLABICS FINAL PLUS> is now considered the
+   “correct” Y final, instead of <U+1540 CANADIAN SYLLABICS WEST-CREE Y>
+   See <https://github.com/UAlbertaALTLab/nehiyawewin-syllabics/issues/2>
+
 ## [2020.5.11]
 
 ### Added
