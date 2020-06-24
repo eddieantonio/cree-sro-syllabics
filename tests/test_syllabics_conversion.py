@@ -27,10 +27,10 @@ COMBINING_CIRCUMFLEX = "\u0302"
     [
         ("acimosis", "ᐊᒋᒧᓯᐢ"),
         ("atahk", "ᐊᑕᕽ"),
-        ("mêriy", "ᒣᕒᐃᕀ"),
+        ("mêriy", "ᒣᕒᐃᐩ"),
         ("wîstihkêw", "ᐑᐢᑎᐦᑫᐤ"),
         ("nêhiyawêwin", "ᓀᐦᐃᔭᐍᐏᐣ"),
-        ("tirêyl", "ᑎᕒᐁᕀᓬ"),
+        ("tirêyl", "ᑎᕒᐁᐩᓬ"),
         ("mitêh", "ᒥᑌᐦ"),
     ],
 )
@@ -66,8 +66,8 @@ def test_unicode_normalization():
     leaf = "ni" + COMBINING_CIRCUMFLEX + "piy"
     assert water != leaf
     assert sro2syllabics(water) != sro2syllabics(leaf)
-    assert sro2syllabics(water) == "ᓂᐱᕀ"
-    assert sro2syllabics(leaf) == "ᓃᐱᕀ"
+    assert sro2syllabics(water) == "ᓂᐱᐩ"
+    assert sro2syllabics(leaf) == "ᓃᐱᐩ"
 
 
 @pytest.mark.parametrize(
@@ -120,7 +120,7 @@ def test_macrons(sro, syllabics):
         # in the syllabics transliteration may not render properly in
         # fixed-width fonts!
         ("paskwâwi-mostos", "ᐸᐢᒁᐏ ᒧᐢᑐᐢ"),
-        ("amiskwaciy-waskahikan", "ᐊᒥᐢᑿᒋᕀ ᐘᐢᑲᐦᐃᑲᐣ"),
+        ("amiskwaciy-waskahikan", "ᐊᒥᐢᑿᒋᐩ ᐘᐢᑲᐦᐃᑲᐣ"),
         ("kâ-mahihkani-pimohtêt isiyihkâsow", "ᑳ ᒪᐦᐃᐦᑲᓂ ᐱᒧᐦᑌᐟ ᐃᓯᔨᐦᑳᓱᐤ"),
     ],
 )
@@ -144,7 +144,7 @@ def test_hyphens(sro, syllabics):
         # NOTE: this /still/ might not be the right transliteration, but
         # the correct transliteration requires even more phonological knowledge,
         # so I'm not even going to go there...
-        ("miyw-âyâw", "ᒥᔼᔮᐤ", "", "ᒥᕀᐤᐋᔮᐤ"),
+        ("miyw-âyâw", "ᒥᔼᔮᐤ", "", "ᒥᐩᐤᐋᔮᐤ"),
         ("pîhc-âyihk", "ᐲᐦᒑᔨᕽ", "", "ᐲᐦᐨᐋᔨᕽ"),
         # NOTE: not orthographically correct, but demonstrates Sandhi in th-Cree
         ("wîhth-owin", "ᐑᐦᖪᐏᐣ", "", "ᐑᐦᖮᐅᐏᐣ"),
@@ -199,7 +199,7 @@ def test_final_middle_dot(original_syllabics, sro, clean_syllabics):
     [
         ("ᐚᐸ\u1466", "wâpam", "ᐚᐸᒼ"),  # ᑦ|ᒼ <U+1466 CANADIAN SYLLABICS T>
         ("ᓂᐲ\u1541", "nipîhk", "ᓂᐲᕽ"),  # ᕁ|ᕽ <U+1541 CANADIAN SYLLABICS SAYISI YI>
-        ("ᓂᐱ\u1429", "nipiy", "ᓂᐱᕀ"),  # ᐩ|ᕀ <U+1429 CANADIAN SYLLABICS FINAL PLUS>
+        ("ᓂᐱ\u1540", "nipiy", "ᓂᐱᐩ"),  # ᕀ|ᐩ <U+1429 CANADIAN SYLLABICS FINAL PLUS>
     ],
 )
 def test_syllabics_lookalikes(erroneous_syllabics, sro, correct_syllabics):
