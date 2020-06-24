@@ -183,7 +183,7 @@ sro2syllabics_lookup = {
     "swô": "ᓿ",
     "swa": "ᔁ",
     "swâ": "ᔃ",
-    "y": "ᕀ",
+    "y": "ᐩ",
     "yê": "ᔦ",
     "yi": "ᔨ",
     "yî": "ᔩ",
@@ -323,7 +323,7 @@ def sro2syllabics(sro: str, hyphens: str = DEFAULT_HYPHENS, sandhi: bool = True)
     >>> sro2syllabics('Maskêkosihk trail')
     'ᒪᐢᑫᑯᓯᕽ trail'
     >>> sro2syllabics('Maskêkosihk tireyl')
-    'ᒪᐢᑫᑯᓯᕽ ᑎᕒᐁᕀᓬ'
+    'ᒪᐢᑫᑯᓯᕽ ᑎᕒᐁᐩᓬ'
 
     Roman full-stops/periods (".") are converted into syllabics full-stops:
 
@@ -524,7 +524,7 @@ assert len(syllabics2sro_lookup) == len(sro2syllabics_lookup)
 # Add alternate and "look-alike" forms:
 syllabics2sro_lookup.update(
     {
-        # Some communities use the ᐝ symbol instead of ᕀ for the y-final.
+        # Some communities use the ᐝ symbol instead of ᐩ for the y-final.
         # See:
         # https://en.wikipedia.org/w/index.php?title=Plains_Cree&oldid=848160114#Canadian_aboriginal_syllabics
         # for an explanation of this special y-final.
@@ -534,7 +534,8 @@ syllabics2sro_lookup.update(
         # Look-alikes characters:
         "\N{CANADIAN SYLLABICS T}": "m",  # ᑦ looks like ᒼ or "m"
         "\N{CANADIAN SYLLABICS SAYISI YI}": "hk",  # ᕁ looks like ᕽ or "hk"
-        "\N{CANADIAN SYLLABICS FINAL PLUS}": "y",  # ᐩ looks like ᕀ or "y"
+        # See: https://github.com/UAlbertaALTLab/nehiyawewin-syllabics/issues/2
+        "\N{CANADIAN SYLLABICS WEST-CREE Y}": "y",  # ᕀ looks like ᐩ or "y"
         # Convert NNBSP within syllabics to hyphens to support round-trip
         # conversion between syllabics and SRO.
         "\N{NARROW NO-BREAK SPACE}": "-",
@@ -675,13 +676,21 @@ def syllabics2sro(syllabics: str, produce_macrons=False) -> str:
     Some syllabics converters produce erroneous yet very similar looking
     characters. ``syllabics2sro()`` knows the following look-alike characters:
 
-     ================================= ==================================
-      Look-alike                        Correct character
-     ================================= ==================================
-      ᐩ CANADIAN SYLLABICS FINAL PLUS   ᕀ CANADIAN SYLLABICS WEST-CREE Y
-      ᑦ CANADIAN SYLLABICS T            ᒼ CANADIAN SYLLABICS WEST-CREE M
-      ᕁ CANADIAN SYLLABICS SAYISI YI    ᕽ CANADIAN SYLLABICS HK
-     ================================= ==================================
+     ================================== ==================================
+      Look-alike                         Correct character
+     ================================== ==================================
+      ᕀ CANADIAN SYLLABICS WEST-CREE Y   ᐩ CANADIAN SYLLABICS FINAL PLUS
+      ᑦ CANADIAN SYLLABICS T             ᒼ CANADIAN SYLLABICS WEST-CREE M
+      ᕁ CANADIAN SYLLABICS SAYISI YI     ᕽ CANADIAN SYLLABICS HK
+     ================================== ==================================
+
+    Note: although \<U+1540 CANADIAN WEST-CREE Y\> is named as if it is the
+    correct Y final, writers prefer  \<U+1429 CANADIAN SYLLABICS FINAL PLUS\>.
+    Both are in the shape of a plus sign, but FINAL PLUS is often rendered
+    similarly to other finals, small, and above the center line, whereas
+    WEST-CREE Y is rendered centered to other syllabics. Having all finals
+    render small and above the centre line is preferable from most Cree
+    writers I surveyed.
 
     ``syllabics2sro()`` automatically interprets erroneous look-alikes as their
     visually equivalent characters.
