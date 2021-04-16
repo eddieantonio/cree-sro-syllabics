@@ -3,9 +3,8 @@ name = "cree_sro_syllabics"
 version = "2020.6.23"
 homepage = "https://github.com/eddieantonio/cree-sro-syllabics"
 description = "Convert between Western Cree SRO and syllabics"
-license = "AGPLv3"
+license = "mit"
 classifiers = [
-    "License :: OSI Approved :: GNU Affero General Public License v3",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.4",
@@ -17,7 +16,7 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Topic :: Text Processing :: Linguistic"
 ]
-authors = ["Eddie Antonio Santos <easantos@ualberta.ca>"]
+authors = ["Eddie Antonio Santos <Eddie.Santos@nrc-cnrc.gc.ca>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

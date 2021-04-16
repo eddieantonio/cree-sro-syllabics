@@ -1,21 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
-
-# Copyright (C) 2018 Eddie Antonio Santos <easantos@ualberta.ca>
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 import pytest  # type: ignore
 from cree_sro_syllabics import sro2syllabics, syllabics2sro
 
@@ -49,7 +31,11 @@ def test_single_words(sro, syllabics):
 
 
 @pytest.mark.parametrize(
-    "sro,syllabics", [("Tân'si", "ᑖᓂᓯ"), ("Maskekosihk", "ᒪᐢᑫᑯᓯᕽ"),]
+    "sro,syllabics",
+    [
+        ("Tân'si", "ᑖᓂᓯ"),
+        ("Maskekosihk", "ᒪᐢᑫᑯᓯᕽ"),
+    ],
 )
 def test_normalize_single_words(sro, syllabics):
     """
@@ -103,7 +89,11 @@ def test_alternate_y_final():
 
 
 @pytest.mark.parametrize(
-    "sro,syllabics", [("yōtinipēstāw", "ᔫᑎᓂᐯᐢᑖᐤ"), ("īkatē", "ᐄᑲᑌ"),]
+    "sro,syllabics",
+    [
+        ("yōtinipēstāw", "ᔫᑎᓂᐯᐢᑖᐤ"),
+        ("īkatē", "ᐄᑲᑌ"),
+    ],
 )
 def test_macrons(sro, syllabics):
     """
