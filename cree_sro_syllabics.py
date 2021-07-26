@@ -203,7 +203,7 @@ sro2syllabics_lookup = {
     "ywô": "ᔸ",
     "ywa": "ᔺ",
     "ywâ": "ᔼ",
-    "th": "ᖮ",
+    "th": "ᙾ",
     "thê": "ᖧ",
     "thi": "ᖨ",
     "thî": "ᖩ",

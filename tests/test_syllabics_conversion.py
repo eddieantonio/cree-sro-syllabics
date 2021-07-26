@@ -137,7 +137,7 @@ def test_hyphens(sro, syllabics):
         ("miyw-âyâw", "ᒥᔼᔮᐤ", "", "ᒥᐩᐤᐋᔮᐤ"),
         ("pîhc-âyihk", "ᐲᐦᒑᔨᕽ", "", "ᐲᐦᐨᐋᔨᕽ"),
         # NOTE: not orthographically correct, but demonstrates Sandhi in th-Cree
-        ("wîhth-owin", "ᐑᐦᖪᐏᐣ", "", "ᐑᐦᖮᐅᐏᐣ"),
+        ("wîhth-owin", "ᐑᐦᖪᐏᐣ", "", "ᐑᐦᙾᐅᐏᐣ"),
     ],
 )
 def test_sandhi(sro, syllabics, hyphens, alt_syllabics):
@@ -224,7 +224,7 @@ def test_short_i_ellision(original_sro, syllabics, sro):
         ("mithomon", "ᒥᖪᒧᐣ"),
         ("namōtha", "ᓇᒨᖬ"),
         ("thāhkan", "ᖭᐦᑲᐣ"),
-        ("namēpith", "ᓇᒣᐱᖮ"),
+        ("namēpith", "ᓇᒣᐱᙾ"),
         ("ikw", "ᐃᐠᐤ"),
         ("pokw", "ᐳᐠᐤ"),
         # Test each syllable.
