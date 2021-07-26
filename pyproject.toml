@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cree_sro_syllabics"
-version = "2021.4.16"
+version = "2021.7.26"
 homepage = "https://github.com/eddieantonio/cree-sro-syllabics"
 description = "Convert between Western Cree SRO and syllabics"
 license = "mit"
