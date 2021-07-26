@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html),
 with [Calendar Versioning](https://calver.org/).
 
+## [2021.7.26]
+
+### BREAKING CHANGE
+
+ - <U+167E CANADIAN SYLLABICS WOODS-CREE FINAL TH> is the correct
+   Woods Cree th- final. I have no idea where the East Cree final <ᖮ>
+   came from.
+
 ## [2020.6.23]
 
 ### BREAKING CHANGE
